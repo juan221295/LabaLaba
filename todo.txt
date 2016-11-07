@@ -1,0 +1,3 @@
+- Buat js buat register di jsp
+- implementasi method save di controller data
+- pisahin controller

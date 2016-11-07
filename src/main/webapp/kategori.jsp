@@ -61,7 +61,6 @@
                 <li><a href="#">About Us</a></li> -->
               </ul>
             </div>
-
           <p>
             Hot Items
           </p>
