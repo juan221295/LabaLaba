@@ -4,16 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
-<link rel="stylesheet" type="text/css" href="/css.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
-<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/js.js"></script>
-<title>LabaLaba.com</title>
-<style type="text/css">
-=======
     <link rel="stylesheet" type="text/css" href="/css.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
@@ -22,15 +12,10 @@
     <script src="/js.js"></script>
     <title>LabaLaba.com</title>
     <style type="text/css">
->>>>>>> 9f2da3f3543652c9084ddee2ff8c8e656157f5c2
-
     </style>
 </head>
 <body>
-<<<<<<< HEAD
-=======
     <h1>${name }</h1>
->>>>>>> 9f2da3f3543652c9084ddee2ff8c8e656157f5c2
 	<header class="container">
 		<div class="row">
 		  <h1 class="col-xs-8 col-md-7">
@@ -281,14 +266,8 @@
 	
 	   </div>
 	   <!-- /.row -->
-	
 	   <hr>
-	   
-	
-	
 	 </div>
-
-
 	<footer class="footer footer-1">
 	    <div class="container">
 	      <p class="text-muted">Dibuat Oleh Ariel Juan, ini Footer</p>
