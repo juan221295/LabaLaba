@@ -13,13 +13,9 @@
     <link rel="stylesheet" type="text/css" href="css.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<<<<<<< HEAD
 <script src="/js.js"></script>
 <link href="/css.css" rel="stylesheet" />
-=======
-    <script src="/js.js"></script>
-    <link href="/css.css" rel="stylesheet" />
->>>>>>> ccc42f7252bf2d41cc537677b81877fbab37f200
+
 </head>
     
 <body>
