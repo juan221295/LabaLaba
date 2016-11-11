@@ -4,7 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ccc42f7252bf2d41cc537677b81877fbab37f200
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -15,7 +18,10 @@
 
 </head>
 <body>
+<<<<<<< HEAD
     
+=======
+>>>>>>> ccc42f7252bf2d41cc537677b81877fbab37f200
 	<header class="container">
 		<div class="row">
 		  <h1 class="col-xs-8 col-md-7">

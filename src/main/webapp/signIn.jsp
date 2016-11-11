@@ -26,11 +26,6 @@
 <script src="/js.js"></script>
 <link href="/css.css" rel="stylesheet" />
 <title>Sign in</title>
-<style type="text/css">
-/* body {
-	background-image: url('http://labalaba.com/bg.png');
-} */
-</style>
 </head>
 
 <body>
