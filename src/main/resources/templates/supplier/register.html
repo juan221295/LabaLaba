@@ -12,12 +12,15 @@
         ...
     </header>
     <div>
-        <form id="register-form" th:action="@{/user/register}" method="post" role="form" th:object="${form}">
+        <form id="register-form" th:action="@{/supplier/register}" method="post" role="form" th:object="${form}">
             <div class="form-group">
-                <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" th:field="*{username}"/>
+                <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Username" th:field="*{name}"/>
             </div>
             <div class="form-group">
                 <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" th:field="*{email}" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="website" id="website" tabindex="1" class="form-control" placeholder="Email Address" th:field="*{website}" />
             </div>
             <div class="form-group">
                 <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" th:field="*{password}"/>

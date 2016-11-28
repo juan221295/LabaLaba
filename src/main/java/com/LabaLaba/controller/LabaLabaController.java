@@ -14,5 +14,7 @@ public class LabaLabaController {
 	    return "index";
 	}
 
-	
+
+
+
 }

@@ -1,14 +1,13 @@
 package com.LabaLaba.repository;
 
-import com.LabaLaba.entity.User;
+import com.LabaLaba.entity.Supplier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by rien on 11/5/16.
+ * Created by rien on 11/28/16.
  */
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
 }

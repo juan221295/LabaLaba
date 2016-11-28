@@ -1,7 +1,7 @@
 package com.LabaLaba.service;
 
-import com.LabaLaba.model.User;
-import com.LabaLaba.model.UserRegistrationForm;
+import com.LabaLaba.entity.User;
+import com.LabaLaba.form.UserRegistrationForm;
 import com.LabaLaba.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,9 @@ public class UserService {
         return (Collection<User>) repository.findAll();
     }
 
-    public void registerUser(UserRegistrationForm registrationForm) {
+    public void register(UserRegistrationForm registrationForm) {
         User user = new User();
-        user.setUsername(registrationForm.getUsername());
+        user.setName(registrationForm.getName());
         user.setPassword(registrationForm.getPassword());
         user.setEmail(registrationForm.getEmail());
 
