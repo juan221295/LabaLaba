@@ -1,28 +1,21 @@
 package com.LabaLaba.model;
 
-import javax.persistence.*;
-
 /**
- * Created by rien on 11/5/16.
+ * Created by rien on 11/28/16.
  */
+public class UserRegistrationForm {
 
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String username;
+
+//    @Email
+//    @NotEmpty
     private String email;
+
+//    @NotEmpty
     private String password;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    @NotEmpty
+    private String repeatPassword;
 
     public String getUsername() {
         return username;
@@ -46,5 +39,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 }

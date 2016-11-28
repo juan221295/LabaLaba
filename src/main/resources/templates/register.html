@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Register Here</title>
+</head>
+<body>
+    <header>
+        ...
+    </header>
+    <div>
+        <form id="register-form" th:action="@{/user/register}" method="post" role="form" th:object="${form}">
+            <div class="form-group">
+                <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" th:field="*{username}"/>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" th:field="*{email}" />
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" th:field="*{password}"/>
+            </div>
+            <div class="form-group">
+                <input type="password" name="repeatPassword" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" th:field="*{repeatPassword}" />
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer>
+        ...
+    </footer>
+
+    <script>
+        
+    </script>
+</body>
+</html>
