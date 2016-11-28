@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LabaLabaController {
-
 	@RequestMapping("/")
 	public String index(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
 	    model.addAttribute("name", "index");

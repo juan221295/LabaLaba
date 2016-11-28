@@ -32,6 +32,11 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <ul th:if="${#fields.hasErrors('*')}">
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Nanti errornya di sini. How, you ask? It's magic</li>
+                </ul>
+            </div>
         </form>
     </div>
     <footer>
