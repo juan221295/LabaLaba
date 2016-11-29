@@ -8,7 +8,68 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>This is Index</h1>
-    <div>register here <a href="/user/register">X</a> </div>
+
+    <!-- HEADER -->
+    <div th:replace="header :: copy"></div>
+
+    <div class="row text-center">
+        <!-- Indicator -->
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1" ></li>
+                <li data-target="#myCarousel" data-slide-to="2" ></li>
+            </ol>
+            
+            <!--Slides wrapper -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="http://loremflickr.com/1280/720/blue,sky/all?random=1" />
+                    <div class="carousel-caption">
+                        <h3>LoremFlickr</h3>
+                        <p>random pic here</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <hr />
+
+
+    <!-- Title -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Furniture</h3>
+        </div>
+    </div>
+    <!-- /.Title -->
+
+    <!-- Page Features -->
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://loremflickr.com/800/500/coffee?random=1" />
+                <div class="caption">
+                    <h3>Label</h3>
+                    <p>bla bla bla</p>
+
+                    <a href="#" class="btn btn-default">View Product</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.Page Features -->
 </body>
 </html>

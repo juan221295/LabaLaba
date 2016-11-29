@@ -1,12 +1,14 @@
 package com.LabaLaba.validator;
 
 import com.LabaLaba.form.SupplierRegistrationForm;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
  * Created by rien on 11/29/16.
  */
+@Component
 public class SupplierRegistrationFormValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {

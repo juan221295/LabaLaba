@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Header</title>
+</head>
+<body>
+<header th:fragment="copy">
+    <div class="row">
+        <h1 class="col-xs-8 col-md-7">
+            <a href="/">LabaLaba</a>
+        </h1>
+        <nav class="col-xs-4 col-md-5 text-right">
+            <p>
+                <a href="/customer/login">Sign in</a>
+            </p>
+        </nav>
+    </div>
+    <div class="row">
+        <nav>
+            <div class="dropdown">
+                <!--<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">-->
+                    <!--Categories<span class="caret"></span>-->
+                <!--</button>-->
+                <div class="pointer" data-toggle="dropdown">
+                    Categories <span class="caret"></span>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a href="/kategori/elektronik">Elektronik</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+</body>
+</html>
