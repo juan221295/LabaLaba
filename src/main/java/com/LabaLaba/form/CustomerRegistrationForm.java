@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 /**
  * Created by rien on 11/28/16.
  */
-public class UserRegistrationForm {
+public class CustomerRegistrationForm {
 
     private String name;
 

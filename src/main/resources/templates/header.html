@@ -8,14 +8,18 @@
     <title>Header</title>
 </head>
 <body>
-<header th:fragment="copy">
-    <div class="row">
+<header th:fragment="copy" class="container">
+    <div class="row container">
         <h1 class="col-xs-8 col-md-7">
             <a href="/">LabaLaba</a>
         </h1>
         <nav class="col-xs-4 col-md-5 text-right">
-            <p>
-                <a href="/customer/login">Sign in</a>
+            <p th:if="${session.loggedIn}">
+                <a href="/customer/logout">Log Out</a>
+            </p>
+            <p th:unless="${session.loggedIn}">
+                <a href="/customer/login">Log in</a> |
+                <a href="/customer/register">Register</a>
             </p>
         </nav>
     </div>

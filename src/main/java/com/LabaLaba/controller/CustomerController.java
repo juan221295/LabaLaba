@@ -1,8 +1,8 @@
 package com.LabaLaba.controller;
 
-import com.LabaLaba.entity.User;
-import com.LabaLaba.form.UserRegistrationForm;
-import com.LabaLaba.service.UserService;
+import com.LabaLaba.entity.Customer;
+import com.LabaLaba.form.CustomerRegistrationForm;
+import com.LabaLaba.service.CustomerService;
 import com.LabaLaba.validator.UserRegistrationFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collection;
 
@@ -19,12 +20,12 @@ import java.util.Collection;
  */
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
-    private final String VIEW_PREFIX = "user/";
+@RequestMapping("/customer")
+public class CustomerController {
+    private final String VIEW_PREFIX = "customer/";
 
     @Autowired
-    private UserService service;
+    private CustomerService service;
 
     @Autowired
     private UserRegistrationFormValidator validator;
@@ -36,20 +37,18 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getRegisterPage(Model model) {
-        model.addAttribute("form", new UserRegistrationForm());
+        model.addAttribute("form", new CustomerRegistrationForm());
         return VIEW_PREFIX + "register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String handleRegister(@Valid @ModelAttribute(name = "form") UserRegistrationForm registrationForm, BindingResult bindingResult) {
-
-
+    public String handleRegister(@Valid @ModelAttribute(name = "form") CustomerRegistrationForm registrationForm, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return VIEW_PREFIX + "register";
         }
 
         service.register(registrationForm);
-        return VIEW_PREFIX + "register";
+        return "redirect:/customer/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -58,15 +57,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String handleLogin(@RequestParam String username, @RequestParam String password) {
-        return "/";
+    public String handleLogin(@RequestParam String email, @RequestParam String password, HttpSession session) {
+        if(service.login(email, password).isPresent()) {
+            session.setAttribute("loggedIn", true);
+            System.out.println("login success");
+            return "redirect:/";
+        }
+
+        return "redirect:/customer/login";
+    }
+
+    @RequestMapping(value = "/logout")
+    public String handleLogout(HttpSession session) {
+        session.removeAttribute("loggedIn");
+        session.invalidate();
+        return "redirect:/";
     }
 
     //RESPONSE BODY FOR TESTING BELOW
 
     @ResponseBody
     @RequestMapping("/all")
-    public Collection<User> getAllUser() {
+    public Collection<Customer> getAllUser() {
         return service.getAllUser();
     }
 

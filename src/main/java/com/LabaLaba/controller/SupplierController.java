@@ -1,7 +1,7 @@
 package com.LabaLaba.controller;
 
 import com.LabaLaba.form.SupplierRegistrationForm;
-import com.LabaLaba.form.UserRegistrationForm;
+import com.LabaLaba.form.CustomerRegistrationForm;
 import com.LabaLaba.service.SupplierService;
 import com.LabaLaba.validator.SupplierRegistrationFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class SupplierController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getRegisterPage(Model model) {
-        model.addAttribute("form", new UserRegistrationForm());
+        model.addAttribute("form", new CustomerRegistrationForm());
         return VIEW_PREFIX + "register";
     }
 

@@ -8,11 +8,11 @@
     <title>Register Here</title>
 </head>
 <body>
-    <header>
-        ...
-    </header>
+    <!-- HEADER -->
+    <div th:replace="header :: copy"></div>
+
     <div>
-        <form id="register-form" th:action="@{/user/register}" method="post" role="form" th:object="${form}">
+        <form id="register-form" th:action="@{/customer/register}" method="post" role="form" th:object="${form}">
             <div class="form-group">
                 <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Full Name" th:field="*{name}"/>
             </div>
