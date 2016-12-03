@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Header</title>
@@ -23,21 +24,36 @@
             </p>
         </nav>
     </div>
+    <br />
     <div class="row">
         <nav>
             <div class="dropdown">
-                <!--<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">-->
-                    <!--Categories<span class="caret"></span>-->
-                <!--</button>-->
-                <div class="pointer" data-toggle="dropdown">
-                    Categories <span class="caret"></span>
-                </div>
+                <p class="pointer" data-toggle="dropdown">Categories
+                    <span class="caret"></span></p>
                 <ul class="dropdown-menu">
-                    <li><a href="/kategori/elektronik">Elektronik</a></li>
+                    <li class="dropdown-header">Categories</li>
+                    <li><a href="kategori?kategoriName=elektronik">Electronic</a></li>
+                    <li><a href="kategori?kategoriName=furniture">Furniture</a></li>
+                    <!--<li><a href="#">Textile</a></li>-->
+                    <!--<li><a href="#">Machinary Industrial</a></li>-->
+                    <!--<li><a href="#">Gift</a></li>-->
+                    <!--<li><a href="#">Health & Beauty</a></li>-->
+                    <!--<li><a href="#">Agriculture & Food</a></li>-->
+                    <!-- <li class="divider"></li>
+          <li class="dropdown-header">Dropdown header 2</li>
+          <li><a href="#">About Us</a></li> -->
                 </ul>
             </div>
+
+            <p>
+                Hot Items
+            </p>
+            <p>
+                Contact
+            </p>
         </nav>
     </div>
+    <hr />
 </header>
 </body>
 </html>
