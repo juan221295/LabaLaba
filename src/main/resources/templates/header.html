@@ -19,8 +19,8 @@
                 <a href="/customer/logout">Log Out</a>
             </p>
             <p th:unless="${session.loggedIn}">
-                <a href="/customer/login">Log in</a> |
-                <a href="/customer/register">Register</a>
+                <a href="/customer/login">Log in</a>
+                <!--<a href="/customer/register">Register</a>-->
             </p>
         </nav>
     </div>
@@ -34,9 +34,11 @@
                     <li class="dropdown-header">Categories</li>
                     <li><a href="kategori?kategoriName=elektronik">Electronic</a></li>
                     <li><a href="kategori?kategoriName=furniture">Furniture</a></li>
-                    <!--<li><a href="#">Textile</a></li>-->
-                    <!--<li><a href="#">Machinary Industrial</a></li>-->
-                    <!--<li><a href="#">Gift</a></li>-->
+                    <li><a href="#">Textile</a></li>
+                    <li><a href="#">Machinary Industrial</a></li>
+                    <li><a href="#">Gift</a></li>
+                    <li><a href="#">Health and Beuty</a></li>
+                    <li><a href="#">Agriculture and Food</a></li>
                     <!--<li><a href="#">Health & Beauty</a></li>-->
                     <!--<li><a href="#">Agriculture & Food</a></li>-->
                     <!-- <li class="divider"></li>
