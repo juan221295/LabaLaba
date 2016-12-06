@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <form th:action="@{/products}" th:object="${form}">
+            <div>
+                <input type="text" placeholder="Name" id="name" />
+            </div>
+            <div>
+                <input type="number" placeholder="Price" id="price" />
+            </div>
+            <div>
+                <input type="number" placeholder="Minimal Quantitiy" id="minimalQuantity" />
+            </div>
+            <div>
+                <input type="button" id="btnSubmit" />
+            </div>
+        </form>
+
+        <script>
+            $('#btnSubmit').click(function(){
+                var form = {
+                   name: 'name',
+                   price: 1,
+                   minimalQuantity: 1
+                };
+                    
+                $.ajax({
+                   url: 'http://localhost:8080/products',
+                   method: 'post',
+                   data: {form : JSON.stringify(form)},
+                    originalName: "application/json",
+                    dataType: 'json',
+//                    contentType: 'application/json',
+                   statusCode: {
+                       200: function(){console.log("Yey");},
+                       404: function(){console.log('Huh??');}
+                   }
+               });
+
+            });
+        </script>
+    </div>
+</body>
+</html>
