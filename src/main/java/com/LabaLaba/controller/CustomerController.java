@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -52,8 +53,22 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String getLoginPage() {
-        return VIEW_PREFIX + "login";
+    public String getLoginPage(HttpSession session) {
+        String login ="redirect:/";
+        try{
+            if(session.getAttribute("username").equals(null)){
+
+            }
+
+            login = "redirect:/";
+
+        }
+        catch (Exception e){
+            login = VIEW_PREFIX + "login";
+        }
+
+        return login;
+
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -65,7 +80,7 @@ public class CustomerController {
 
             session.setAttribute("loggedIn", true);
 //            session.setAttribute("username", service.getUserByEmail(email).getName());
-            session.setAttribute("user", service.getUserByEmail(email));
+            session.setAttribute("username", service.getUserByEmail(email).getName());
             System.out.println("login success");
             System.out.println(service.getUserByEmail(email).getName());
             return "redirect:/";
@@ -74,9 +89,32 @@ public class CustomerController {
         return "redirect:/customer/login";
     }
 
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public ModelAndView handleLogin(@RequestParam String email, @RequestParam String password, HttpSession session) {
+//        if(service.login(email, password).isPresent()) {
+//
+////            session.setAttribute("username", );
+////            CustomerService cs = new CustomerService();
+//
+//            session.setAttribute("loggedIn", true);
+////            session.setAttribute("username", service.getUserByEmail(email).getName());
+//            session.setAttribute("user", service.getUserByEmail(email));
+//            System.out.println("login success");
+//            System.out.println(service.getUserByEmail(email).getName());
+//            //return "redirect:/";
+//
+//            mav.addObject("nama", service.getUserByEmail(email).getName());
+//
+//            return mav;
+//        }
+//
+//        return new ModelAndView("forward:/customer/login");
+//    }
+
     @RequestMapping(value = "/logout")
     public String handleLogout(HttpSession session) {
         session.removeAttribute("loggedIn");
+        session.removeAttribute("username");
         session.invalidate();
         return "redirect:/";
     }

@@ -9,55 +9,60 @@
     <title>Header</title>
 </head>
 <body>
-<header th:fragment="copy" class="container">
-    <div class="row container">
-        <h1 class="col-xs-8 col-md-7">
-            <a href="/">LabaLaba</a>
-        </h1>
-        <nav class="col-xs-4 col-md-5 text-right">
-            <p th:if="${session.loggedIn}">
-                <span th:text="${session.user.getName()}"></span>
-                <span>, </span>
-                <a href="/customer/logout"> Log Out</a>
-            </p>
-            <p th:unless="${session.loggedIn}">
-                <a href="/customer/login">Log in</a>
-                <!--<a href="/customer/register">Register</a>-->
-            </p>
-        </nav>
-    </div>
-    <br />
-    <div class="row">
-        <nav>
-            <div class="dropdown">
-                <p class="pointer" data-toggle="dropdown">Categories
-                    <span class="caret"></span></p>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-header">Categories</li>
-                    <li><a href="kategori?kategoriName=elektronik">Electronic</a></li>
-                    <li><a href="kategori?kategoriName=furniture">Furniture</a></li>
-                    <li><a href="#">Textile</a></li>
-                    <li><a href="#">Machinary Industrial</a></li>
-                    <li><a href="#">Gift</a></li>
-                    <li><a href="#">Health and Beuty</a></li>
-                    <li><a href="#">Agriculture and Food</a></li>
-                    <!--<li><a href="#">Health & Beauty</a></li>-->
-                    <!--<li><a href="#">Agriculture & Food</a></li>-->
-                    <!-- <li class="divider"></li>
-          <li class="dropdown-header">Dropdown header 2</li>
-          <li><a href="#">About Us</a></li> -->
-                </ul>
-            </div>
+<header th:fragment="header">
+    <div class="container">
+        <div class="row container">
+            <h1 class="col-xs-8 col-md-7">
+                <a href="/">LabaLaba</a>
+            </h1>
+            <nav class="col-xs-4 col-md-5 text-right">
+                <p th:if="${session.loggedIn}">
+                    <span th:text="${session.username}"></span>
+                    <span>, </span>
+                    <a href="/customer/logout"> Log Out</a>
+                </p>
+                <p th:unless="${session.loggedIn}">
+                    <a href="/customer/login">Log in</a>
+                    <!--<a href="/customer/register">Register</a>-->
+                </p>
+            </nav>
+        </div>
+        <br />
+        <div class="row">
+            <nav>
+                <div class="dropdown">
+                    <p class="pointer" data-toggle="dropdown">Categories
+                        <span class="caret"></span></p>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Categories</li>
+                        <li><a href="kategori?kategoriName=elektronik">Electronic</a></li>
+                        <li><a href="kategori?kategoriName=furniture">Furniture</a></li>
+                        <li><a href="#">Textile</a></li>
+                        <li><a href="#">Machinary Industrial</a></li>
+                        <li><a href="#">Gift</a></li>
+                        <li><a href="#">Health and Beuty</a></li>
+                        <li><a href="#">Agriculture and Food</a></li>
+                        <!--<li><a href="#">Health & Beauty</a></li>-->
+                        <!--<li><a href="#">Agriculture & Food</a></li>-->
+                        <!-- <li class="divider"></li>
+              <li class="dropdown-header">Dropdown header 2</li>
+              <li><a href="#">About Us</a></li> -->
+                    </ul>
+                </div>
 
-            <p>
-                Hot Items
-            </p>
-            <p>
-                Contact
-            </p>
-        </nav>
+                <p>
+                    Hot Items
+                </p>
+                <p>
+                    Contact
+                </p>
+            </nav>
+        </div>
+
     </div>
     <hr />
 </header>
+
+
 </body>
 </html>
