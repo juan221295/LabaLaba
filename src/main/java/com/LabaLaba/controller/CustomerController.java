@@ -59,8 +59,15 @@ public class CustomerController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String handleLogin(@RequestParam String email, @RequestParam String password, HttpSession session) {
         if(service.login(email, password).isPresent()) {
+
+//            session.setAttribute("username", );
+//            CustomerService cs = new CustomerService();
+
             session.setAttribute("loggedIn", true);
+//            session.setAttribute("username", service.getUserByEmail(email).getName());
+            session.setAttribute("user", service.getUserByEmail(email));
             System.out.println("login success");
+            System.out.println(service.getUserByEmail(email).getName());
             return "redirect:/";
         }
 
