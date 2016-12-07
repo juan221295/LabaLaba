@@ -12,8 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by rien on 12/6/16.
@@ -28,6 +32,9 @@ public class ProductController {
     @Autowired
     private ObjectMapper mapper;
 
+    public static final String uploadingdir = System.getProperty("user.dir") + "/src/main/resources/static/images/";
+
+
     @RequestMapping(method = RequestMethod.POST)
     public String uploadNewProduct(HttpSession session,
                                    @ModelAttribute("form") RegisterProductForm form) {
@@ -36,14 +43,19 @@ public class ProductController {
          * Ceritanya sih buat nahan kalo dia bukan supplier - Ariel
          */
         Supplier supplier = null;
-        if(!"supplier".equalsIgnoreCase(String.valueOf(session.getAttribute("role")))) {
-            return "redirect:/";
-        }
+//        if(!"supplier".equalsIgnoreCase(String.valueOf(session.getAttribute("role")))) {
+//            return "redirect:/";
+//        }
 
         /**
          * Sejauh ini aku mikirnya Object supplier/customer masukin session, tapi ntah nanti gmn - Ariel
          */
-        supplier = (Supplier) session.getAttribute("object");
+        supplier = new Supplier();
+        supplier.setSupplierId((long) 1);
+
+
+
+//        supplier = (Supplier) session.getAttribute("object");
         Product product = new Product();
 
         product.setName(form.getName());
@@ -62,4 +74,20 @@ public class ProductController {
 
         return "add-product";
     }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public String upload(Model model, @RequestParam("file") MultipartFile uploadingFile){
+
+        File file = new File(uploadingdir + "halo.jpg");
+        try {
+            uploadingFile.transferTo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return "redirect:/";
+
+    }
+
 }

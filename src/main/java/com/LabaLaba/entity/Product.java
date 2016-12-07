@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Created by rien on 11/28/16.
  */
 @Entity
+@Table(name="product")
 public class Product {
     @Id
     @GeneratedValue
@@ -13,6 +14,7 @@ public class Product {
     private String name;
     private Category category;
     private Long price;
+    private String path;
     @ManyToOne(cascade = CascadeType.ALL)
     private Supplier supplier;
 

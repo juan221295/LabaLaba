@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
     public Supplier findBySupplierId(Long supplierId);
+//    public Supplier findByDate(Long date);
 }
