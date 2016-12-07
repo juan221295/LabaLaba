@@ -98,7 +98,7 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/success")
     public String success(Model model){
-        model.addAttribute("produk", productService.getProductById((long) 1));
+        model.addAttribute("produk", productService.getProductById((long) 1)); //ini masih statis
 
         return "success";
     }
