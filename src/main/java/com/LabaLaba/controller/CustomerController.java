@@ -45,7 +45,7 @@ public class CustomerController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleRegister(@Valid @ModelAttribute(name = "form") CustomerRegistrationForm registrationForm, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return VIEW_PREFIX + "register";
+            return VIEW_PREFIX + "login";
         }
 
         service.register(registrationForm);
@@ -80,7 +80,8 @@ public class CustomerController {
 
             session.setAttribute("loggedIn", true);
 //            session.setAttribute("username", service.getUserByEmail(email).getName());
-            session.setAttribute("username", service.getUserByEmail(email).getName());
+//            session.setAttribute("username", service.getUserByEmail(email).getName());
+            session.setAttribute("customer", service.getUserByEmail(email));
             System.out.println("login success");
             System.out.println(service.getUserByEmail(email).getName());
             return "redirect:/";

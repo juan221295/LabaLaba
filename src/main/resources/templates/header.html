@@ -17,7 +17,7 @@
             </h1>
             <nav class="col-xs-4 col-md-5 text-right">
                 <p th:if="${session.loggedIn}">
-                    <span th:text="${session.username}"></span>
+                    <span th:text="${session.customer.getName()}"></span>
                     <span>, </span>
                     <a href="/customer/logout"> Log Out</a>
                 </p>
