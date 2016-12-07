@@ -50,8 +50,8 @@ public class ProductController {
         /**
          * Sejauh ini aku mikirnya Object supplier/customer masukin session, tapi ntah nanti gmn - Ariel
          */
-        supplier = new Supplier();
-        supplier.setSupplierId((long) 1);
+//        supplier = new Supplier();
+//        supplier.setSupplierId((long) 1);
 
 
 
@@ -61,11 +61,16 @@ public class ProductController {
         product.setName(form.getName());
         product.setPrice(form.getPrice());
 
-        product.setSupplier(supplier);
+//        product.setSupplier(supplier);
+
 
         productService.addNewProduct(product);
 
-        return "redirect:/success";
+        product.setImage(upload(form.getFile(), product));
+
+        productService.updateProduct(product);
+
+        return "redirect:/products/success";
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -75,10 +80,10 @@ public class ProductController {
         return "add-product";
     }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String upload(Model model, @RequestParam("file") MultipartFile uploadingFile){
 
-        File file = new File(uploadingdir + uploadingFile.getOriginalFilename());
+    public String upload(MultipartFile uploadingFile, Product product){
+        String namaFile = product.getId().toString()+ "-" +uploadingFile.getOriginalFilename();
+        File file = new File(uploadingdir + namaFile);
         //File file = new File(uploadingdir + nama file);
         try {
             uploadingFile.transferTo(file);
@@ -87,9 +92,16 @@ public class ProductController {
         }
         System.out.println();
 
-
-        return "redirect:/";
+        return namaFile;
 
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/success")
+    public String success(Model model){
+        model.addAttribute("produk", productService.getProductById((long) 1));
+
+        return "success";
+    }
+
 
 }

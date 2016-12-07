@@ -12,4 +12,5 @@ import java.util.Collection;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Collection<Product> findBySupplier_SupplierId(Long supplierId);
+    Product findById(Long id);
 }

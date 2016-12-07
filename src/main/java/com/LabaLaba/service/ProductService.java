@@ -16,4 +16,12 @@ public class ProductService {
     public Product addNewProduct(Product product) {
         return productRepository.save(product);
     }
+
+    public void updateProduct(Product product){
+        productRepository.save(product);
+    }
+
+    public Product getProductById(Long id) {
+        return productRepository.findById(id);
+    }
 }

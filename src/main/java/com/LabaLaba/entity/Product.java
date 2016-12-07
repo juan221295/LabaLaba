@@ -9,12 +9,14 @@ import javax.persistence.*;
 @Table(name="product")
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
     private Category category;
     private Long price;
-    private String path;
+    private String image;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private Supplier supplier;
 
@@ -56,5 +58,13 @@ public class Product {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
