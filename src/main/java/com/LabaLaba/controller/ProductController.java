@@ -78,12 +78,14 @@ public class ProductController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String upload(Model model, @RequestParam("file") MultipartFile uploadingFile){
 
-        File file = new File(uploadingdir + "halo.jpg");
+        File file = new File(uploadingdir + uploadingFile.getOriginalFilename());
+        //File file = new File(uploadingdir + nama file);
         try {
             uploadingFile.transferTo(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println();
 
 
         return "redirect:/";
