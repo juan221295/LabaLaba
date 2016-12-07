@@ -1,9 +1,6 @@
 package com.LabaLaba.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by rien on 11/28/16.
@@ -11,6 +8,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Product {
     @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private Category category;
