@@ -1,6 +1,7 @@
 package com.LabaLaba.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by rien on 11/28/16.
@@ -16,6 +17,13 @@ public class Product {
     private Category category;
     private Long price;
     private String image;
+
+    //tambahan
+    private String description;
+    private Date date;
+
+
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Supplier supplier;
