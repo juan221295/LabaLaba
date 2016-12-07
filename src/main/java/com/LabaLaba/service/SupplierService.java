@@ -14,6 +14,9 @@ public class SupplierService {
     @Autowired
     private SupplierRepository repository;
 
+    public Supplier getSupplierById(Long supplierId) {
+        return repository.findBySupplierId(supplierId);
+    }
 
     public void register(SupplierRegistrationForm registrationForm) {
         Supplier supplier = new Supplier();
