@@ -24,11 +24,19 @@ public class SupplierService {
         supplier.setEmail(registrationForm.getEmail());
         supplier.setName(registrationForm.getName());
         supplier.setPassword(registrationForm.getPassword());
-
-        if(!registrationForm.getWebsite().isEmpty()) {
+//
+        if(registrationForm.getWebsite() != null) {
             supplier.setWebsite(registrationForm.getWebsite());
         }
 
         repository.save(supplier);
+    }
+
+    public Supplier login(String email, String password){
+        return repository.findOneByEmailAndPassword(email, password);
+    }
+
+    public Supplier getUserByEmail(String email) {
+        return repository.findOneByEmail(email);
     }
 }

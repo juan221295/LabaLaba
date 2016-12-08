@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Long> {
-
+    public Supplier findOneByEmail(String email);
     public Supplier findBySupplierId(Long supplierId);
+    public Supplier findOneByEmailAndPassword(String email, String password);
 //    public Supplier findByDate(Long date);
 }

@@ -34,7 +34,7 @@ public class SupplierController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getRegisterPage(Model model) {
-        model.addAttribute("form", new CustomerRegistrationForm());
+        model.addAttribute("form", new SupplierRegistrationForm());
         return VIEW_PREFIX + "register";
     }
 
@@ -45,7 +45,7 @@ public class SupplierController {
         }
 
         supplierService.register(registrationForm);
-        return VIEW_PREFIX + "register";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

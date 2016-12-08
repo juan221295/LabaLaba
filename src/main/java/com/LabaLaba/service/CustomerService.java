@@ -21,20 +21,22 @@ public class CustomerService {
         return repository.findOneByEmail(email);
     }
 
-    public Optional<Customer> login(String email, String password) {
-        Customer customer = repository.findOneByEmail(email);
-
-        if(customer ==null) {
-            return null;
-        }
-
-
-        if(password.equals(customer.getPassword())) {
-            return Optional.ofNullable(customer);
-        } else {
-            return null;
-        }
+    public Customer login(String email, String password) {
+        Customer customer = repository.findOneByEmailAndPassword(email, password);
+//        if(customer ==null) {
+//            return null;
+//        }
+//
+//
+//        if(password.equals(customer.getPassword())) {
+//            return Optional.ofNullable(customer);
+//        } else {
+//            return null;
+//        }
+        return customer;
     }
+
+
 
     public Collection<Customer> getAllUser() {
         return (Collection<Customer>) repository.findAll();

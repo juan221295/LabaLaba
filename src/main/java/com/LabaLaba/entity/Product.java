@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name="product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     private String name;
@@ -18,14 +18,14 @@ public class Product {
     private Long price;
     private String image;
 
+
     //tambahan
     private String description;
     private Date date;
 
 
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Supplier supplier;
 
     public Long getId() {
@@ -60,13 +60,7 @@ public class Product {
         this.price = price;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
-    }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
 
     public String getImage() {
         return image;
@@ -74,5 +68,13 @@ public class Product {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 }

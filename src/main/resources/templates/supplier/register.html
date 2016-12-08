@@ -6,49 +6,47 @@
     <link rel="stylesheet" href="../css.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Register Here</title>
+    <title>Register Supplier</title>
 </head>
 <body>
     <!-- HEADER -->
-    <div th:replace="header :: copy"></div>
-    
-    <div>
-        <form supplierId="register-form" th:action="@{/supplier/register}" method="post" role="form" th:object="${form}">
-            <div class="form-group">
-                <input type="text" name="name" supplierId="name" tabindex="1" class="form-control" placeholder="Username" th:field="*{name}"/>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" supplierId="email" tabindex="1" class="form-control" placeholder="Email Address" th:field="*{email}" />
-            </div>
-            <div class="form-group">
-                <input type="text" name="website" supplierId="website" tabindex="1" class="form-control" placeholder="Email Address" th:field="*{website}" />
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" supplierId="password" tabindex="2" class="form-control" placeholder="Password" th:field="*{password}"/>
-            </div>
-            <div class="form-group">
-                <input type="password" name="repeatPassword" supplierId="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" th:field="*{repeatPassword}" />
-            </div>
-            <div>
-                <ul th:if="${#fields.hasErrors('*')}">
-                    <li class="text-danger" th:each="err : ${#fields.errors('*')}" th:text="${err}">Nanti errornya di sini. How, you ask? It's magic</li>
-                </ul>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <input type="submit" name="register-submit" supplierId="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now" />
+    <div th:replace="header :: header"></div>
+
+    <div class="container">
+        <div class="row">
+            <form id="register-form" th:action="@{/supplier/register}" method="post" role="form" th:object="${form}">
+                <div class="form-group">
+                    <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Username" th:field="*{name}"/>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" th:field="*{email}" />
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<input type="text" name="website" id="website" tabindex="1" class="form-control" placeholder="Email Address" th:field="*{website}" />-->
+                <!--</div>-->
+                <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" th:field="*{password}"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="repeatPassword" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" th:field="*{repeatPassword}" />
+                </div>
+                <div>
+                    <ul th:if="${#fields.hasErrors('*')}">
+                        <li class="text-danger" th:each="err : ${#fields.errors('*')}" th:text="${err}">Nanti errornya di sini. How, you ask? It's magic</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <footer>
-        ...
-    </footer>
+            </form>
+        </div>
 
-    <script>
-        
-    </script>
+    </div>
+    <div th:replace="footer :: footer"></div>
+
 </body>
 </html>

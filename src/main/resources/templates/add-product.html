@@ -3,44 +3,61 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css.css" />
+    <link rel="stylesheet" href="css.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Title</title>
+    <title>Add Product</title>
 </head>
 <body>
-    <div class="container">
-        <form th:action="@{/products}" th:object="${form}" enctype="multipart/form-data" method="post">
-            <div class="form-group">
-                <span>nama: </span>
-                <input type="text" placeholder="Name" id="name" th:field="*{name}" />
-            </div>
-            <div class="form-group">
-                <span>nama: </span>
-                <input type="number" placeholder="Price" id="price" th:field="*{price}" />
-            </div>
-            <div class="form-group">
-                <span>nama: </span>
-                <input type="number" placeholder="Minimal Quantitiy" id="minimalQuantity" th:field="*{minimalQuantity}" />
-            </div>
-            <div class="form-group">
-                <input type="file" name="file" th:field="*{file}"/>
-            </div>
+<div th:replace="header :: header"></div>
 
-            <div class="form-group">
-                <button type="submit">Submit</button>
-            </div>
-        </form>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <form class="form-horizontal" th:action="@{/products}" th:object="${form}" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Nama Barang: </label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Name" id="name" th:field="*{name}" />
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Harga Barang: </label>
+                    <div class="col-sm-6">
+                        <input type="number" placeholder="Price" id="price" th:field="*{price}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Jumlah Minimum Pemesanan: </label>
+                    <div class="col-sm-6">
+                        <input type="number" placeholder="Minimal Quantitiy" id="minimalQuantity" th:field="*{minimalQuantity}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Gambar:</label>
+                    <!--<input type="file" name="file" th:field="*{file}"/>-->
+                    <div class="col-sm-6">
+                        <input type="file" name="file" th:field="*{file}"/>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6 control-label">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+
+
+                </div>
+
+            </form>
+        </div>
     </div>
-    <!--<div class="container">-->
-        <!--<form th:action="@{/products/upload}"  method="POST">-->
-            <!--<div class="form-group">-->
-                <!--<input type="file" name="file" />-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<input type="submit" value="Upload" />-->
-            <!--</div>-->
-        <!--</form>-->
-    <!--</div>-->
+
+</div>
+
+    <div th:replace="footer :: footer"></div>
+
 </body>
 </html>

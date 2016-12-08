@@ -1,9 +1,6 @@
 package com.LabaLaba.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
@@ -12,12 +9,13 @@ import java.util.Collection;
 @Entity
 public class Supplier {
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long supplierId;
     private String email;
     private String name;
     private String website;
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supplier")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "supplier")
     private Collection<Product> products;
 
 

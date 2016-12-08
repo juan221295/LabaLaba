@@ -11,20 +11,33 @@
 <body>
 <div class="container">
 
-    <div>
-        <span>id: </span>
-        <span th:text="${produk.getId()}"></span>
-    </div>
-    <div>
-        <span>nama: </span>
-        <span th:text="${produk.getName()}"></span>
-    </div>
-    <div>
-        <span>price: </span>
-        <span th:text="${produk.getPrice()}"></span>
-    </div>
-    <div>
-        <img th:src="'/images/' + ${produk.getImage()}" />
+    <!--<div>-->
+        <!--<span>id: </span>-->
+        <!--<span th:text="${produk.id}"></span>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<span>nama: </span>-->
+        <!--<span th:text="${produk.name}"></span>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<span>price: </span>-->
+        <!--<span th:text="${produk.price}"></span>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<img th:src="'/images/' + ${produk.image}" />-->
+    <!--</div>-->
+
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-6 hero-feature" th:each="prod : ${products}">
+            <div class="thumbnail">
+                <img th:src="'/images/' + ${prod.image}" alt="" />
+                <div class="caption">
+                    <h3 th:text="${prod.name}">Feature Label</h3>
+                    <label th:text="${prod.id}"></label>
+                    <p th:text="${prod.price}">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

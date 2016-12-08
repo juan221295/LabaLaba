@@ -3,6 +3,7 @@ package com.LabaLaba.controller;
 import com.LabaLaba.entity.Customer;
 import com.LabaLaba.form.CustomerRegistrationForm;
 import com.LabaLaba.service.CustomerService;
+import com.LabaLaba.service.SupplierService;
 import com.LabaLaba.validator.UserRegistrationFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerService service;
+
+    @Autowired
+    private SupplierService supplierService;
 
     @Autowired
     private UserRegistrationFormValidator validator;
@@ -73,18 +77,32 @@ public class CustomerController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String handleLogin(@RequestParam String email, @RequestParam String password, HttpSession session) {
-        if(service.login(email, password).isPresent()) {
+        if(service.login(email, password) != null) {
 
 //            session.setAttribute("username", );
 //            CustomerService cs = new CustomerService();
 
             session.setAttribute("loggedIn", true);
+            session.setAttribute("role", "customer");
 //            session.setAttribute("username", service.getUserByEmail(email).getName());
 //            session.setAttribute("username", service.getUserByEmail(email).getName());
-            session.setAttribute("customer", service.getUserByEmail(email));
+
+            session.setAttribute("user", service.getUserByEmail(email));
             System.out.println("login success");
             System.out.println(service.getUserByEmail(email).getName());
             return "redirect:/";
+        }else if(supplierService.login(email, password) != null){
+            session.setAttribute("loggedIn", true);
+//            session.setAttribute("username", service.getUserByEmail(email).getName());
+//            session.setAttribute("username", service.getUserByEmail(email).getName());
+
+            session.setAttribute("role", "supplier");
+            session.setAttribute("user", supplierService.getUserByEmail(email));
+            session.setAttribute("supId", supplierService.getUserByEmail(email).getSupplierId());
+            System.out.println("login success");
+            System.out.println(supplierService.getUserByEmail(email).getName());
+            return "redirect:/";
+
         }
 
         return "redirect:/customer/login";

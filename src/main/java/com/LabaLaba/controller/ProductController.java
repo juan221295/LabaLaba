@@ -6,7 +6,9 @@ import com.LabaLaba.form.RegisterProductForm;
 import com.LabaLaba.service.ProductService;
 import com.LabaLaba.service.SupplierService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,10 +44,12 @@ public class ProductController {
         /**
          * Ceritanya sih buat nahan kalo dia bukan supplier - Ariel
          */
-        Supplier supplier = null;
+//        Supplier supplier = null;
 //        if(!"supplier".equalsIgnoreCase(String.valueOf(session.getAttribute("role")))) {
 //            return "redirect:/";
 //        }
+
+
 
         /**
          * Sejauh ini aku mikirnya Object supplier/customer masukin session, tapi ntah nanti gmn - Ariel
@@ -53,24 +57,29 @@ public class ProductController {
 //        supplier = new Supplier();
 //        supplier.setSupplierId((long) 1);
 
-
-
+        if(session.getAttribute("role").equals("supplier")){
+            Supplier supplier = null;
+            supplier = (Supplier) session.getAttribute("user");
 //        supplier = (Supplier) session.getAttribute("object");
-        Product product = new Product();
-
-        product.setName(form.getName());
-        product.setPrice(form.getPrice());
+            Product product = new Product();
+            product.setSupplier(supplier);
+            product.setName(form.getName());
+            product.setPrice(form.getPrice());
 
 //        product.setSupplier(supplier);
 
 
-        productService.addNewProduct(product);
+            productService.addNewProduct(product);
 
-        product.setImage(upload(form.getFile(), product));
+            product.setImage(upload(form.getFile(), product));
 
-        productService.updateProduct(product);
+            productService.updateProduct(product);
 
-        return "redirect:/products/success";
+
+            return "redirect:/products/success";
+        }
+        return "redirect:/error123";
+
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -97,8 +106,12 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/success")
-    public String success(Model model){
-        model.addAttribute("produk", productService.getProductById((long) 1)); //ini masih statis
+    public String success(Model model, HttpSession session){
+
+        Supplier supplier = (Supplier) session.getAttribute("user");
+        model.addAttribute("products", productService.getBySuplier(supplier));
+//       model.addAttribute("products", productService.getBySupplier((long)supplier.getSupplierId()));
+//        model.addAttribute("produk", productService.getProductById((long) session.getAttribute("supId"))); //ini masih statis
 
         return "success";
     }
