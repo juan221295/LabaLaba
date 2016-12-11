@@ -1,7 +1,9 @@
 package com.LabaLaba.entity;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by rien on 11/28/16.
@@ -12,19 +14,13 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-
     private String name;
     private Category category;
     private Long price;
-    private String image;
-
-
-    //tambahan
+    private String imagePath;
     private String description;
-    private Date date;
-
-
-
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime uploadDate;
     @ManyToOne(cascade = CascadeType.MERGE)
     private Supplier supplier;
 
@@ -60,14 +56,28 @@ public class Product {
         this.price = price;
     }
 
-
-
-    public String getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public DateTime getUploadDate() {
+        return uploadDate;
+    }
+
+    public void setUploadDate(DateTime uploadDate) {
+        this.uploadDate = uploadDate;
     }
 
     public Supplier getSupplier() {

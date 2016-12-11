@@ -24,7 +24,7 @@ public class SupplierService {
         supplier.setEmail(registrationForm.getEmail());
         supplier.setName(registrationForm.getName());
         supplier.setPassword(registrationForm.getPassword());
-//
+
         if(registrationForm.getWebsite() != null) {
             supplier.setWebsite(registrationForm.getWebsite());
         }

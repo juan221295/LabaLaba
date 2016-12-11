@@ -222,7 +222,6 @@ hs_err_pid*
 src/main/resources/application.properties
 **/application.properties
 #images
-src/main/resources/images/
 
 
 # Created by https://www.gitignore.io/api/images
@@ -264,7 +263,7 @@ src/main/resources/images/
 # Animated Portable Network Graphics
 *.apng
 
-# Multiple-image Network Graphics
+# Multiple-imagePath Network Graphics
 *.mng
 
 # Tagged Image File Format

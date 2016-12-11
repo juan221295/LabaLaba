@@ -6,7 +6,6 @@ import com.LabaLaba.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -17,12 +16,8 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product addNewProduct(Product product) {
+    public Product addOrUpdateProduct(Product product) {
         return productRepository.save(product);
-    }
-
-    public void updateProduct(Product product){
-        productRepository.save(product);
     }
 
     public Product getProductById(Long id) {
@@ -38,7 +33,7 @@ public class ProductService {
 
     }
 
-    public Collection<Product> getBySuplier(Supplier supplier){
+    public Collection<Product> getBySupplier(Supplier supplier){
         return productRepository.findBySupplier(supplier);
     }
 
