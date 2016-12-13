@@ -40,6 +40,7 @@ public class Product {
         this.name = name;
     }
 
+    @Enumerated(EnumType.STRING)
     public Category getCategory() {
         return category;
     }

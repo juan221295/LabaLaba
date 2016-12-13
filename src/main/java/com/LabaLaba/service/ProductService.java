@@ -2,7 +2,7 @@ package com.LabaLaba.service;
 
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
-import com.LabaLaba.form.RegisterProductForm;
+import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.repository.ProductRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,15 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product addProduct(RegisterProductForm form) {
+    public Product addProduct(ProductForm form) {
         Product product = new Product();
 
         product.setPrice(form.getPrice());
         product.setName(form.getName());
         product.setSupplier(form.getSupplier());
         product.setUploadDate(new DateTime());
+        product.setCategory(form.getCategory());
+        System.out.println(form.getCategory());
         if(form.getId()!=null) {
             product.setId(product.getId());
         }

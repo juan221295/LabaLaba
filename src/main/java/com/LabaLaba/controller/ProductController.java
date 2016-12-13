@@ -1,7 +1,7 @@
 package com.LabaLaba.controller;
 
 import com.LabaLaba.entity.Supplier;
-import com.LabaLaba.form.RegisterProductForm;
+import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String uploadNewProduct(HttpSession session,
-                                   @ModelAttribute("form") RegisterProductForm form) {
+                                   @ModelAttribute("form") ProductForm form) {
 
         if(session.getAttribute("role").equals("supplier")){
             Supplier supplier = (Supplier) session.getAttribute("user");
@@ -38,7 +38,7 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getIndex(Model model) {
-        model.addAttribute("form", new RegisterProductForm());
+        model.addAttribute("form", new ProductForm());
 
         return "add-product";
     }
