@@ -4,6 +4,7 @@ import com.LabaLaba.form.SupplierRegistrationForm;
 import com.LabaLaba.form.CustomerRegistrationForm;
 import com.LabaLaba.service.SupplierService;
 import com.LabaLaba.validator.SupplierRegistrationFormValidator;
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,5 +57,11 @@ public class SupplierController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String handleLogin(@RequestParam String username, @RequestParam String password) {
         return "/";
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(){
+
+        return VIEW_PREFIX + "supplierProfile";
     }
 }

@@ -1,10 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="../js.js"></script>
+    <title>Info Produk</title>
 </head>
 <body>
+
+<div th:replace="header :: header"></div>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-8 col-md-1 col-xs-8">
+            <ul class="image-detail">
+                <li><img src="https://dummyimage.com/50x50/b337b3/0b19db.png" alt="" /></li>
+                <li><img src="https://dummyimage.com/50x50/b337b3/0b19db.png" alt="" /></li>
+                <li><img src="https://dummyimage.com/50x50/b337b3/0b19db.png" alt="" /></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-8 col-md-4">
+            <img class="image-produk" src="http://placehold.it/800x500" />
+        </div>
+        <div class="col-sm-8 col-md-4">
+            <div class="caption">
+                <h3>Buku</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <!-- <p><a href="#">Details...</a></p> -->
+                <!-- <a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a> -->
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-3">
+            <div class="thumbnail">
+                <p>
+                    * * * * *
+                </p>
+                <p>
+                    stock : berapa
+                </p>
+                <p>
+                    mau pesan berapa
+                </p>
+                <p>
+                    <a href="#" class="btn btn-primary">Buy Now!</a>
+                </p>
+
+                <!-- alt="..." -->
+                <!-- <img src="http://3.bp.blogspot.com/-5EtAyOSCNjc/UWiDnJl7ONI/AAAAAAAABb4/rsnD8_cXZsM/s640/cover_komik_naruto_vol_64_narutolovindo.png"> -->
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-sm-8 col-md-8">
+            <h2>Deskripsi</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+            <hr />
+            <h2>Ulasan</h2>
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <p>
+                        * * * * *
+                    </p>
+                    <p>
+                        oleh pengulas
+                    </p>
+
+                </div>
+                <div class="col-sm-8 col-md-6">
+
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <p>
+                        * * * * *
+                    </p>
+                    <p>
+                        oleh pengulas
+                    </p>
+
+                </div>
+                <div class="col-sm-8 col-md-6">
+
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-sm-6 col-md-4">
+            <h3>RELATED PRODUCT</h3>
+            <div class="thumbnail">
+                <img src="http://placehold.it/800x500" alt="" />
+                <div class="caption">
+                    <h3>Feature Label</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <p>
+                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                    </p>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <img src="http://placehold.it/800x500" alt="" />
+                <div class="caption">
+                    <h3>Feature Label</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <p>
+                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer :: footer"></div>
 
 </body>
 </html>

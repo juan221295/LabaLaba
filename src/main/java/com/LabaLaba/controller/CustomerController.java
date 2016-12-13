@@ -4,6 +4,7 @@ import com.LabaLaba.entity.Customer;
 import com.LabaLaba.form.CustomerRegistrationForm;
 import com.LabaLaba.service.CustomerService;
 import com.LabaLaba.service.SupplierService;
+import com.LabaLaba.session.UserSession;
 import com.LabaLaba.validator.UserRegistrationFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,25 +80,21 @@ public class CustomerController {
     public String handleLogin(@RequestParam String email, @RequestParam String password, HttpSession session) {
         if(service.login(email, password) != null) {
 
-//            session.setAttribute("username", );
-//            CustomerService cs = new CustomerService();
 
             session.setAttribute("loggedIn", true);
             session.setAttribute("role", "customer");
-//            session.setAttribute("username", service.getUserByEmail(email).getName());
-//            session.setAttribute("username", service.getUserByEmail(email).getName());
 
-            session.setAttribute("user", service.getUserByEmail(email));
+            UserSession userSession = new UserSession(service.getUserByEmail(email));
+            session.setAttribute("user", userSession);
             System.out.println("login success");
             System.out.println(service.getUserByEmail(email).getName());
             return "redirect:/";
         }else if(supplierService.login(email, password) != null){
             session.setAttribute("loggedIn", true);
-//            session.setAttribute("username", service.getUserByEmail(email).getName());
-//            session.setAttribute("username", service.getUserByEmail(email).getName());
 
+            UserSession userSession = new UserSession(supplierService.getUserByEmail(email));
             session.setAttribute("role", "supplier");
-            session.setAttribute("user", supplierService.getUserByEmail(email));
+            session.setAttribute("user", userSession);
             session.setAttribute("supId", supplierService.getUserByEmail(email).getSupplierId());
             System.out.println("login success");
             System.out.println(supplierService.getUserByEmail(email).getName());
@@ -108,27 +105,6 @@ public class CustomerController {
         return "redirect:/customer/login";
     }
 
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public ModelAndView handleLogin(@RequestParam String email, @RequestParam String password, HttpSession session) {
-//        if(service.login(email, password).isPresent()) {
-//
-////            session.setAttribute("username", );
-////            CustomerService cs = new CustomerService();
-//
-//            session.setAttribute("loggedIn", true);
-////            session.setAttribute("username", service.getUserByEmail(email).getName());
-//            session.setAttribute("user", service.getUserByEmail(email));
-//            System.out.println("login success");
-//            System.out.println(service.getUserByEmail(email).getName());
-//            //return "redirect:/";
-//
-//            mav.addObject("nama", service.getUserByEmail(email).getName());
-//
-//            return mav;
-//        }
-//
-//        return new ModelAndView("forward:/customer/login");
-//    }
 
     @RequestMapping(value = "/logout")
     public String handleLogout(HttpSession session) {

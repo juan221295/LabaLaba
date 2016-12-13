@@ -22,6 +22,8 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
+    private final String VIEW_PREFIX = "produk/";
+
     @Autowired
     private ProductService productService;
 
@@ -82,6 +84,12 @@ public class ProductController {
 //        model.addAttribute("produk", productService.getProductById((long) session.getAttribute("supId"))); //ini masih statis
 
         return "success";
+    }
+
+    @RequestMapping(value="/infoProduk", method = RequestMethod.GET)
+    public String infoProduk(){
+
+        return VIEW_PREFIX + "infoProduk";
     }
 
 
