@@ -2,10 +2,17 @@ package com.LabaLaba.service;
 
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
+import com.LabaLaba.form.RegisterProductForm;
 import com.LabaLaba.repository.ProductRepository;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 
 /**
@@ -13,10 +20,30 @@ import java.util.Collection;
  */
 @Service
 public class ProductService {
+    public static final String IMAGE_DIR = System.getProperty("user.dir") + "/src/main/resources/static/images/";
+
     @Autowired
     private ProductRepository productRepository;
 
-    public Product addOrUpdateProduct(Product product) {
+    public Product addProduct(RegisterProductForm form) {
+        Product product = new Product();
+
+        product.setPrice(form.getPrice());
+        product.setName(form.getName());
+        product.setSupplier(form.getSupplier());
+        product.setUploadDate(new DateTime());
+        if(form.getId()!=null) {
+            product.setId(product.getId());
+        }
+
+        Product result = productRepository.save(product);
+
+        if(form.getFile()==null) {
+            return result;
+        }
+        String imagePath = this.uploadImage(form.getFile(), product);
+        product.setImagePath(imagePath);
+
         return productRepository.save(product);
     }
 
@@ -30,11 +57,26 @@ public class ProductService {
 
     public Collection<Product> getBySupplier(Long id){
         return productRepository.findBySupplier_SupplierId(id);
-
     }
 
     public Collection<Product> getBySupplier(Supplier supplier){
         return productRepository.findBySupplier(supplier);
+    }
+
+    public String uploadImage(MultipartFile uploadingFile, Product product){
+        String namaFile = product.getId().toString()+ "-" +uploadingFile.getOriginalFilename();
+
+        System.out.println(IMAGE_DIR);
+        try {
+            Files.createDirectories(Paths.get(IMAGE_DIR));
+            File file = new File(IMAGE_DIR + namaFile);
+            uploadingFile.transferTo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+
+        return namaFile;
     }
 
 }

@@ -1,15 +1,26 @@
 package com.LabaLaba.form;
 
+import com.LabaLaba.entity.Supplier;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by rien on 12/6/16.
  */
 public class RegisterProductForm {
+    private Long id;
     private String name;
     private long price;
     private long minimalQuantity;
     private MultipartFile file;
+    private Supplier supplier;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -41,5 +52,13 @@ public class RegisterProductForm {
 
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 }
