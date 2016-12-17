@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -28,7 +27,7 @@ public class CustomerController {
     private final String VIEW_PREFIX = "customer/";
 
     @Autowired
-    private CustomerService service;
+    private CustomerService customerService;
 
     @Autowired
     private SupplierService supplierService;
@@ -53,7 +52,7 @@ public class CustomerController {
             return VIEW_PREFIX + "login";
         }
 
-        service.register(registrationForm);
+        customerService.register(registrationForm);
         return "redirect:/customer/login";
     }
 
@@ -78,24 +77,26 @@ public class CustomerController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String handleLogin(@RequestParam String email, @RequestParam String password, HttpSession session) {
-        if(service.login(email, password) != null) {
+        if(customerService.login(email, password) != null) {
 
 
             session.setAttribute("loggedIn", true);
             session.setAttribute("role", "customer");
 
-            UserSession userSession = new UserSession(service.getUserByEmail(email));
+            UserSession userSession = new UserSession(customerService.getUserByEmail(email));
             session.setAttribute("user", userSession);
             System.out.println("login success");
-            System.out.println(service.getUserByEmail(email).getName());
+            System.out.println(customerService.getUserByEmail(email).getName());
             return "redirect:/";
         }else if(supplierService.login(email, password) != null){
             session.setAttribute("loggedIn", true);
 
             UserSession userSession = new UserSession(supplierService.getUserByEmail(email));
+
             session.setAttribute("role", "supplier");
             session.setAttribute("user", userSession);
-            session.setAttribute("supId", supplierService.getUserByEmail(email).getSupplierId());
+            session.setAttribute("supId", supplierService.getUserByEmail(email).getId());
+
             System.out.println("login success");
             System.out.println(supplierService.getUserByEmail(email).getName());
             return "redirect:/";
@@ -106,7 +107,7 @@ public class CustomerController {
     }
 
 
-    @RequestMapping(value = "/logout")
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String handleLogout(HttpSession session) {
         session.removeAttribute("loggedIn");
         session.removeAttribute("username");
@@ -119,11 +120,11 @@ public class CustomerController {
     @ResponseBody
     @RequestMapping("/all")
     public Collection<Customer> getAllUser() {
-        return service.getAllUser();
+        return customerService.getAllUser();
     }
 
     @RequestMapping("/clear")
     public void clearUser(){
-        service.clearUser();
+        customerService.clearUser();
     }
 }

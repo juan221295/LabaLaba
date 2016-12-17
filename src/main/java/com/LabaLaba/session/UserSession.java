@@ -23,7 +23,7 @@ public class UserSession {
         this.email = customer.getEmail();
     }
     public  UserSession(Supplier supplier){
-        this.id = supplier.getSupplierId();
+        this.id = supplier.getId();
         this.name = supplier.getName();
         this.email = supplier.getEmail();
     }

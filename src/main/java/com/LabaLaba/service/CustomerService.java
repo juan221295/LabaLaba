@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 /**
  * Created by rien on 11/28/16.
@@ -36,21 +35,14 @@ public class CustomerService {
         return customer;
     }
 
-
+    public void register(CustomerRegistrationForm registrationForm) {
+        Customer customer = new Customer(registrationForm);
+        repository.save(customer);
+    }
 
     public Collection<Customer> getAllUser() {
         return (Collection<Customer>) repository.findAll();
     }
-
-    public void register(CustomerRegistrationForm registrationForm) {
-        Customer customer = new Customer();
-        customer.setName(registrationForm.getName());
-        customer.setPassword(registrationForm.getPassword());
-        customer.setEmail(registrationForm.getEmail());
-
-        repository.save(customer);
-    }
-
     public void clearUser(){
         repository.deleteAll();
     }

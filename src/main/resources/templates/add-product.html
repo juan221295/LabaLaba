@@ -50,15 +50,6 @@
                         <input type="file" name="file" th:field="*{file}"/>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-6">Kategori :</label>
-                    <select class="selectpicker" th:field="*{category}">
-                        <option th:each="category : ${T(com.LabaLaba.entity.Category).values()}"
-                                th:value="${category}"
-                                th:text="${category}">
-                        </option>
-                    </select>
-                </div>
                 <!--<div class="form-group">-->
                     <!--<label class="control-label col-sm-6" for="category">Kategori:</label>-->
                     <!--<div class="col-sm-6">-->
@@ -66,9 +57,9 @@
                             <!--<option>Electronic</option>-->
                             <!--<option>Furniture</option>-->
                             <!--<option>Textile</option>-->
-                            <!--<option>Machinary Industrial</option>-->
+                            <!--<option>Machinery Industrial</option>-->
                             <!--<option>Gift</option>-->
-                            <!--<option value="">Health and Beuty</option>-->
+                            <!--<option value="">Health and Beauty</option>-->
                             <!--<option value="">Agriculture and Food</option>-->
                         <!--</select>-->
                     <!--</div>-->
@@ -77,7 +68,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-6" for="description">Description :</label>
                     <div class="col-sm-6">
-                        <textarea class="form-control" rows="5" id="description"></textarea>
+                        <textarea class="form-control" rows="5" id="description" th:field="*{description}"></textarea>
                     </div>
                 </div>
                 <div class="form-group">

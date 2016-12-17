@@ -15,6 +15,7 @@ public class ProductForm {
     private Category category;
     private MultipartFile file;
     private Supplier supplier;
+    private String description;
 
     public Long getId() {
         return id;
@@ -70,5 +71,13 @@ public class ProductForm {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

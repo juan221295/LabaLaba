@@ -1,5 +1,7 @@
 package com.LabaLaba.entity;
 
+import com.LabaLaba.form.SupplierRegistrationForm;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -10,7 +12,7 @@ import java.util.Collection;
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long supplierId;
+    private Long id;
     private String email;
     private String name;
     private String website;
@@ -18,13 +20,20 @@ public class Supplier {
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "supplier")
     private Collection<Product> products;
 
+    public Supplier() {}
 
-    public Long getSupplierId() {
-        return supplierId;
+    public Supplier(SupplierRegistrationForm  form) {
+        this.setEmail(form.getEmail());
+        this.setName(form.getName());
+        this.setPassword(form.getPassword());
     }
 
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {

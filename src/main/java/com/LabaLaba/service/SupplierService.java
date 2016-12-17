@@ -15,7 +15,7 @@ public class SupplierService {
     private SupplierRepository repository;
 
     public Supplier getSupplierById(Long supplierId) {
-        return repository.findBySupplierId(supplierId);
+        return repository.findById(supplierId);
     }
 
     public void register(SupplierRegistrationForm registrationForm) {

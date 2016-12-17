@@ -1,5 +1,7 @@
 package com.LabaLaba.entity;
 
+import com.LabaLaba.form.CustomerRegistrationForm;
+
 import javax.persistence.*;
 
 /**
@@ -15,6 +17,15 @@ public class Customer {
     private String name;
     private String email;
     private String password;
+
+
+    public Customer() {}
+
+    public Customer(CustomerRegistrationForm form) {
+        this.name = form.getName();
+        this.email = form.getEmail();
+        this.password = form.getPassword();
+    }
 
     public Long getId() {
         return id;

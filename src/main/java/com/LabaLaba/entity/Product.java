@@ -1,5 +1,6 @@
 package com.LabaLaba.entity;
 
+import com.LabaLaba.form.ProductForm;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
  * Created by rien on 11/28/16.
  */
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -17,6 +18,7 @@ public class Product {
     private String name;
     private Category category;
     private Long price;
+    private Long minimalQuantity;
     private String imagePath;
     private String description;
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -24,7 +26,25 @@ public class Product {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Supplier supplier;
 
+
+    public Product() {}
+
+    public Product(Long id) {
+        this.setId(id);
+    }
+
+    public Product(ProductForm form) {
+        this.setName(form.getName());
+        this.setPrice(form.getPrice());
+        this.setMinimalQuantity(form.getMinimalQuantity());
+        this.setSupplier(form.getSupplier());
+        this.setUploadDate(new DateTime());
+        this.setCategory(form.getCategory());
+        this.setDescription(form.getDescription());
+    }
+
     public Long getId() {
+
         return id;
     }
 
@@ -40,7 +60,6 @@ public class Product {
         this.name = name;
     }
 
-    @Enumerated(EnumType.STRING)
     public Category getCategory() {
         return category;
     }
@@ -55,6 +74,14 @@ public class Product {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Long getMinimalQuantity() {
+        return minimalQuantity;
+    }
+
+    public void setMinimalQuantity(Long minimalQuantity) {
+        this.minimalQuantity = minimalQuantity;
     }
 
     public String getImagePath() {
@@ -88,4 +115,5 @@ public class Product {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
+
 }

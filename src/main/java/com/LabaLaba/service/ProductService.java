@@ -4,7 +4,6 @@ import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.repository.ProductRepository;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,13 +25,8 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public Product addProduct(ProductForm form) {
-        Product product = new Product();
+        Product product = new Product(form);
 
-        product.setPrice(form.getPrice());
-        product.setName(form.getName());
-        product.setSupplier(form.getSupplier());
-        product.setUploadDate(new DateTime());
-        product.setCategory(form.getCategory());
         System.out.println(form.getCategory());
         if(form.getId()!=null) {
             product.setId(product.getId());
@@ -58,7 +52,7 @@ public class ProductService {
     }
 
     public Collection<Product> getBySupplier(Long id){
-        return productRepository.findBySupplier_SupplierId(id);
+        return productRepository.findBySupplier_Id(id);
     }
 
     public Collection<Product> getBySupplier(Supplier supplier){
