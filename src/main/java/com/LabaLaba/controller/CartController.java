@@ -5,10 +5,7 @@ import com.LabaLaba.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -17,7 +14,8 @@ import java.util.HashMap;
 /**
  * Created by rien on 12/17/16.
  */
-@RestController("/cart")
+@RestController
+@RequestMapping("/cart")
 public class CartController {
     @Autowired
     private PaymentService paymentService;

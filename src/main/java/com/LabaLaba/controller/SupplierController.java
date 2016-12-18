@@ -1,8 +1,12 @@
 package com.LabaLaba.controller;
 
+import com.LabaLaba.entity.Supplier;
+import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.form.SupplierRegistrationForm;
 import com.LabaLaba.form.CustomerRegistrationForm;
+import com.LabaLaba.service.ProductService;
 import com.LabaLaba.service.SupplierService;
+import com.LabaLaba.session.UserSession;
 import com.LabaLaba.validator.SupplierRegistrationFormValidator;
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -25,6 +30,8 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
 
+    @Autowired
+    private ProductService productService;
     @Autowired
     private SupplierRegistrationFormValidator validator;
 
@@ -60,8 +67,16 @@ public class SupplierController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(){
+    public String profile(Model model, HttpSession session){
+        if(session.getAttribute("role").equals("supplier")){
+            UserSession userSession = (UserSession) session.getAttribute("user");
+            Supplier supplier = new Supplier();
+            supplier.setId(userSession.getId());
 
-        return VIEW_PREFIX + "supplierProfile";
+            model.addAttribute("products", productService.getBySupplier(supplier));
+            return VIEW_PREFIX + "supplierProfile";
+        }
+        return "redirect:/error123";
+
     }
 }

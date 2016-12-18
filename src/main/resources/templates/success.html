@@ -30,7 +30,7 @@
     <div class="row text-center">
         <div class="col-md-3 col-sm-6 hero-feature" th:each="prod : ${products}">
             <div class="thumbnail">
-                <img th:src="@{'/images/' + ${prod.imagePath}}" />
+                <img th:src="'/images/' + ${prod.getImagePath()}" />
                 <div class="caption">
                     <h3 th:text="${prod.name}">Feature Label</h3>
                     <label th:text="${prod.id}"></label>

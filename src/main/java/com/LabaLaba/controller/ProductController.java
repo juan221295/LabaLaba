@@ -36,7 +36,7 @@ public class ProductController {
             form.setSupplier(supplier);
 
             productService.addProduct(form);
-            return "redirect:/products/success";
+            return "redirect:/supplier/profile";
         }
         return "redirect:/error123";
 
