@@ -10,7 +10,7 @@ import javax.persistence.*;
  * Created by rien on 11/28/16.
  */
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

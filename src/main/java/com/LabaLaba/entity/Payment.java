@@ -4,12 +4,13 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.Map;
+import java.util.Collection;
 
 /**
  * Created by rien on 12/17/16.
  */
 @Entity
+@Table(name = "payments")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -18,8 +19,8 @@ public class Payment {
     private Customer customer;
     @ManyToOne
     private Supplier supplier;
-    @ElementCollection
-    private Map<Product, Integer> details;
+    @OneToMany(mappedBy = "header")
+    private Collection<PaymentDetail> details;
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime creationDate;
     private Boolean isPaid;
@@ -48,11 +49,11 @@ public class Payment {
         this.supplier = supplier;
     }
 
-    public Map<Product, Integer> getDetails() {
+    public Collection<PaymentDetail> getDetails() {
         return details;
     }
 
-    public void setDetails(Map<Product, Integer> details) {
+    public void setDetails(Collection<PaymentDetail> details) {
         this.details = details;
     }
 

@@ -9,6 +9,7 @@ import java.util.Collection;
  * Created by rien on 11/28/16.
  */
 @Entity
+@Table(name = "suppliers")
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
