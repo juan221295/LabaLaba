@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" th:href="@{/css.css}" />
+    <link rel="stylesheet" href="css.css" th:href="@{/css.css}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Header</title>
@@ -15,8 +15,6 @@
             <h1 class="col-xs-8 col-md-7">
                 <a href="/">LabaLaba</a>
             </h1>
-
-
             <nav class="col-xs-4 col-md-5 text-right">
                 <div class="input-group stylish-input-group col-md-8">
                     <input type="text" class="form-control"  placeholder="Search" />
@@ -24,7 +22,7 @@
                         <button type="submit">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
-                </span>
+                    </span>
                 </div>
                 <p th:if="${session.loggedIn}">
                     <span th:text="${session.role}"></span>
@@ -37,7 +35,6 @@
                     <span>, </span>
                     <a href="/customer/logout"> Log Out</a>
                 </p>
-
                 <p th:unless="${session.loggedIn}">
                     <a href="/customer/login">Log in</a>
                     <!--<a href="/customer/register">Register</a>-->
@@ -76,6 +73,31 @@
                 <p>
                     <a href="/supplier/register">Want to become a Merchant?</a>
                 </p>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> x items<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-cart" role="menu">
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item Name</span>
+                                            <span>details</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                                
+                            </li>
+                            <button type="button" class="btn btn-default">checkout</button>
+                        </ul>
+                    </li>
+                </ul>
             </nav>
         </div>
 
