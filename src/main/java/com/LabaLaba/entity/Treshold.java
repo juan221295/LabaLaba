@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Created by rien on 12/25/16.
  */
 @Entity
+@Table(name = "treshold")
 public class Treshold {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
