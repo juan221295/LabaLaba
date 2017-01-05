@@ -3,7 +3,7 @@ package com.LabaLaba.controller;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.service.ProductService;
-import com.LabaLaba.session.UserSession;
+import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +29,9 @@ public class ProductController {
                                    @ModelAttribute("form") ProductForm form) {
 
         if(session.getAttribute("role").equals("supplier")){
-            UserSession userSession = (UserSession) session.getAttribute("user");
+            SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
             Supplier supplier = new Supplier();
-            supplier.setId(userSession.getId());
+            supplier.setId(sessionInfo.getId());
 
             form.setSupplier(supplier);
 
@@ -51,9 +51,9 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/success")
     public String success(Model model, HttpSession session){
-        UserSession userSession = (UserSession) session.getAttribute("user");
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
         Supplier supplier = new Supplier();
-        supplier.setId(userSession.getId());
+        supplier.setId(sessionInfo.getId());
         model.addAttribute("products", productService.getBySupplier(supplier));
 
         return "success";
