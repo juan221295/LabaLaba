@@ -1,64 +1,48 @@
 package com.LabaLaba.controller;
 
-import com.LabaLaba.entity.Product;
-import com.LabaLaba.service.PaymentService;
+import com.LabaLaba.entity.CartItem;
+import com.LabaLaba.service.CartService;
+import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 
 
 /**
  * Created by rien on 12/17/16.
  */
-@RestController
 @RequestMapping("/cart")
 public class CartController {
     @Autowired
-    private PaymentService paymentService;
+    private CartService cartService;
+
+    /*If needed, I haven't make it yet*/
+    @GetMapping
+    public String getCartView() {
+        return "cart-view";
+    }
 
     @PutMapping
-    public ResponseEntity addToCart(HttpSession session,
-                                    @RequestParam Long productId,
-                                    @RequestParam Integer quantity) {
-        HashMap cart = (HashMap) session.getAttribute("cart");
-        if(null == cart) {
-            session.setAttribute("cart", new HashMap());
-        }
+    public String addToCart(@RequestParam Long productId,
+                            @RequestParam Integer quantity,
+                            @RequestParam String originUrl,
+                            HttpSession session) {
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
 
-        Product product = new Product(productId);
+        CartItem item = cartService.addToCart(sessionInfo.getId(), productId, quantity);
 
-        cart.put(product, quantity);
-
-        return new ResponseEntity(HttpStatus.OK);
+        
+        return "redirect:"  + originUrl;
     }
 
     @DeleteMapping
-    public ResponseEntity removeProductFromCart(HttpSession session,
-                                                @RequestParam Long productId) {
-        HashMap cart = (HashMap) session.getAttribute("cart");
-        if(null == cart) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
+    public String deleteFromCart(@RequestParam Long cartItemId,
+                                 @RequestParam String originUrl,
+                                 HttpSession session) {
 
-        Product product = new Product(productId);
+        cartService.deleteFromCart(cartItemId);
 
-        cart.remove(product);
-        return new ResponseEntity(HttpStatus.OK);
+        return "redirect:"  + originUrl;
     }
-
-//    public boolean processCart(HttpSession session) {
-//        HashMap cart = (HashMap) session.getAttribute("cart");
-//        if(null == cart) {
-//            return null;
-//        }
-//
-//        UserSession userSession = (UserSession) session.getAttribute("user");
-//
-//        paymentService.createPayment(cart, userSession);
-//
-//    }
 }

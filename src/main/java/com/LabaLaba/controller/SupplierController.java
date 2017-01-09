@@ -1,14 +1,11 @@
 package com.LabaLaba.controller;
 
 import com.LabaLaba.entity.Supplier;
-import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.form.SupplierRegistrationForm;
-import com.LabaLaba.form.CustomerRegistrationForm;
 import com.LabaLaba.service.ProductService;
 import com.LabaLaba.service.SupplierService;
-import com.LabaLaba.session.UserSession;
+import com.LabaLaba.session.SessionInfo;
 import com.LabaLaba.validator.SupplierRegistrationFormValidator;
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,9 +66,9 @@ public class SupplierController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(Model model, HttpSession session){
         if(session.getAttribute("role").equals("supplier")){
-            UserSession userSession = (UserSession) session.getAttribute("user");
+            SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
             Supplier supplier = new Supplier();
-            supplier.setId(userSession.getId());
+            supplier.setId(sessionInfo.getId());
 
             model.addAttribute("products", productService.getBySupplier(supplier));
             return VIEW_PREFIX + "supplierProfile";

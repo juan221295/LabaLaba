@@ -6,23 +6,23 @@ import com.LabaLaba.entity.Supplier;
 /**
  * Created by Juan on 12/13/16.
  */
-public class UserSession {
+public class SessionInfo {
     private Long id;
     private String name;
     private String email;
 
-    public UserSession(Long id, String name, String email){
+    public SessionInfo(Long id, String name, String email){
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public  UserSession(Customer customer){
+    public SessionInfo(Customer customer){
         this.id = customer.getId();
         this.name = customer.getName();
         this.email = customer.getEmail();
     }
-    public  UserSession(Supplier supplier){
+    public SessionInfo(Supplier supplier){
         this.id = supplier.getId();
         this.name = supplier.getName();
         this.email = supplier.getEmail();

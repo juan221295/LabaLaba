@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "carts")
-public class Cart {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,6 +16,14 @@ public class Cart {
     @ManyToOne
     private Product product;
     private Integer quantity;
+
+    public CartItem() {}
+
+    public CartItem(Customer owner, Product product, Integer quantity) {
+        this.owner = owner;
+        this.product = product;
+        this.quantity = quantity;
+    }
 
     public Long getId() {
         return id;
