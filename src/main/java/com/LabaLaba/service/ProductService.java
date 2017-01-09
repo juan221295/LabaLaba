@@ -75,4 +75,16 @@ public class ProductService {
         return namaFile;
     }
 
+    public void deleteProduct(Long id){
+        productRepository.delete(id);
+    }
+
+    public void editProduct(ProductForm form){
+        Product oldProduct = getProductById(form.getId());
+        oldProduct.setDescription(form.getDescription());
+        oldProduct.setMinimalQuantity(form.getMinimalQuantity());
+        oldProduct.setPrice(form.getPrice());
+        productRepository.save(oldProduct);
+    }
+
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Add Product</title>
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<img th:src="'/images/' + ${product.getImagePath()}" src="http://loremflickr.com/250/250/tea" alt="" />
+<h1 th:text="${product.getName()}"></h1>
+<h2 th:text="${product.getCategory()}"></h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <form class="form-horizontal" th:action="@{/products/edit}" th:object="${form}" enctype="multipart/form-data" method="post">
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-6">Nama Barang: </label>
+                    <div class="col-sm-6">
+                        <input type="text"  id="name" th:field="*{name}" />
+                    </div>
+                </div>
+
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-6">Nama Barang: </label>
+                    <div class="col-sm-6">
+                        <input type="text"  id="id" th:field="*{id}" />
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Harga Barang: </label>
+                    <div class="col-sm-6">
+                        <input type="number"  id="price" th:field="*{price}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Jumlah Minimum Pemesanan: </label>
+                    <div class="col-sm-6">
+                        <input type="number"  id="minimalQuantity" th:field="*{minimalQuantity}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-6" for="description">Description :</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control"  rows="5" id="description" th:field="*{description}"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6 control-label">
+                        <button type="submit" class="btn btn-default">Edit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>

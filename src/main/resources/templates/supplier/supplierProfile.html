@@ -59,7 +59,7 @@
                         <p th:text="${prod.price}">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         <p th:text="${prod.category}"></p>
                         <p>
-                            <a href="#" class="btn btn-danger">Delete!</a> <a href="#" class="btn btn-warning">Edit</a>
+                            <a th:href="@{/products/delete(id=${prod.getId()})}" class="btn btn-danger">Delete!</a> <a th:href="@{/products/editProduct(id=${prod.getId()})}" class="btn btn-warning">Edit</a>
                         </p>
                     </div>
                 </div>

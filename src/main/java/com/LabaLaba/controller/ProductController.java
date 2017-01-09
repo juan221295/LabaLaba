@@ -1,5 +1,6 @@
 package com.LabaLaba.controller;
 
+import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.service.ProductService;
@@ -70,6 +71,43 @@ public class ProductController {
         model.addAttribute("product", productService.getProductById(id));
         return VIEW_PREFIX + "infoProduk";
     }
+
+    @GetMapping(value = "/delete")
+    public String deleteProduct(@RequestParam Long id){
+
+        productService.deleteProduct(id);
+        return "redirect:/supplier/profile";
+    }
+
+    @GetMapping(value = "/editProduct")
+    public String editProduct(@RequestParam Long id, Model model){
+        Product product = productService.getProductById(id);
+
+        ProductForm productForm = new ProductForm();
+        productForm.setId(product.getId());
+        productForm.setDescription(product.getDescription());
+        productForm.setName(product.getName());
+        productForm.setCategory(product.getCategory());
+        productForm.setPrice(product.getPrice());
+        productForm.setMinimalQuantity(product.getMinimalQuantity());
+        productForm.setSupplier(product.getSupplier());
+
+
+        model.addAttribute("form", productForm);
+        model.addAttribute("product", product);
+        return VIEW_PREFIX + "editProduct";
+    }
+
+    @RequestMapping(value="/edit", method = RequestMethod.POST)
+    public String editProcess(@ModelAttribute("form") ProductForm form){
+
+        productService.editProduct(form);
+        return "redirect:/supplier/profile";
+    }
+
+
+
+
 
 
 }
