@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js.js"></script>
+    <title>Admin Dashboard</title>
+    <title>LabaLaba.com</title>
+</head>
+
+<body>
+    <div th:replace="header :: header"></div>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Customer</a></li>
+            <li><a data-toggle="tab" href="#menu2">Merchants</a></li>
+            <li><a data-toggle="tab" href="#menu3">Products</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>Customer</h3>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="cust : ${customers}">
+                    <tr>
+                        <td th:text="${cust.getId()}">1</td>
+                        <td th:text="${cust.getName()}">Doe</td>
+                        <td th:text="${cust.getEmail()}">john@example.com</td>
+                        <td><a th:href="@{/admin/customer/delete(id=${cust.getId()})}" class="btn btn-xs btn-danger">x</a></td>
+                    </tr>
+                    <!--<tr>-->
+                        <!--<td>2</td>-->
+                        <!--<td>Moe</td>-->
+                        <!--<td>mary@example.com</td>-->
+                        <!--<td><a href="#" class="btn btn-xs btn-danger">x</a></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>3</td>-->
+                        <!--<td>Dooley</td>-->
+                        <!--<td>july@example.com</td>-->
+                        <!--<td><a href="#" class="btn btn-xs btn-danger">x</a></td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>Merchants</h3>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="supp : ${suppliers}">
+                    <tr>
+                        <td th:text="${supp.getId()}">1</td>
+                        <td th:text="${supp.getName()}">Doe</td>
+                        <td th:text="${supp.getEmail()}">john@example.com</td>
+                        <td><a th:href="@{/admin/supplier/delete(id=${supp.getId()})}" class="btn btn-xs btn-danger">x</a></td>
+                    </tr>
+                    <!--<tr>-->
+                        <!--<td>2</td>-->
+                        <!--<td>Moe</td>-->
+                        <!--<td>mary@example.com</td>-->
+                        <!--<td><a href="#" class="btn btn-xs btn-danger">x</a></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>3</td>-->
+                        <!--<td>Dooley</td>-->
+                        <!--<td>july@example.com</td>-->
+                        <!--<td><a href="#" class="btn btn-xs btn-danger">x</a></td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <h3>Products</h3>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Minimal Quantity</th>
+                        <th>Date</th>
+                        <th>Supplier</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Coba</td>
+                        <td>Cateogry</td>
+                        <td>Price</td>
+                        <td>Minimal</td>
+                        <td>Date</td>
+                        <td>Supp</td>
+                        <td><a href="#" class="btn btn-xs btn-danger">x</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Coba</td>
+                        <td>Cateogry</td>
+                        <td>Price</td>
+                        <td>Minimal</td>
+                        <td>Date</td>
+                        <td>Supp</td>
+                        <td><a href="#" class="btn btn-xs btn-danger">x</a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Coba</td>
+                        <td>Cateogry</td>
+                        <td>Price</td>
+                        <td>Minimal</td>
+                        <td>Date</td>
+                        <td>Supp</td>
+                        <td><a href="#" class="btn btn-xs btn-danger">x</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div th:replace="footer :: footer"></div>
+</body>
+
+</html>

@@ -6,6 +6,8 @@ import com.LabaLaba.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 /**
  * Created by rien on 11/28/16.
  */
@@ -39,4 +41,13 @@ public class SupplierService {
     public Supplier getUserByEmail(String email) {
         return repository.findOneByEmail(email);
     }
+
+    public Collection<Supplier> getAllUser() {
+        return (Collection<Supplier>) repository.findAll();
+    }
+
+    public void deleteSupplier(Long id){
+        repository.delete(id);
+    }
+
 }

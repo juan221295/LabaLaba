@@ -46,4 +46,9 @@ public class CustomerService {
     public void clearUser(){
         repository.deleteAll();
     }
+
+    public void deleteCustomer(Long id){
+        repository.delete(id);
+    }
+
 }
