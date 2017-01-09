@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -22,8 +24,11 @@ public class LabaLabaController {
         ArrayList<Product> products = (ArrayList)productService.getAll();
         Collections.sort(products, (product1, product2) -> product2.getId().compareTo(product1.getId()));
 
+        Map<String, List<Product>> displayItem = productService.getProductOnIndexPage();
+
         model.addAttribute("name", "index");
         model.addAttribute("products", products);
+        model.addAttribute("displayItems", displayItem);
 
 	    return "index";
 	}

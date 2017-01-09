@@ -1,10 +1,13 @@
 package com.LabaLaba.service;
 
+import com.LabaLaba.entity.Category;
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +16,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rien on 12/6/16.
@@ -87,4 +93,14 @@ public class ProductService {
         productRepository.save(oldProduct);
     }
 
+    public Map<String, List<Product>> getProductOnIndexPage() {
+        Map<String, List<Product>> result = new HashMap<>();
+        for(Category category : Category.values()) {
+            List<Product> products =
+                    productRepository.findByCategory(category, new PageRequest(0, 5, Sort.Direction.ASC)).getContent();
+
+            result.put(category.name(), products);
+        }
+        return result;
+    }
 }
