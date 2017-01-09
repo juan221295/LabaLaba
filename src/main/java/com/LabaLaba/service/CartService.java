@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
- * Created by rien on 1/3/17.
- * TO DO: DEFENSIVE
+ * Created by rien on 1/3/17
  */
 @Service
 public class CartService {

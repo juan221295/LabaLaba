@@ -40,7 +40,6 @@ public class CartController {
     public String deleteFromCart(@RequestParam Long cartItemId,
                                  @RequestParam String originUrl,
                                  HttpSession session) {
-        SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
 
         cartService.deleteFromCart(cartItemId);
 

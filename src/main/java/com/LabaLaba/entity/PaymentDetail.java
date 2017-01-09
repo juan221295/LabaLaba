@@ -16,7 +16,9 @@ public class PaymentDetail {
     @ManyToOne
     private Payment header;
     private Integer quantity;
-    private Integer price;
+    private Long price;
+
+    public PaymentDetail(){}
 
     public Product getProduct() {
         return product;
@@ -42,11 +44,11 @@ public class PaymentDetail {
         this.quantity = quantity;
     }
 
-    public Integer getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 }
