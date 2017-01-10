@@ -1,7 +1,7 @@
 package com.LabaLaba.controller;
 
-import com.LabaLaba.entity.Customer;
 import com.LabaLaba.form.CustomerRegistrationForm;
+import com.LabaLaba.service.CartService;
 import com.LabaLaba.service.CustomerService;
 import com.LabaLaba.service.SupplierService;
 import com.LabaLaba.session.SessionInfo;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Collection;
 
 /**
  * Created by rien on 11/28/16.
@@ -34,6 +33,8 @@ public class CustomerController {
 
     @Autowired
     private UserRegistrationFormValidator validator;
+    @Autowired
+    private CartService cartService;
 
     @InitBinder("form")
     public void initBinder (WebDataBinder binder) {
@@ -60,7 +61,7 @@ public class CustomerController {
     public String getLoginPage(HttpSession session) {
         String login ="redirect:/";
         try{
-            if(session.getAttribute("username").equals(null)){
+            if(session.getAttribute("user").equals(null)){
 
             }
 
@@ -110,21 +111,8 @@ public class CustomerController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String handleLogout(HttpSession session) {
         session.removeAttribute("loggedIn");
-        session.removeAttribute("username");
+        session.removeAttribute("user");
         session.invalidate();
         return "redirect:/";
-    }
-
-    //RESPONSE BODY FOR TESTING BELOW
-
-    @ResponseBody
-    @RequestMapping("/all")
-    public Collection<Customer> getAllUser() {
-        return customerService.getAllUser();
-    }
-
-    @RequestMapping("/clear")
-    public void clearUser(){
-        customerService.clearUser();
     }
 }

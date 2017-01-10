@@ -31,6 +31,10 @@ public class CartService {
         Customer owner = customerRepository.findOne(ownerId);
         Product product = productRepository.findById(productId);
 
+        if(cartRepository.findByOwnerAndProduct(owner, product) != null) {
+            return null;
+        }
+
         CartItem cartItem = new CartItem(owner, product, quantity);
 
         return cartRepository.save(cartItem);
@@ -40,12 +44,13 @@ public class CartService {
         cartRepository.delete(cartId);
     }
 
-    public Collection<CartItem> getCartByOwner(Long ownerId) {
-        if(ownerId == null) {
+    public Collection<CartItem> getCartByCustomer(Long customerId) {
+        if(customerId == null) {
             return null;
         }
-        Customer owner = customerRepository.findOne(ownerId);
+        Customer owner = customerRepository.findOne(customerId);
 
         return cartRepository.findByOwner(owner);
     }
+
 }

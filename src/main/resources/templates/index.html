@@ -98,7 +98,7 @@
                                 <button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#myModal'+${prod.getId()}" >Buy !</button>
                                 <a th:href="@{/products/detail(id=${prod.getId()})}" class="btn btn-default">More Info</a>
                             </p>
-                            <div class="modal fade" th:id="'myModal' +${prod.getId()}" role="dialog">
+                            <div class="modal fade" th:id="'myModal' + ${prod.getId()}" role="dialog">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -106,11 +106,12 @@
                                             <h4 class="modal-title" th:text="${prod.getName()}"></h4>
                                             <!--<h4 class="modal-title">Coba</h4>-->
                                         </div>
-                                        <form class="form-horizontal" th:action="@{/products/addToCart}" enctype="multipart/form-data" method="post">
+                                        <form class="form-horizontal" th:action="@{/cart/add}" enctype="multipart/form-data" method="post">
+                                            <input th:value="${prod.getId()}" th:name="productId" readonly="readonly" class="hidden"/>
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label class="control-label">Jumlah: </label>
-                                                    <input type="number" placeholder="Quantity" id="quantity" />
+                                                    <input type="number" th:name="quantity" placeholder="Quantity" id="quantity" />
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

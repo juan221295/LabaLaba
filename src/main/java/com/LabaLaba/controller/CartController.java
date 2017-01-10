@@ -1,48 +1,51 @@
 package com.LabaLaba.controller;
 
-import com.LabaLaba.entity.CartItem;
 import com.LabaLaba.service.CartService;
 import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
 /**
  * Created by rien on 12/17/16.
  */
+@Controller
 @RequestMapping("/cart")
 public class CartController {
     @Autowired
     private CartService cartService;
 
-    /*If needed, I haven't make it yet*/
-    @GetMapping
-    public String getCartView() {
-        return "cart-view";
-    }
-
-    @PutMapping
+    @PostMapping("/add")
     public String addToCart(@RequestParam Long productId,
                             @RequestParam Integer quantity,
-                            @RequestParam String originUrl,
-                            HttpSession session) {
+                            HttpSession session,
+                            HttpServletRequest request) {
+
         SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
-
-        CartItem item = cartService.addToCart(sessionInfo.getId(), productId, quantity);
-
-        
-        return "redirect:"  + originUrl;
+        System.out.println(productId);
+        System.out.println(quantity);
+        System.out.println(sessionInfo.getId());
+        cartService.addToCart(sessionInfo.getId(), productId, quantity);
+        System.out.println(getRefererUrl(request));
+        return "redirect:" + getRefererUrl(request);
     }
 
-    @DeleteMapping
+    @PostMapping("/delete")
     public String deleteFromCart(@RequestParam Long cartItemId,
-                                 @RequestParam String originUrl,
-                                 HttpSession session) {
+                                 HttpServletRequest request) {
 
         cartService.deleteFromCart(cartItemId);
 
-        return "redirect:"  + originUrl;
+        return "redirect:" + getRefererUrl(request);
+    }
+
+    private String getRefererUrl(HttpServletRequest request) {
+        return request.getHeader("Referer");
     }
 }

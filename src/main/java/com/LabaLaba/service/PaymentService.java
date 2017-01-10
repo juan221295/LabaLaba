@@ -30,7 +30,7 @@ public class PaymentService {
         }
         Customer owner = customerRepository.findOne(ownerId);
 
-        ArrayList<CartItem> cart = new ArrayList<>(cartService.getCartByOwner(ownerId));
+        ArrayList<CartItem> cart = new ArrayList<>(cartService.getCartByCustomer(ownerId));
         Map<Long, List<CartItem>> separatedItem = separateItemBySupplier(cart);
         List<Payment> payments = generatePaymentsFromSeparatedItem(separatedItem, owner);
 
