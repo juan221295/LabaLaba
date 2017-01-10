@@ -9,22 +9,45 @@
     <title>Header</title>
 </head>
 <body>
-<header th:fragment="header">
+<header th:fragment="header" style="padding: 0px;">
     <div class="container">
-        <div class="row container">
-            <h1 class="col-xs-8 col-md-7">
-                <a href="/">LabaLaba</a>
-            </h1>
-            <nav class="col-xs-4 col-md-5 text-right">
-                <div class="input-group stylish-input-group col-md-8">
-                    <input type="text" class="form-control"  placeholder="Search" />
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-                <p th:if="${session.loggedIn}">
+        <!--<div class="row container">-->
+        <!--<nav class="col-xs-4 col-md-5 text-right">-->
+        <!--<div class="input-group stylish-input-group col-md-8">-->
+        <!--<input type="text" class="form-control"  placeholder="Search" />-->
+        <!--<span class="input-group-addon">-->
+        <!--<button type="submit">-->
+        <!--<span class="glyphicon glyphicon-search"></span>-->
+        <!--</button>-->
+        <!--</span>-->
+        <!--</div>-->
+        <!--<p th:if="${session.loggedIn}">-->
+        <!--<span th:text="${session.role}"></span>-->
+
+        <!--<span th:switch="${session.role}">-->
+        <!--<span th:case="'supplier'"> <a href="/supplier/profile" th:text="${session.user.name}"></a></span>-->
+        <!--<span th:case="*"><span th:text="${session.user.name}"></span></span>-->
+        <!--</span>-->
+        <!--&lt;!&ndash;<span th:text="${session.user.name}"></span>&ndash;&gt;-->
+        <!--<span>, </span>-->
+        <!--<a href="/customer/logout"> Log Out</a>-->
+        <!--</p>-->
+        <!--<p th:unless="${session.loggedIn}">-->
+        <!--<a href="/customer/login">Log in</a>-->
+        <!--&lt;!&ndash;<a href="/customer/register">Register</a>&ndash;&gt;-->
+        <!--</p>-->
+        <!--</nav>-->
+        <!--</div>-->
+        <!--<br />-->
+        <div class="row pull-left">
+            <div style="padding-bottom: 0; padding-top: 0;">
+                <a href="/"> <img src="/images/labalaba.png" alt="Labalaba" width="130" height="130" style="padding: 0; margin: 0;"/> </a>
+            </div>
+        </div>
+        <br />
+        <div class="row pull-right">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                <p th:if="${session.loggedIn}" class="pull-right" style="margin-top:5px;">
                     <span th:text="${session.role}"></span>
 
                     <span th:switch="${session.role}">
@@ -33,18 +56,36 @@
                     </span>
                     <!--<span th:text="${session.user.name}"></span>-->
                     <span>, </span>
-                    <a href="/customer/logout"> Log Out</a>
+                    <a href="/customer/logout" style="padding-top: 5px;"> Log Out</a>
                 </p>
-                <p th:unless="${session.loggedIn}">
-                    <a href="/customer/login">Log in</a>
+                <p th:unless="${session.loggedIn}" class="pull-right" style="margin-top:2px">
+                    <a href="/customer/login" style="padding-top: 5px;">Log in</a>
                     <!--<a href="/customer/register">Register</a>-->
                 </p>
-            </nav>
+            </div>
+
         </div>
         <br />
+        <br />
+
         <div class="row">
+            <div class="pull-right">
+                <div class="col-md-4 col-sm-3 pull-right">
+                    <div class="input-group stylish-input-group">
+                        <input type="text" class="form-control"  placeholder="Search" />
+                        <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row pull-left">
             <nav>
-                <div class="dropdown">
+                <div class="dropdown pull-left">
                     <p class="pointer" data-toggle="dropdown">Categories
                         <span class="caret"></span></p>
                     <ul class="dropdown-menu">
@@ -73,13 +114,12 @@
                 <p>
                     <a href="/supplier/register">Want to become a Merchant?</a>
                 </p>
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> x items<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-cart" role="menu">
-                            <li>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> x items<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-cart" role="menu">
+                        <li>
                                 <span class="item">
                                     <span class="item-left">
                                         <img src="http://lorempixel.com/50/50/" alt="" />
@@ -92,17 +132,28 @@
                                         <button class="btn btn-xs btn-danger pull-right">x</button>
                                     </span>
                                 </span>
-                                
-                            </li>
-                            <button type="button" class="btn btn-default">checkout</button>
-                        </ul>
-                    </li>
-                </ul>
+
+                        </li>
+                        <button type="button" class="btn btn-default">checkout</button>
+                    </ul>
+                </div>
+                <!--<ul>-->
+                <!--<li class="dropdown">-->
+                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">-->
+                <!--<span class="glyphicon glyphicon-shopping-cart"></span> x items<span class="caret"></span>-->
+                <!--</a>-->
+                <!---->
+                <!--</li>-->
+                <!--</ul>-->
+
             </nav>
         </div>
 
+
+
+
     </div>
-    <hr />
+    <hr style="margin-top:0px"/>
 </header>
 
 
