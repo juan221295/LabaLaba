@@ -6,6 +6,7 @@ import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -97,10 +98,14 @@ public class ProductService {
         Map<String, List<Product>> result = new HashMap<>();
         for(Category category : Category.values()) {
             List<Product> products =
-                    productRepository.findByCategory(category, new PageRequest(0, 5, Sort.Direction.ASC)).getContent();
+                    productRepository.findByCategory(category, new PageRequest(0, 5, Sort.Direction.ASC, "uploadDate")).getContent();
 
             result.put(category.name(), products);
         }
         return result;
+    }
+
+    public Page<Product> getProductByCategoryWithPageRequest(Category category, PageRequest pageRequest) {
+        return productRepository.findByCategory(category, pageRequest);
     }
 }
