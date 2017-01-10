@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css.css" th:href="@{/css.css}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css.css" th:href="@{/css.css}" />
     <title>Header</title>
 </head>
 <body>
@@ -119,17 +119,20 @@
                         <span class="glyphicon glyphicon-shopping-cart"></span> x items<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-cart" role="menu">
-                        <li>
+                        <li th:each="cartItem : ${cart}">
                                 <span class="item">
                                     <span class="item-left">
-                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <img th:src="'/images/' + ${cartItem.product.getImagePath()}"  src="http://lorempixel.com/50/50/" alt="" style="width: auto; height: auto; max-width: 50px; max-height: 50px;"/>
                                         <span class="item-info">
-                                            <span>Item Name</span>
-                                            <span>details</span>
+                                            <span th:text="${cartItem.product.getName()}">Item Name</span>
+                                            <span th:text="${cartItem.getQuantity()}">details</span>
                                         </span>
                                     </span>
                                     <span class="item-right">
-                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        <form th:action="@{/cart/delete}" method="post">
+                                            <input readonly="readonly" th:name="cartItemId" th:value="${cartItem.getId()}"  class="hidden"/>
+                                            <button type="submit" class="btn btn-xs btn-danger pull-right">x</button>
+                                        </form>
                                     </span>
                                 </span>
 

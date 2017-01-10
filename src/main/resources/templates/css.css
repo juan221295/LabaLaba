@@ -168,11 +168,11 @@ ul.dropdown-cart li .item-left span.item-info{
     float:left;
 }
 
-ul.dropdown-cart li .item-left img {
+img.cart-image{
     width: auto;
     height: auto;
-    max-width: auto;
-    max-height: auto;
+    max-width: 50px;
+    max-height: 50px;
 }
 
 ul.dropdown-cart li .item-left span.item-info{
