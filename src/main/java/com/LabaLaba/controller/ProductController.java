@@ -1,16 +1,23 @@
 package com.LabaLaba.controller;
 
+import com.LabaLaba.entity.Category;
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.service.ProductService;
 import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rien on 12/6/16.
@@ -103,6 +110,16 @@ public class ProductController {
 
         productService.editProduct(form);
         return "redirect:/supplier/profile";
+    }
+
+    @GetMapping(value = "/kategori")
+    public String kategori(@RequestParam String nama, Model model){
+        List<Product> products = productService.getProductByCategoryWithPageRequest(Category.valueOf(nama), new PageRequest(0, 10, Sort.Direction.ASC, "uploadDate")).getContent();
+
+        model.addAttribute("products", products);
+        model.addAttribute("namaKategori", nama);
+        return VIEW_PREFIX +"kategori";
+
     }
 
 

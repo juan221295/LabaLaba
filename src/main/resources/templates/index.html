@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css.css" />
     <title>LabaLaba.com</title>
 </head>
 <body>
@@ -28,35 +28,35 @@
                 <div class="carousel-inner" role="listbox">
 
                     <div class="item active">
-                        <img src="http://cdn3.dualshockers.com/wp-content/uploads/2016/03/FFXV_0330__13.jpg" alt="Chania" width="100%" height="345" style="margin:auto" />
-                        <div class="carousel-caption">
-                            <h3>FF XIII</h3>
-                            <p>NEW, FROM THE OVEN</p>
-                        </div>
+                        <img src="/images/gambar1.jpg" alt="Chania" width="100%" height="345" style="margin:auto" />
+                        <!--<div class="carousel-caption">-->
+                            <!--<h3>FF XIII</h3>-->
+                            <!--<p>NEW, FROM THE OVEN</p>-->
+                        <!--</div>-->
                     </div>
 
                     <div class="item">
-                        <img src="https://liveyourfantasy.files.wordpress.com/2015/08/ffx_chocobo.jpg   " alt="Chania" width="100%" height="345" style="margin:auto" />
-                        <div class="carousel-caption">
-                            <h3>Mountain</h3>
-                            <p>Beautiful scenery isnt it...</p>
-                        </div>
+                        <img src="/images/gambar2.jpg" alt="Chania" width="100%" height="345" style="margin:auto" />
+                        <!--<div class="carousel-caption">-->
+                            <!--<h3>Mountain</h3>-->
+                            <!--<p>Beautiful scenery isnt it...</p>-->
+                        <!--</div>-->
                     </div>
 
                     <div class="item">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/f/f5/Final_Fantasy_XV_key_art%3B_characters_in_battle.png" alt="Flower" width="100%" height="345" style="margin:auto" />
-                        <div class="carousel-caption">
-                            <h3>Flowers and Fire</h3>
-                            <p>Lets beat them up, Friends.</p>
-                        </div>
+                        <img src="/images/gambar3.png" alt="Flower" width="100%" height="345" style="margin:auto" />
+                        <!--<div class="carousel-caption">-->
+                            <!--<h3>Flowers and Fire</h3>-->
+                            <!--<p>Lets beat them up, Friends.</p>-->
+                        <!--</div>-->
                     </div>
 
                     <div class="item">
-                        <img src="http://cdn.mos.cms.futurecdn.net/60666855057add5fac5da91ec44784e9.jpg" alt="Flower" width="100%" height="345" style="margin:auto" />
-                        <div class="carousel-caption">
-                            <h3>Chocobo</h3>
-                            <p>Kwerk Kwerk.</p>
-                        </div>
+                        <img src="/images/gambar4.jpg" alt="Flower" width="100%" height="345" style="margin:auto" />
+                        <!--<div class="carousel-caption">-->
+                            <!--<h3>Chocobo</h3>-->
+                            <!--<p>Kwerk Kwerk.</p>-->
+                        <!--</div>-->
                     </div>
 
                 </div>
@@ -85,48 +85,53 @@
                 </div>
             </div>
             <div class="row text-center">
-            <div class="col-md-3 col-sm-6 hero-feature" th:each="prod : ${displayItem.value}">
-                <div class="thumbnail">
-                    <img th:src="'/images/' + ${prod.getImagePath()}" src="http://loremflickr.com/250/250/tea" alt="" />
-                    <div class="caption">
-                        <h3 th:text="${prod.getName()}">Feature Label</h3>
-                        <p th:text="${prod.getPrice()}">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>Starting price : <span>Rp. 5000</span></p>
-                        <p>Minimal Quantity : <span>100</span></p>
-                        <p>
-                            <!--<a href="#" class="btn btn-primary">add to Cart</a> -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#myModal'+${prod.getId()}" >Buy !</button>
-                            <a th:href="@{/products/detail(id=${prod.getId()})}" class="btn btn-default">More Info</a>
-                        </p>
-                        <div class="modal fade" th:id="'myModal' +${prod.getId()}" role="dialog">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title" th:text="${prod.getName()}"></h4>
-                                        <!--<h4 class="modal-title">Coba</h4>-->
+                <div class="col-md-3 col-sm-6 hero-feature" th:each="prod : ${displayItem.value}">
+                    <div class="thumbnail">
+                        <img th:src="'/images/' + ${prod.getImagePath()}" src="http://loremflickr.com/250/250/tea" alt="" />
+                        <div class="caption">
+                            <h3 th:text="${prod.getName()}">Feature Label</h3>
+                            <p th:text="${prod.getPrice()}">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>Starting price : <span>Rp. 5000</span></p>
+                            <p>Minimal Quantity : <span>100</span></p>
+                            <p>
+                                <!--<a href="#" class="btn btn-primary">add to Cart</a> -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#myModal'+${prod.getId()}" >Buy !</button>
+                                <a th:href="@{/products/detail(id=${prod.getId()})}" class="btn btn-default">More Info</a>
+                            </p>
+                            <div class="modal fade" th:id="'myModal' +${prod.getId()}" role="dialog">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title" th:text="${prod.getName()}"></h4>
+                                            <!--<h4 class="modal-title">Coba</h4>-->
+                                        </div>
+                                        <form class="form-horizontal" th:action="@{/products/addToCart}" enctype="multipart/form-data" method="post">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label class="control-label">Jumlah: </label>
+                                                    <input type="number" placeholder="Quantity" id="quantity" />
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-default">Buy</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <form class="form-horizontal" th:action="@{/products/addToCart}" enctype="multipart/form-data" method="post">
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label class="control-label">Jumlah: </label>
-                                                <input type="number" placeholder="Quantity" id="quantity" />
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-default">Buy</button>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a class="pull-right" th:href="@{/products/kategori(nama=${displayItem.key})}">more....</a>
+                </div>
+            </div>
         </div>
 
         
@@ -140,7 +145,7 @@
         <!--<img th:src="@{/images/lalala.png}" />-->
 
     <!--</div>-->
-    <a th:href="@{/admin/dashboard}">admincoba</a>
+    <!--<a th:href="@{/admin/dashboard}">admincoba</a>-->
     <div th:replace="footer :: footer"></div>
 </body>
 </html>
