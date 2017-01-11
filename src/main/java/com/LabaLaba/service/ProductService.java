@@ -108,8 +108,19 @@ public class ProductService {
     public Page<Product> getProductByCategoryWithPageRequest(Category category, PageRequest pageRequest) {
         return productRepository.findByCategory(category, pageRequest);
     }
-//
-//    public Collection<Product> searchProduct(String keyword){
-//        return productRepository.
-//    }
+
+    public Collection<Product> searchProduct(String keyword){
+//        Collection<Product> products = productRepository.findByModelContainingWithIgnoreCase(keyword);
+////                productRepository.findByModelStartingWithIgnoreCase(keyword);
+//        products.addAll(productRepository.findByModelStartingWithIgnoreCase(keyword));
+//        products.addAll(productRepository.findByModelEndingWithIgnoreCase(keyword));
+
+
+        //return products;
+
+        return productRepository.findByKeyWord(keyword);
+
+    }
+
+
 }

@@ -71,14 +71,31 @@
         <div class="row">
             <div class="pull-right">
                 <div class="col-md-4 col-sm-3 pull-right">
-                    <div class="input-group stylish-input-group">
-                        <input type="text" class="form-control"  placeholder="Search" />
-                        <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                    </div>
+                    <!--<form th:action="@{/products/search}" method="get" role="form">-->
+                        <!--<input type="text" class="form-control" placeholder="Search" id="keyword" name="keyword"/>-->
+                        <!--<span class="input-group-addon"></span>-->
+                        <!--<button type="submit">-->
+                            <!--<span class="glyphicon glyphicon-search"></span>-->
+                        <!--</button>-->
+                    <!--</form>-->
+                    <form th:action="@{/products/search}" method="get" role="form">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" class="form-control" placeholder="Search" id="keyword" name="keyword"/>
+                            <span class="input-group-addon">
+                                <button type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <!--<div class="input-group stylish-input-group">-->
+                        <!--<input type="text" class="form-control"  placeholder="Search" />-->
+                        <!--<span class="input-group-addon">-->
+                        <!--<button type="submit">-->
+                            <!--<span class="glyphicon glyphicon-search"></span>-->
+                        <!--</button>-->
+                    <!--</span>-->
+                    <!--</div>-->
                 </div>
             </div>
 
