@@ -8,6 +8,7 @@ import com.LabaLaba.service.ProductService;
 import com.LabaLaba.service.SupplierService;
 import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by rien on 12/6/16.
@@ -119,10 +116,20 @@ public class ProductController {
     }
 
     @GetMapping(value = "/kategori")
-    public String kategori(@RequestParam String nama, Model model){
-        List<Product> products = productService.getProductByCategoryWithPageRequest(Category.valueOf(nama), new PageRequest(0, 10, Sort.Direction.ASC, "uploadDate")).getContent();
+    public String kategori(@RequestParam String nama,
+                           @RequestParam(defaultValue = "1", required = false) int page,
+                           Model model){
+        if(page < 1) {
+            page =1;
+        }
 
-        model.addAttribute("products", products);
+        Page<Product> productPage =
+                productService.getProductByCategoryWithPageRequest(
+                        Category.valueOf(nama),
+                        new PageRequest(page - 1, 10, Sort.Direction.ASC, "uploadDate")
+                );
+
+        model.addAttribute("productPage", productPage);
         model.addAttribute("namaKategori", nama);
         return VIEW_PREFIX +"kategori";
 
