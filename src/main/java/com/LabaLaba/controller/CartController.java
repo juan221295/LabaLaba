@@ -1,9 +1,12 @@
 package com.LabaLaba.controller;
 
 import com.LabaLaba.service.CartService;
+import com.LabaLaba.service.CustomerService;
 import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +23,9 @@ import javax.servlet.http.HttpSession;
 public class CartController {
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private CustomerService customerService;
 
     @PostMapping("/add")
     public String addToCart(@RequestParam Long productId,
@@ -58,5 +64,24 @@ public class CartController {
 
     private String getRefererUrl(HttpServletRequest request) {
         return request.getHeader("Referer");
+    }
+
+    @GetMapping(value = "/checkout")
+    private String checkOut(HttpSession session, Model model){
+        try {
+            if(session.getAttribute("role").equals("customer")) {
+                SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
+                model.addAttribute("cart", cartService.getCartByCustomer(sessionInfo.getId()));
+                model.addAttribute("customer", customerService.getUserById(sessionInfo.getId()));
+
+                return "customer/checkout";
+            }
+            else{
+                return "redirect:/";
+            }
+        }catch (NullPointerException e){
+            return "redirect:/";
+        }
+
     }
 }
