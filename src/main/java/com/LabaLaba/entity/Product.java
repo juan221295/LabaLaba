@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by rien on 11/28/16.
@@ -26,6 +27,8 @@ public class Product {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Supplier supplier;
 
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "product")
+    private Collection<Comment> comments;
 
     public Product() {}
 
@@ -116,4 +119,11 @@ public class Product {
         this.supplier = supplier;
     }
 
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
+    }
 }

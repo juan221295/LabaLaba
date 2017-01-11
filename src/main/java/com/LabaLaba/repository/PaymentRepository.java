@@ -14,7 +14,6 @@ import java.util.Collection;
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
     public Collection<Payment> findByCustomer(Customer customer);
-
     public Collection<Payment> findBySupplier(Supplier supplier);
 
 }

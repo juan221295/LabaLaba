@@ -19,6 +19,7 @@ public class Customer {
     private String password;
 
 
+
     public Customer() {}
 
     public Customer(CustomerRegistrationForm form) {
