@@ -19,6 +19,9 @@ public class CustomerService {
     public Customer getUserByEmail(String email) {
         return repository.findOneByEmail(email);
     }
+    public Customer getUserById(Long id){
+        return repository.findById(id);
+    }
 
     public Customer login(String email, String password) {
         Customer customer = repository.findOneByEmailAndPassword(email, password);

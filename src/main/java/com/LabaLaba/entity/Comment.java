@@ -11,9 +11,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "comments")
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
+
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime uploadDate;
 
@@ -21,7 +23,10 @@ public class Comment {
     private Product product;
 
     private String text;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Customer commentator;
+//    private Customer commentator;
 
     public Product getProduct() {
         return product;

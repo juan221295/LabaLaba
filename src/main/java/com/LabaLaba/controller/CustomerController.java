@@ -85,6 +85,8 @@ public class CustomerController {
             SessionInfo sessionInfo = new SessionInfo(customerService.getUserByEmail(email));
             session.setAttribute("user", sessionInfo);
 
+//            session.setAttribute("customer", customerService.getUserByEmail(email));
+
             System.out.println("login success");
             System.out.println(customerService.getUserByEmail(email).getName());
 

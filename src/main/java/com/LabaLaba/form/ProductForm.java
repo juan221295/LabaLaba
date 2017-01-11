@@ -17,6 +17,14 @@ public class ProductForm {
     private Supplier supplier;
     private String description;
 
+
+    private long treshold1;
+    private long treshold2;
+    private long treshold3;
+    private long price1;
+    private long price2;
+    private long price3;
+
     public Long getId() {
         return id;
     }
@@ -79,5 +87,53 @@ public class ProductForm {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getTreshold1() {
+        return treshold1;
+    }
+
+    public void setTreshold1(long treshold1) {
+        this.treshold1 = treshold1;
+    }
+
+    public long getTreshold2() {
+        return treshold2;
+    }
+
+    public void setTreshold2(long treshold2) {
+        this.treshold2 = treshold2;
+    }
+
+    public long getTreshold3() {
+        return treshold3;
+    }
+
+    public void setTreshold3(long treshold3) {
+        this.treshold3 = treshold3;
+    }
+
+    public long getPrice1() {
+        return price1;
+    }
+
+    public void setPrice1(long price1) {
+        this.price1 = price1;
+    }
+
+    public long getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(long price2) {
+        this.price2 = price2;
+    }
+
+    public long getPrice3() {
+        return price3;
+    }
+
+    public void setPrice3(long price3) {
+        this.price3 = price3;
     }
 }

@@ -22,13 +22,15 @@ public class CommentService {
         return commentRepository.findById(id);
     }
 
-    public Comment addComment(String text, Customer customer, Product product){
+
+    public void addComment(String text, Customer customer, Product product){
         Comment comment = new Comment();
         comment.setText(text);
         comment.setCommentator(customer);
         comment.setProduct(product);
 
-        return commentRepository.save(comment);
+        commentRepository.save(comment);
+        //return commentRepository.save(comment);
 
     }
 

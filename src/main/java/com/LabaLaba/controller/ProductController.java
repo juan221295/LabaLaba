@@ -1,9 +1,12 @@
 package com.LabaLaba.controller;
 
 import com.LabaLaba.entity.Category;
+import com.LabaLaba.entity.Customer;
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
+import com.LabaLaba.service.CommentService;
+import com.LabaLaba.service.CustomerService;
 import com.LabaLaba.service.ProductService;
 import com.LabaLaba.service.SupplierService;
 import com.LabaLaba.session.SessionInfo;
@@ -30,6 +33,12 @@ public class ProductController {
 
     @Autowired
     private SupplierService supplierService;
+
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(method = RequestMethod.POST)
     public String uploadNewProduct(HttpSession session,
@@ -77,8 +86,8 @@ public class ProductController {
     @GetMapping(value = "/detail")
     public String detailProduk(@RequestParam Long id, Model model){
 
-
         model.addAttribute("product", productService.getProductById(id));
+        model.addAttribute("comments", commentService.findByProduct(productService.getProductById(id)));
         return VIEW_PREFIX + "infoProduk";
     }
 
@@ -132,6 +141,26 @@ public class ProductController {
         model.addAttribute("productPage", productPage);
         model.addAttribute("namaKategori", nama);
         return VIEW_PREFIX +"kategori";
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "comment")
+    public String addComment(@RequestParam String text, @RequestParam String id, HttpSession session){
+        try{
+            if(session.getAttribute("role").equals("customer")){
+
+                Long idBarang = Long.parseLong(id);
+                SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
+
+                commentService.addComment(text, customerService.getUserById(sessionInfo.getId()), productService.getProductById(idBarang));
+
+                return "redirect:/products/detail?id=" + id;
+            }
+        }catch (Exception e){
+            return "redirect:/customer/login";
+        }
+        return "redirect:/customer/login";
+
 
     }
 

@@ -64,37 +64,76 @@
             </p>
 
             <hr />
-            <h2>Ulasan</h2>
-            <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <p>
-                        * * * * *
-                    </p>
-                    <p>
-                        oleh pengulas
-                    </p>
+            <h2>Comment</h2>
+            <form th:action="@{/products/comment}" enctype="multipart/form-data" method="post" role="form">
+                <p>Comment :</p>
+                <div class="form-group">
+                    <!--<label class="control-label" for="description">AddComment :</label>-->
+                    <div style="display: none;">
+                        <!--<input type="text" placeholder="Name" id="name" th:field="*{name}" />-->
 
+                        <input type="text" id="id" name="id" th:value="${product.getId()}" />
+                    </div>
+                    <div>
+                        <textarea class="form-control" rows="5" id="text" name="text"></textarea>
+                    </div>
                 </div>
-                <div class="col-sm-8 col-md-6">
+                <div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+            <br />
+            <div th:each="comment: ${comments}">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <h6>
+                            Pengulas:
+                        </h6>
+                        <span th:text="${comment.getCommentator().getName()}"></span>
+                        <p>
+                            * * * * * rating
+                        </p>
 
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="col-sm-8 col-md-6" >
+                        <h6>Comment: </h6>
+                        <p th:text="${comment.text}">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
                 </div>
+                <hr />
             </div>
-            <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <p>
-                        * * * * *
-                    </p>
-                    <p>
-                        oleh pengulas
-                    </p>
+            <!--<div class="row">-->
+                <!--<div class="col-sm-4 col-md-4">-->
+                    <!--<p>-->
+                        <!--* * * * *-->
+                    <!--</p>-->
+                    <!--<p>-->
+                        <!--oleh pengulas-->
+                    <!--</p>-->
 
-                </div>
-                <div class="col-sm-8 col-md-6">
+                <!--</div>-->
+                <!--<div class="col-sm-8 col-md-6">-->
 
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
-            </div>
+                    <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="col-sm-4 col-md-4">-->
+                    <!--<p>-->
+                        <!--* * * * *-->
+                    <!--</p>-->
+                    <!--<p>-->
+                        <!--oleh pengulas-->
+                    <!--</p>-->
+
+                <!--</div>-->
+                <!--<div class="col-sm-8 col-md-6">-->
+
+                    <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.-->
+                <!--</div>-->
+            <!--</div>-->
 
 
         </div>
