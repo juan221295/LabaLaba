@@ -71,7 +71,7 @@ public class ProductService {
 
         System.out.println(IMAGE_DIR);
         try {
-            //Files.createDirectories(Paths.get(IMAGE_DIR));
+            Files.createDirectories(Paths.get(IMAGE_DIR));
 //            File file = new File(IMAGE_DIR+ idSupp.toString() + "/" + namaFile);
             File file = new File(IMAGE_DIR + namaFile);
             uploadingFile.transferTo(file);
