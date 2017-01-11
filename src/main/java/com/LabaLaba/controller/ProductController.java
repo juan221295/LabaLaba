@@ -54,6 +54,7 @@ public class ProductController {
             form.setSupplier(supplier);
 
             productService.addProduct(form);
+
             return "redirect:/supplier/profile";
         }
         return "redirect:/error123";
@@ -93,8 +94,9 @@ public class ProductController {
 
     @GetMapping(value = "/delete")
     public String deleteProduct(@RequestParam Long id){
-
+        commentService.deleteCommentByProduct(productService.getProductById(id));
         productService.deleteProduct(id);
+
         return "redirect:/supplier/profile";
     }
 

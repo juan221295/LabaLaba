@@ -67,4 +67,5 @@ public class Comment {
     public void setCommentator(Customer commentator) {
         this.commentator = commentator;
     }
+
 }

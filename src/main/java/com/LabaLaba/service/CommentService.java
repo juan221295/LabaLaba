@@ -5,6 +5,7 @@ import com.LabaLaba.entity.Customer;
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -42,7 +43,14 @@ public class CommentService {
         return commentRepository.findByProduct(product);
     }
 
-    public void deleteProduct(Long id){
+    public void deleteComment(Long id){
         commentRepository.delete(id);
     }
+
+
+    public void deleteCommentByProduct(Product Product){
+        commentRepository.deleteByProduct(Product);
+    }
+
+
 }

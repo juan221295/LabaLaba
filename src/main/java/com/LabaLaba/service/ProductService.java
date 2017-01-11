@@ -44,10 +44,10 @@ public class ProductService {
         if(form.getFile()==null) {
             return result;
         }
-        String imagePath = this.uploadImage(form.getFile(), product);
-        product.setImagePath(imagePath);
+        String imagePath = this.uploadImage(form.getFile(), result, form.getSupplier().getId());
+        result.setImagePath(imagePath);
 
-        return productRepository.save(product);
+        return productRepository.save(result);
     }
 
     public Product getProductById(Long id) {
@@ -66,12 +66,13 @@ public class ProductService {
         return productRepository.findBySupplier(supplier);
     }
 
-    public String uploadImage(MultipartFile uploadingFile, Product product){
+    public String uploadImage(MultipartFile uploadingFile, Product product, Long idSupp){
         String namaFile = product.getId().toString()+ "-" +uploadingFile.getOriginalFilename();
 
         System.out.println(IMAGE_DIR);
         try {
-            Files.createDirectories(Paths.get(IMAGE_DIR));
+            //Files.createDirectories(Paths.get(IMAGE_DIR));
+//            File file = new File(IMAGE_DIR+ idSupp.toString() + "/" + namaFile);
             File file = new File(IMAGE_DIR + namaFile);
             uploadingFile.transferTo(file);
         } catch (IOException e) {
