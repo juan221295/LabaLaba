@@ -39,9 +39,11 @@
         </div>
         <div class="col-sm-8 col-md-3">
             <div class="thumbnail">
-                <form class="form-horizontal" th:action="@{/products/addToCart}" enctype="multipart/form-data" method="post">
+                <form class="form-horizontal" th:action="@{/cart/add}" enctype="multipart/form-data" method="post">
+                <!--<form class="form-horizontal" th:action="@{/products/addToCart}" enctype="multipart/form-data" method="post">-->
+                    <input th:value="${product.getId()}" th:name="productId" readonly="readonly" class="hidden"/>
                     <p>Jumlah: </p>
-                    <input type="number" placeholder="Quantity" id="quantity" />
+                    <input type="number" placeholder="Quantity" id="quantity" th:name="quantity"/>
                     <button type="submit" class="btn btn-primary">Buy Now!</button>
                 </form>
 

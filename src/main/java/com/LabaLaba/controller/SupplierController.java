@@ -69,7 +69,8 @@ public class SupplierController {
             SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
             Supplier supplier = new Supplier();
             supplier.setId(sessionInfo.getId());
-
+            supplier = supplierService.getSupplierById(sessionInfo.getId());
+            model.addAttribute("supplier", supplier);
             model.addAttribute("products", productService.getBySupplier(supplier));
             return VIEW_PREFIX + "supplierProfile";
         }

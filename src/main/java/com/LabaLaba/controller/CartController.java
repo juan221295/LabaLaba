@@ -27,13 +27,24 @@ public class CartController {
                             HttpSession session,
                             HttpServletRequest request) {
 
-        SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
-        System.out.println(productId);
-        System.out.println(quantity);
-        System.out.println(sessionInfo.getId());
-        cartService.addToCart(sessionInfo.getId(), productId, quantity);
-        System.out.println(getRefererUrl(request));
-        return "redirect:" + getRefererUrl(request);
+        try{
+            if(session.getAttribute("role").equals("customer")){
+                SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
+                System.out.println(productId);
+                System.out.println(quantity);
+                System.out.println(sessionInfo.getId());
+                cartService.addToCart(sessionInfo.getId(), productId, quantity);
+                System.out.println(getRefererUrl(request));
+                return "redirect:" + getRefererUrl(request);
+            }else{
+                return "redirect:" + getRefererUrl(request);
+            }
+        }catch (NullPointerException e){
+            return "redirect:" + getRefererUrl(request);
+        }
+
+
+
     }
 
     @PostMapping("/delete")
