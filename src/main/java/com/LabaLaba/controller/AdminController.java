@@ -61,5 +61,14 @@ public class AdminController {
 
     }
 
+    @GetMapping("supplier/products")
+    public String seeProduct(Model model, @RequestParam Long id){
+        Supplier supplier = supplierService.getSupplierById(id);
+        model.addAttribute("products", productService.getBySupplier(supplier));
+        model.addAttribute("supplier", supplier);
+
+        return VIEW_PREFIX + "supplierProduct";
+    }
+
 
 }

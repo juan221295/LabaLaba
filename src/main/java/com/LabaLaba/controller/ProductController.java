@@ -5,6 +5,7 @@ import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.service.ProductService;
+import com.LabaLaba.service.SupplierService;
 import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private SupplierService supplierService;
+
     @RequestMapping(method = RequestMethod.POST)
     public String uploadNewProduct(HttpSession session,
                                    @ModelAttribute("form") ProductForm form) {
@@ -34,7 +38,9 @@ public class ProductController {
         if(session.getAttribute("role").equals("supplier")){
             SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
             Supplier supplier = new Supplier();
-            supplier.setId(sessionInfo.getId());
+            supplier = supplierService.getSupplierById(sessionInfo.getId());
+            //supplier.setId(sessionInfo.getId());
+
 
             form.setSupplier(supplier);
 
@@ -83,7 +89,7 @@ public class ProductController {
         return "redirect:/supplier/profile";
     }
 
-    @GetMapping(value = "/editProduct")
+    @GetMapping(value = "/products")
     public String editProduct(@RequestParam Long id, Model model){
         Product product = productService.getProductById(id);
 
