@@ -1,8 +1,13 @@
 package com.LabaLaba.form;
 
 import com.LabaLaba.entity.Category;
+import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rien on 12/6/16.
@@ -10,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductForm {
     private Long id;
     private String name;
-    private long price;
-    private long minimalQuantity;
+//    private long price;
+//    private long minimalQuantity;
     private Category category;
     private MultipartFile file;
     private Supplier supplier;
@@ -24,6 +29,29 @@ public class ProductForm {
     private long price1;
     private long price2;
     private long price3;
+
+    public ProductForm() {}
+
+    public ProductForm(Product product) {
+        this.setId(product.getId());
+        this.setDescription(product.getDescription());
+        this.setName(product.getName());
+        this.setCategory(product.getCategory());
+        this.setSupplier(product.getSupplier());
+
+        /**Edit Treshold**/
+        Map<Long, Long> tresholds = product.getTresholds();
+        List<Long> tresholdQuantity = new ArrayList(tresholds.keySet());
+
+        this.setTreshold1(tresholdQuantity.get(0));
+        this.setTreshold2(tresholdQuantity.get(1));
+        this.setTreshold3(tresholdQuantity.get(2));
+        this.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+        this.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+        this.setPrice3(tresholds.get(tresholdQuantity.get(2)));
+        /**EoEdit Treshold**/
+    }
+
 
     public Long getId() {
         return id;
@@ -41,21 +69,21 @@ public class ProductForm {
         this.name = name;
     }
 
-    public long getPrice() {
-        return price;
-    }
-
-    public void setPrice(long price) {
-        this.price = price;
-    }
-
-    public long getMinimalQuantity() {
-        return minimalQuantity;
-    }
-
-    public void setMinimalQuantity(long minimalQuantity) {
-        this.minimalQuantity = minimalQuantity;
-    }
+//    public long getPrice() {
+//        return price;
+//    }
+//
+//    public void setPrice(long price) {
+//        this.price = price;
+//    }
+//
+//    public long getMinimalQuantity() {
+//        return minimalQuantity;
+//    }
+//
+//    public void setMinimalQuantity(long minimalQuantity) {
+//        this.minimalQuantity = minimalQuantity;
+//    }
 
     public Category getCategory() {
         return category;

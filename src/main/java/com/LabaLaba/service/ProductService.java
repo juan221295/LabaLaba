@@ -88,11 +88,14 @@ public class ProductService {
     }
 
     public void editProduct(ProductForm form){
-        Product oldProduct = getProductById(form.getId());
-        oldProduct.setDescription(form.getDescription());
-        oldProduct.setMinimalQuantity(form.getMinimalQuantity());
-        oldProduct.setPrice(form.getPrice());
-        productRepository.save(oldProduct);
+        Product newProduct = new Product(form);
+
+
+//        Product oldProduct = getProductById(form.getId());
+//        oldProduct.setDescription(form.getDescription());
+//        oldProduct.setMinimalQuantity(form.getMinimalQuantity());
+//        oldProduct.setPrice(form.getPrice());
+        productRepository.save(newProduct);
     }
 
     public Map<String, List<Product>> getProductOnIndexPage() {
@@ -111,16 +114,7 @@ public class ProductService {
     }
 
     public Page<Product> searchProduct(String keyword, PageRequest pageRequest){
-//        Collection<Product> products = productRepository.findByModelContainingWithIgnoreCase(keyword);
-////                productRepository.findByModelStartingWithIgnoreCase(keyword);
-//        products.addAll(productRepository.findByModelStartingWithIgnoreCase(keyword));
-//        products.addAll(productRepository.findByModelEndingWithIgnoreCase(keyword));
-
-
-        //return products;
-
         return productRepository.findByNameContainingIgnoreCase(keyword, pageRequest);
-
     }
 
 

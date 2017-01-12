@@ -6,6 +6,9 @@ import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by rien on 11/28/16.
@@ -26,7 +29,10 @@ public class Product {
     private DateTime uploadDate;
     @ManyToOne(cascade = CascadeType.MERGE)
     private Supplier supplier;
-
+    /**Edit Treshold**/
+    @ElementCollection
+    private Map<Long, Long> tresholds;
+    /**EoEdit Treshold**/
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "product")
     private Collection<Comment> comments;
 
@@ -37,13 +43,30 @@ public class Product {
     }
 
     public Product(ProductForm form) {
+        /**Edit Treshold**/
+        if(form.getId() != null) {
+            this.id = form.getId();
+        }
+        /**EoEdit Treshold**/
+
         this.setName(form.getName());
-        this.setPrice(form.getPrice());
-        this.setMinimalQuantity(form.getMinimalQuantity());
+//        this.setPrice(form.getPrice());
+//        this.setMinimalQuantity(form.getMinimalQuantity());
         this.setSupplier(form.getSupplier());
         this.setUploadDate(new DateTime());
         this.setCategory(form.getCategory());
         this.setDescription(form.getDescription());
+
+        /**Edit Treshold**/
+        Map<Long, Long> treshold = new TreeMap<>();
+        treshold.put(form.getTreshold1(), form.getPrice1());
+        treshold.put(form.getTreshold2(), form.getPrice2());
+        treshold.put(form.getTreshold3(), form.getPrice3());
+        this.setTresholds(treshold);
+
+        this.setMinimalQuantity(Collections.min(treshold.keySet()));
+        this.setPrice(treshold.get(this.getMinimalQuantity()));
+        /**EoEdit Treshold**/
     }
 
     public Long getId() {
@@ -125,5 +148,13 @@ public class Product {
 
     public void setComments(Collection<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Map<Long, Long> getTresholds() {
+        return tresholds;
+    }
+
+    public void setTresholds(Map<Long, Long> tresholds) {
+        this.tresholds = tresholds;
     }
 }

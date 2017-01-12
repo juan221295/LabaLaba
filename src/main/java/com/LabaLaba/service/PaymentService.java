@@ -125,16 +125,17 @@ public class PaymentService {
         Payment result = new Payment();
         List<PaymentDetail> resultDetail = new ArrayList<>();
         Supplier supplier = cartItems.get(0).getProduct().getSupplier();
+        long totalPriceBuffer = 0;
 
-        for(CartItem item : cartItems) {
+        for(CartItem itemInCart : cartItems) {
             PaymentDetail detail = new PaymentDetail();
 
-            detail.setQuantity(item.getQuantity());
+            detail.setQuantity(itemInCart.getQuantity());
             detail.setHeader(result);
-            detail.setProduct(item.getProduct());
+            detail.setProduct(itemInCart.getProduct());
 
-            //To-do: treshold
-            detail.setPrice(item.getProduct().getPrice());
+            detail.setPrice(itemInCart.getPrice() * itemInCart.getQuantity());
+            totalPriceBuffer = itemInCart.getPrice() * itemInCart.getQuantity();
             resultDetail.add(detail);
         }
 
@@ -143,6 +144,8 @@ public class PaymentService {
         result.setDetails(resultDetail);
         result.setSupplier(supplier);
         result.setPaid(false);
+        result.setTotalPrice(totalPriceBuffer);
+
         return result;
     }
 

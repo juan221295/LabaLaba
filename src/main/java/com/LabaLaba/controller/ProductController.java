@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by rien on 12/6/16.
@@ -117,15 +116,25 @@ public class ProductController {
     public String editProduct(@RequestParam Long id, Model model){
         Product product = productService.getProductById(id);
 
-        ProductForm productForm = new ProductForm();
-        productForm.setId(product.getId());
-        productForm.setDescription(product.getDescription());
-        productForm.setName(product.getName());
-        productForm.setCategory(product.getCategory());
-        productForm.setPrice(product.getPrice());
-        productForm.setMinimalQuantity(product.getMinimalQuantity());
-        productForm.setSupplier(product.getSupplier());
-
+        ProductForm productForm = new ProductForm(product);
+//        ProductForm productForm = new ProductForm();
+//        productForm.setId(product.getId());
+//        productForm.setDescription(product.getDescription());
+//        productForm.setName(product.getName());
+//        productForm.setCategory(product.getCategory());
+//        productForm.setSupplier(product.getSupplier());
+//
+//        /**Edit Treshold**/
+//        Map<Long, Long> tresholds = product.getTresholds();
+//        List<Long> tresholdQuantity = new ArrayList(tresholds.keySet());
+//
+//        productForm.setTreshold1(tresholdQuantity.get(0));
+//        productForm.setTreshold2(tresholdQuantity.get(1));
+//        productForm.setTreshold3(tresholdQuantity.get(2));
+//        productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+//        productForm.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+//        productForm.setPrice3(tresholds.get(tresholdQuantity.get(2)));
+//        /**EoEdit Treshold**/
 
         model.addAttribute("form", productForm);
         model.addAttribute("product", product);

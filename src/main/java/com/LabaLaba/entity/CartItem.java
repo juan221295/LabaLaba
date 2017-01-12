@@ -1,6 +1,7 @@
 package com.LabaLaba.entity;
 
 import javax.persistence.*;
+import java.util.Map;
 
 /**
  * Created by rien on 12/25/16.
@@ -16,6 +17,9 @@ public class CartItem {
     @ManyToOne
     private Product product;
     private Integer quantity;
+    /**Edit Treshold**/
+    private Long price;
+    /**EoEdit Treshold**/
 
     public CartItem() {}
 
@@ -23,6 +27,18 @@ public class CartItem {
         this.owner = owner;
         this.product = product;
         this.quantity = quantity;
+
+        /**Edit Treshold**/
+        Map<Long, Long> productTreshold = product.getTresholds();
+
+        for(Map.Entry<Long, Long> treshold : productTreshold.entrySet()) {
+            if(this.quantity >= treshold.getKey()) {
+                this.price = treshold.getValue();
+            } else {
+                break;
+            }
+        }
+        /**EoEdit Treshold**/
     }
 
     public Long getId() {
@@ -55,5 +71,13 @@ public class CartItem {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
     }
 }

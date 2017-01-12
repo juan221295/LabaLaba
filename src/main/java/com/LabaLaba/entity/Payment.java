@@ -24,6 +24,9 @@ public class Payment {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime creationDate;
     private Boolean isPaid;
+    /**Edit Treshold**/
+    private Long totalPrice;
+    /**EoEdit Treshold**/
 
     public Long getId() {
         return id;
@@ -71,5 +74,13 @@ public class Payment {
 
     public void setPaid(Boolean paid) {
         isPaid = paid;
+    }
+
+    public Long getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Long totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
