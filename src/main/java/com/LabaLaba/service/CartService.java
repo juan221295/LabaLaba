@@ -53,4 +53,13 @@ public class CartService {
         return cartRepository.findByOwner(owner);
     }
 
+    public void cleanCustomerCart(Long customerId) {
+        Customer cartOwner = customerRepository.findById(customerId);
+        Collection<CartItem> cartItems = cartRepository.findByOwner(cartOwner);
+
+        for(CartItem item : cartItems) {
+            cartRepository.delete(item);
+        }
+    }
+
 }

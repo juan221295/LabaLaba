@@ -1,7 +1,10 @@
 package com.LabaLaba.repository;
 
-/**
- * Created by rien on 1/12/17.
- */
-public class PaymentDetailRepository {
+import com.LabaLaba.entity.PaymentDetail;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PaymentDetailRepository extends JpaRepository<PaymentDetail, Long> {
+
 }

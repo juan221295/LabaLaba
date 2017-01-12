@@ -32,7 +32,7 @@
         </thead>
         <tbody th:each="cartItem : ${cart}">
         <tr>
-            <td><img th:src="'/images/' + ${cartItem.product.getImagePath()}"  src="http://lorempixel.com/50/50/" alt="" style="width: auto; height: auto; max-width: 50px; max-height: 50px;"/></td>
+            <!--<td><img th:src="'/images/' + ${cartItem.product.getImagePath()}"  src="http://lorempixel.com/50/50/" alt="" style="width: auto; height: auto; max-width: 50px; max-height: 50px;"/></td>-->
             <td th:text="${cartItem.product.getName()}">Item Name</td>
             <td th:text="${cartItem.product.getCategory()}">Cateogry</td>
             <td th:text="${cartItem.product.getPrice()}">Price</td>
@@ -48,7 +48,7 @@
     </table>
 
     <div class="pull-right">
-        <a href="#" class="btn btn-primary">Purchase</a>
+        <a th:href="@{/payment/create}" class="btn btn-primary">Purchase</a>
     </div>
 </div>
 <div th:replace="footer :: footer"></div>

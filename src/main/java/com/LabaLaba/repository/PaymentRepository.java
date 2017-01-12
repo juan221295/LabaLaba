@@ -7,13 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by rien on 12/17/16.
  */
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
-    public Collection<Payment> findByCustomer(Customer customer);
-    public Collection<Payment> findBySupplier(Supplier supplier);
-
+    Collection<Payment> findByCustomer(Customer customer);
+    Collection<Payment> findBySupplier(Supplier supplier);
+    List<Payment> findByCustomerOrderByCreationDateDesc(Customer customer);
+    List<Payment> findBySupplierOrderByCreationDateDesc(Supplier supplier);
 }

@@ -1,7 +1,6 @@
 package com.LabaLaba.controller;
 
 import com.LabaLaba.entity.Category;
-import com.LabaLaba.entity.Customer;
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
@@ -100,7 +99,7 @@ public class ProductController {
         return "redirect:/supplier/profile";
     }
 
-    @GetMapping(value = "/products")
+    @GetMapping(value = "/editProduct")
     public String editProduct(@RequestParam Long id, Model model){
         Product product = productService.getProductById(id);
 
@@ -131,7 +130,7 @@ public class ProductController {
                            @RequestParam(defaultValue = "1", required = false) int page,
                            Model model){
         if(page < 1) {
-            page =1;
+            page = 1;
         }
 
         Page<Product> productPage =

@@ -2,6 +2,7 @@ package com.LabaLaba.service;
 
 import com.LabaLaba.entity.*;
 import com.LabaLaba.repository.CustomerRepository;
+import com.LabaLaba.repository.PaymentDetailRepository;
 import com.LabaLaba.repository.PaymentRepository;
 import com.LabaLaba.repository.SupplierRepository;
 import org.joda.time.DateTime;
@@ -23,6 +24,8 @@ public class PaymentService {
     private PaymentRepository paymentRepository;
     @Autowired
     private SupplierRepository supplierRepository;
+    @Autowired
+    private PaymentDetailRepository paymentDetailRepository;
 
     public Collection<Payment> createPayment(Long ownerId) {
         if(ownerId == null) {
@@ -30,11 +33,21 @@ public class PaymentService {
         }
         Customer owner = customerRepository.findOne(ownerId);
 
-        ArrayList<CartItem> cart = new ArrayList<>(cartService.getCartByCustomer(ownerId));
+        List<CartItem> cart = new ArrayList<>(cartService.getCartByCustomer(ownerId));
         Map<Long, List<CartItem>> separatedItem = separateItemBySupplier(cart);
         List<Payment> payments = generatePaymentsFromSeparatedItem(separatedItem, owner);
 
-        return paymentRepository.save(payments);
+        cartService.cleanCustomerCart(ownerId);
+
+        return save(payments);
+    }
+
+    private Collection<Payment> save(List<Payment> payments) {
+        for(Payment payment : payments) {
+            paymentRepository.save(payment);
+            paymentDetailRepository.save(payment.getDetails());
+        }
+        return payments;
     }
 
     public Collection<Payment> getPaymentByCustomer(Long customerId) {
@@ -47,7 +60,7 @@ public class PaymentService {
             return null;
         }
 
-        return paymentRepository.findByCustomer(customer);
+        return paymentRepository.findByCustomerOrderByCreationDateDesc(customer);
     }
 
     public Collection<Payment> getPaymentBySupplier(Long supplierId) {
@@ -60,7 +73,7 @@ public class PaymentService {
             return null;
         }
 
-        return paymentRepository.findBySupplier(supplier);
+        return paymentRepository.findBySupplierOrderByCreationDateDesc(supplier);
     }
 
 
@@ -75,7 +88,7 @@ public class PaymentService {
         return result;
     }
 
-    private Map<Long, List<CartItem>> separateItemBySupplier(ArrayList<CartItem> cart) {
+    private Map<Long, List<CartItem>> separateItemBySupplier(List<CartItem> cart) {
         Map<Long, List<CartItem>> result = new HashMap();
 
         for(CartItem item : cart) {
@@ -100,8 +113,10 @@ public class PaymentService {
 
             detail.setQuantity(item.getQuantity());
             detail.setHeader(result);
-            detail.setPrice(item.getProduct().getPrice());
             detail.setProduct(item.getProduct());
+
+            //To-do: treshold
+            detail.setPrice(item.getProduct().getPrice());
 
             resultDetail.add(detail);
         }
