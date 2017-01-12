@@ -117,6 +117,7 @@ public class ProductController {
         Product product = productService.getProductById(id);
 
         ProductForm productForm = new ProductForm(product);
+        /**Edit Treshold**/
 //        ProductForm productForm = new ProductForm();
 //        productForm.setId(product.getId());
 //        productForm.setDescription(product.getDescription());
@@ -124,7 +125,6 @@ public class ProductController {
 //        productForm.setCategory(product.getCategory());
 //        productForm.setSupplier(product.getSupplier());
 //
-//        /**Edit Treshold**/
 //        Map<Long, Long> tresholds = product.getTresholds();
 //        List<Long> tresholdQuantity = new ArrayList(tresholds.keySet());
 //
@@ -134,7 +134,7 @@ public class ProductController {
 //        productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
 //        productForm.setPrice2(tresholds.get(tresholdQuantity.get(1)));
 //        productForm.setPrice3(tresholds.get(tresholdQuantity.get(2)));
-//        /**EoEdit Treshold**/
+        /**EoEdit Treshold**/
 
         model.addAttribute("form", productForm);
         model.addAttribute("product", product);

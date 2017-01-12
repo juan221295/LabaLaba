@@ -54,9 +54,6 @@ public class CartController {
         }catch (NullPointerException e){
             return "redirect:" + getRefererUrl(request);
         }
-
-
-
     }
 
     @PostMapping("/delete")

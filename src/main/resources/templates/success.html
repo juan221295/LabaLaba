@@ -11,22 +11,7 @@
 <body>
 <div class="container">
     <h1>Produk sesuai Supplier</h1>
-    <!--<div>-->
-        <!--<span>id: </span>-->
-        <!--<span th:text="${produk.id}"></span>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<span>nama: </span>-->
-        <!--<span th:text="${produk.name}"></span>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<span>price: </span>-->
-        <!--<span th:text="${produk.price}"></span>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<img th:src="'/images/' + ${produk.imagePath}" />-->
-    <!--</div>-->
-
+    
     <div class="row text-center">
         <div class="col-md-3 col-sm-6 hero-feature" th:each="prod : ${products}">
             <div class="thumbnail">
@@ -34,7 +19,23 @@
                 <div class="caption">
                     <h3 th:text="${prod.name}">Feature Label</h3>
                     <label th:text="${prod.id}"></label>
-                    <p th:text="${prod.price}">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+<!--                    <p th:text="${prod.price}">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+                    
+                    <label class="control-label col-sm-6">Treshold 1: </label>
+                        <span>At Quantity </span> <label th:text="${prod.treshold1}"></label>
+                        <span>Price </span> <label th:text="${prod.price1}"></label>
+                    </div>
+                
+                    <label class="control-label col-sm-6">Treshold 2: </label>
+                        <span>At Quantity </span> <label th:text="${prod.treshold2}"></label>
+                        <span>Price </span> <label th:text="${prod.price2}"></label>
+                    </div>
+            
+                    <label class="control-label col-sm-6">Treshold 3: </label>
+                        <span>At Quantity </span> <label th:text="${prod.treshold3}"></label>
+                        <span>Price </span> <label th:text="${prod.price3}"></label>
+                    </div>
+                </div>
                     <p th:text="${prod.category}"></p>
                 </div>
             </div>
