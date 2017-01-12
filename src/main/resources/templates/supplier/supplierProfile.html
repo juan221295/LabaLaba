@@ -71,6 +71,9 @@
         <p style="float: right">
             <a href="/products" class="btn btn-primary">Add New !</a> <a href="#" class="btn btn-default">More Products</a>
         </p>
+        <p style="float: right">
+            <a th:href="@{/payment/pendingPayment(id=${supplier.getId()})}" class="btn btn-primary">See Pending Payment</a>
+        </p>
 
     </div>
 

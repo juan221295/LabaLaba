@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by rien on 12/6/16.
@@ -88,6 +90,12 @@ public class ProductController {
 
         model.addAttribute("product", productService.getProductById(id));
         model.addAttribute("comments", commentService.findByProduct(productService.getProductById(id)));
+
+        Collection<Product> products =
+                productService.getProductByCategoryWithPageRequest(
+                        productService.getProductById(id).getCategory(),
+                        new PageRequest(0, 3, Sort.Direction.ASC, "uploadDate")).getContent();
+        model.addAttribute("relatedProducts", products);
         return VIEW_PREFIX + "infoProduk";
     }
 
