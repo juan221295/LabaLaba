@@ -51,7 +51,7 @@
                     <span th:text="${session.role}"></span>
                     <span th:switch="${session.role}">
                         <span th:case="'supplier'"> <a href="/supplier/profile" th:text="${session.user.name}"></a></span>
-                        <span th:case="*"><span th:text="${session.user.name}"></span></span>
+                        <span th:case="'customer'"><a href="/customer/profile" th:text="${session.user.name}"></a></span>
                     </span>
                     <!--<span th:text="${session.user.name}"></span>-->
                     <span>, </span>

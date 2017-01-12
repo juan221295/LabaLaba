@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js.js"></script>
+    <title th:text="'Profile-' + ${customer.getName()}">Profile</title>
+    <!--<title>LabaLaba.com</title>-->
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <!--<h1 style="font-weight: bold;" th:text="${customer.getName()}">Nama Toko</h1>-->
+            <div th:if="${customer.getImagePath()}">
+                <img th:src="'/images/' + ${customer.getImagePath()}" alt="My Photo" style="margin: auto; max-width: 250px; max-height: 250px;"/>
+            </div>
+            <div th:unless="${customer.getImagePath()}">
+                <!--th:src="'/images/' + ${prod.getImagePath()}"-->
+                <img th:src="@{/images/dummy.jpg}" src="http://www.motormasters.info/wp-content/uploads/2015/02/dummy-profile-pic-male1.jpg" alt="My Photo" style="margin: auto; max-width: 250px; max-height: 250px;" />
+            </div>
+            <!--<p th:text="${customer.getImagePath()}"></p>-->
+            <!--<p th:text="${supplier.getEmail()}">Email</p>-->
+        </div>
+
+        <div class="col-md-8" style="text-align: center; padding:10px;">
+            <h1>PROFILE</h1>
+            <p>Nama : <span th:text="${customer.name}"></span></p>
+            <p>Email : <span th:text="${customer.email}"></span></p>
+            <p style="float: right">
+                <a th:href="@{/customer/editPage(id=${customer.getId()})}" class="btn btn-primary">Edit</a>
+            </p>
+        </div>
+    </div>
+
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+
+</html>
