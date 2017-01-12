@@ -135,24 +135,26 @@
                         <span class="glyphicon glyphicon-shopping-cart"></span> x items<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-cart" role="menu">
-                        <li th:each="cartItem : ${cart}">
-                                <span class="item">
-                                    <span class="item-left">
-                                        <img th:src="'/images/' + ${cartItem.product.getImagePath()}"  src="http://lorempixel.com/50/50/" alt="" style="width: auto; height: auto; max-width: 50px; max-height: 50px;"/>
-                                        <span class="item-info">
-                                            <span th:text="${cartItem.product.getName()}">Item Name</span>
-                                            <span th:text="${cartItem.getQuantity()}">details</span>
-                                        </span>
-                                    </span>
-                                    <span class="item-right">
-                                        <form th:action="@{/cart/delete}" method="post">
-                                            <input readonly="readonly" th:name="cartItemId" th:value="${cartItem.getId()}"  class="hidden"/>
-                                            <button type="submit" class="btn btn-xs btn-danger pull-right">x</button>
-                                        </form>
+                        <div th:each="cartItem : ${cart}">
+                            <li>
+                            <span class="item">
+                                <span class="item-left">
+                                    <img th:src="'/images/' + ${cartItem.product.getImagePath()}"  src="http://lorempixel.com/50/50/" alt="" style="width: auto; height: auto; max-width: 50px; max-height: 50px;"/>
+                                    <span class="item-info">
+                                        <span th:text="${cartItem.product.getName()}">Item Name</span>
+                                        <span th:text="${cartItem.getQuantity()}">details</span>
                                     </span>
                                 </span>
-
-                        </li>
+                                <span class="item-right">
+                                    <form th:action="@{/cart/delete}" method="post">
+                                        <input readonly="readonly" th:name="cartItemId" th:value="${cartItem.getId()}"  class="hidden"/>
+                                        <button type="submit" class="btn btn-xs btn-danger pull-right">x</button>
+                                    </form>
+                                </span>
+                            </span>
+                            </li>
+                            <hr />
+                        </div>
                         <a th:href="@{/cart/checkout}" class="btn btn-primary">CheckOut</a>
                         <!--<button type="button" class="btn btn-default">checkout</button>-->
                     </ul>

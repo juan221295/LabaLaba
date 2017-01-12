@@ -4,10 +4,7 @@ import com.LabaLaba.entity.Category;
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
-import com.LabaLaba.service.CommentService;
-import com.LabaLaba.service.CustomerService;
-import com.LabaLaba.service.ProductService;
-import com.LabaLaba.service.SupplierService;
+import com.LabaLaba.service.*;
 import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +37,9 @@ public class ProductController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private CartService cartService;
 
     @RequestMapping(method = RequestMethod.POST)
     public String uploadNewProduct(HttpSession session,
@@ -86,7 +86,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/detail")
-    public String detailProduk(@RequestParam Long id, Model model){
+    public String detailProduk(@RequestParam Long id, Model model, HttpSession session){
 
         model.addAttribute("product", productService.getProductById(id));
         model.addAttribute("comments", commentService.findByProduct(productService.getProductById(id)));
@@ -96,6 +96,12 @@ public class ProductController {
                         productService.getProductById(id).getCategory(),
                         new PageRequest(0, 3, Sort.Direction.ASC, "uploadDate")).getContent();
         model.addAttribute("relatedProducts", products);
+
+        if(session.getAttribute("user") != null) {
+            SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
+            model.addAttribute("cart", cartService.getCartByCustomer(sessionInfo.getId()));
+        }
+
         return VIEW_PREFIX + "infoProduk";
     }
 
@@ -136,7 +142,8 @@ public class ProductController {
     @GetMapping(value = "/kategori")
     public String kategori(@RequestParam String nama,
                            @RequestParam(defaultValue = "1", required = false) int page,
-                           Model model){
+                           Model model,
+                           HttpSession session){
         if(page < 1) {
             page = 1;
         }
@@ -147,6 +154,10 @@ public class ProductController {
                         new PageRequest(page - 1, 10, Sort.Direction.ASC, "uploadDate")
                 );
 
+        if(session.getAttribute("user") != null) {
+            SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
+            model.addAttribute("cart", cartService.getCartByCustomer(sessionInfo.getId()));
+        }
         model.addAttribute("productPage", productPage);
         model.addAttribute("namaKategori", nama);
         return VIEW_PREFIX +"kategori";

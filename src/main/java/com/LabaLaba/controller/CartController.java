@@ -2,6 +2,7 @@ package com.LabaLaba.controller;
 
 import com.LabaLaba.service.CartService;
 import com.LabaLaba.service.CustomerService;
+import com.LabaLaba.service.ProductService;
 import com.LabaLaba.session.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,17 +28,26 @@ public class CartController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ProductService productService;
+
     @PostMapping("/add")
     public String addToCart(@RequestParam Long productId,
                             @RequestParam Integer quantity,
                             HttpSession session,
-                            HttpServletRequest request) {
+                            HttpServletRequest request,
+                            Model model) {
 
         try{
             if(session.getAttribute("role").equals("customer")){
                 SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
-                cartService.addToCart(sessionInfo.getId(), productId, quantity);
-                return "redirect:" + getRefererUrl(request);
+                if(new Long(quantity) > productService.getProductById(productId).getMinimalQuantity()){
+                    cartService.addToCart(sessionInfo.getId(), productId, quantity);
+                    return "redirect:" + getRefererUrl(request);
+                }else{
+                    model.addAttribute("link", getRefererUrl(request));
+                    return "fail";
+                }
             }else{
                 return "redirect:" + getRefererUrl(request);
             }
