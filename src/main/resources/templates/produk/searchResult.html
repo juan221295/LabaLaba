@@ -64,20 +64,20 @@
                 </div>
             </div>
         </div>
-        <!--<div class="center">-->
-            <!--<ul class="pagination">-->
-                <!--<li>-->
-                    <!--<a th:href="@{/products/kategori(nama=${namaKategori}, page=${productPage.getNumber()})}">Prev</a>-->
-                <!--</li>-->
-                <!--<li th:each=" i : ${#numbers.sequence(0, productPage.getTotalPages()) }" th:class="(${productPage.getNumber() eq i})?'disabled':''">-->
-                    <!--<a th:text="${i+1}" th:href="@{/products/kategori(nama=${namaKategori}, page=${i+1})}">1</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a th:href="@{/products/kategori(nama=${namaKategori}, page=${productPage.getNumber()+2})}">Next</a>-->
-                <!--</li>-->
+        <div class="center">
+            <ul class="pagination">
+                <li>
+                    <a th:href="@{/products/search(keyword=${keyword}, page=${products.getNumber()})}">Prev</a>
+                </li>
+                <li th:each=" i : ${#numbers.sequence(0, products.getTotalPages() - 1)  }" th:class="(${products.getNumber() eq i})?'disabled':''">
+                    <a th:text="${i+1}" th:href="@{/products/search(keyword=${keyword}, page=${i+1})}">1</a>
+                </li>
+                <li>
+                    <a th:href="@{/products/search(keyword=${keyword}, page=${products.getNumber()+2})}">Next</a>
+                </li>
 
-            <!--</ul>-->
-        <!--</div>-->
+            </ul>
+        </div>
     </div>
 </section>
 
