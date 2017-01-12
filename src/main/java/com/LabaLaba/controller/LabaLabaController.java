@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Controller
 public class LabaLabaController {
-    private final Integer INDEX_ITEM_PAGE_SIZE = 5;
+    private final Integer INDEX_ITEM_PAGE_SIZE = 4;
     private final Integer FIRST_PAGE = 0;
 
     @Autowired

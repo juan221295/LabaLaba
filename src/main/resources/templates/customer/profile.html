@@ -27,13 +27,17 @@
             <!--<p th:text="${supplier.getEmail()}">Email</p>-->
         </div>
 
-        <div class="col-md-8" style="text-align: center; padding:10px;">
+        <div class="col-md-8">
             <h1>PROFILE</h1>
             <p>Nama : <span th:text="${customer.name}"></span></p>
             <p>Email : <span th:text="${customer.email}"></span></p>
-            <p style="float: right">
+            <p>
                 <a th:href="@{/customer/editPage(id=${customer.getId()})}" class="btn btn-primary">Edit</a>
             </p>
+            <p>
+                <a th:href="@{/payment}" class="btn btn-primary">See Payment History</a>
+            </p>
+
         </div>
     </div>
 

@@ -27,6 +27,24 @@ public class PaymentService {
     @Autowired
     private PaymentDetailRepository paymentDetailRepository;
 
+    public Payment confirmPayment(Long paymentId) {
+        if (paymentId == null) {
+            return null;
+        }
+
+        Payment paymentToBeConfirmed = paymentRepository.findOne(paymentId);
+
+        if (paymentToBeConfirmed == null) {
+            return null;
+        }
+
+        paymentToBeConfirmed.setPaid(true);
+
+        paymentRepository.save(paymentToBeConfirmed);
+
+        return paymentToBeConfirmed;
+    }
+
     public Collection<Payment> createPayment(Long ownerId) {
         if(ownerId == null) {
             return null;
@@ -39,10 +57,10 @@ public class PaymentService {
 
         cartService.cleanCustomerCart(ownerId);
 
-        return save(payments);
+        return saveNewPayment(payments);
     }
 
-    private Collection<Payment> save(List<Payment> payments) {
+    private Collection<Payment> saveNewPayment(List<Payment> payments) {
         for(Payment payment : payments) {
             paymentRepository.save(payment);
             paymentDetailRepository.save(payment.getDetails());
@@ -117,7 +135,6 @@ public class PaymentService {
 
             //To-do: treshold
             detail.setPrice(item.getProduct().getPrice());
-
             resultDetail.add(detail);
         }
 
@@ -125,7 +142,7 @@ public class PaymentService {
         result.setCustomer(owner);
         result.setDetails(resultDetail);
         result.setSupplier(supplier);
-
+        result.setPaid(false);
         return result;
     }
 

@@ -168,6 +168,7 @@ public class ProductController {
     @RequestMapping(method = RequestMethod.GET, value = "search")
     public String search(@RequestParam String keyword, Model model){
         model.addAttribute("products", productService.searchProduct(keyword));
+
         model.addAttribute("keyword", keyword);
         return VIEW_PREFIX + "searchResult";
     }

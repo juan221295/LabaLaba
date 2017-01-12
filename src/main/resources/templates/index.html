@@ -90,9 +90,10 @@
                         <img th:src="@{'/images/' + ${prod.imagePath}}" alt="" />
                         <div class="caption">
                             <h3 th:text="${prod.getName()}">Feature Label</h3>
-                            <p th:text="${prod.getPrice()}">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p>Starting price : <span>Rp. 5000</span></p>
-                            <p>Minimal Quantity : <span>100</span></p>
+                            <p>Price: <span th:text="${prod.getPrice()}"></span></p>
+                            <!--<p>Starting price : <span>Rp. 5000</span></p>-->
+                            <p>Minimal Quantity : <span th:text="${prod.getMinimalQuantity()}">100</span></p>
+                            <p>By: <span th:text="${prod.getSupplier().getName()}"></span></p>
                             <p>
                                 <!--<a href="#" class="btn btn-primary">add to Cart</a> -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#myModal'+${prod.getId()}" >Buy !</button>

@@ -22,14 +22,17 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Product findById(Long id);
     Page<Product> findByCategory(Category category, Pageable pageable);
 
-//    Collection<Product> findByModelStartingWithIgnoreCase(String model);
-//    Collection<Product> findByModelEndingWithIgnoreCase(String model);
-//    Collection<Product> findByModelContainingWithIgnoreCase(String model);
+//    Collection<Product> findByModelStartingWithIgnoreCase(String name);
+//    Collection<Product> findByNameEndingWithIgnoreCase(String name);
+//    Collection<Product> findByNameContainingWithIgnoreCase(String name);
 
     //Collection<Product> findByProductLikeIgnoreCase(String model);
 
     @Query("SELECT p FROM Product p where LOWER(p.name) like LOWER(CONCAT('%',:keyword,'%'))")
     public Collection<Product> findByKeyWord(@Param("keyword") String keyword);
+
+//    @Query("SELECT p FROM Product p where LOWER(p.name) like LOWER(CONCAT('%',:keyword,'%'))")
+//    Page<Product> findByKeyWord(@Param("keyword") String keyword, Pageable pageable);
 
 //    MakeModel findByModelStartingWithIgnoreCase(String model); //SQL => LIKE 'model%'
 //    MakeModel findByModelEndingWithIgnoreCase(String model); //SQL => LIKE '%model'

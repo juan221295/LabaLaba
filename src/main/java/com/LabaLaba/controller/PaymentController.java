@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -43,4 +45,20 @@ public class PaymentController {
 
         return "payment-view";
     }
+
+    @GetMapping(value = "/payment/service")
+    public String confirmPayment(@RequestParam Long paymentId,
+                                 HttpSession session) {
+        String role = (String) session.getAttribute("role");
+
+        if (!role.equalsIgnoreCase("supplier")) {
+            return "redirect:/";
+        }
+
+        paymentService.confirmPayment(paymentId);
+
+        return "redirect:/payment";
+
+    }
+
 }
