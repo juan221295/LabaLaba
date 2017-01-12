@@ -2,6 +2,7 @@ package com.LabaLaba.form;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by rien on 11/28/16.
@@ -19,6 +20,9 @@ public class CustomerRegistrationForm {
 
     @NotEmpty
     private String repeatPassword;
+
+
+    private MultipartFile photoProfile;
 
     public String getName() {
         return name;
@@ -50,5 +54,13 @@ public class CustomerRegistrationForm {
 
     public void setRepeatPassword(String repeatPassword) {
         this.repeatPassword = repeatPassword;
+    }
+
+    public MultipartFile getPhotoProfile() {
+        return photoProfile;
+    }
+
+    public void setPhotoProfile(MultipartFile photoProfile) {
+        this.photoProfile = photoProfile;
     }
 }

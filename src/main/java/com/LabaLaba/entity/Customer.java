@@ -17,7 +17,7 @@ public class Customer {
     private String name;
     private String email;
     private String password;
-
+    private String imagePath;
 
 
     public Customer() {}
@@ -58,5 +58,13 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

@@ -44,7 +44,7 @@ public class ProductService {
         if(form.getFile()==null) {
             return result;
         }
-        String imagePath = this.uploadImage(form.getFile(), result, form.getSupplier().getId());
+        String imagePath = this.uploadImage(form.getFile(), result);
         result.setImagePath(imagePath);
 
         return productRepository.save(result);
@@ -66,7 +66,7 @@ public class ProductService {
         return productRepository.findBySupplier(supplier);
     }
 
-    public String uploadImage(MultipartFile uploadingFile, Product product, Long idSupp){
+    public String uploadImage(MultipartFile uploadingFile, Product product){
         String namaFile = product.getId().toString()+ "-" +uploadingFile.getOriginalFilename();
 
         System.out.println(IMAGE_DIR);
