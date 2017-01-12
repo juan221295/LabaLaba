@@ -41,7 +41,7 @@ public class CartController {
         try{
             if(session.getAttribute("role").equals("customer")){
                 SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
-                if(new Long(quantity) > productService.getProductById(productId).getMinimalQuantity()){
+                if(new Long(quantity) >= productService.getProductById(productId).getMinimalQuantity()){
                     cartService.addToCart(sessionInfo.getId(), productId, quantity);
                     return "redirect:" + getRefererUrl(request);
                 }else{
