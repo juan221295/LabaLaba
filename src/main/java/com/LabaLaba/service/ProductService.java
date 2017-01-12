@@ -110,7 +110,7 @@ public class ProductService {
         return productRepository.findByCategory(category, pageRequest);
     }
 
-    public Collection<Product> searchProduct(String keyword){
+    public Page<Product> searchProduct(String keyword, PageRequest pageRequest){
 //        Collection<Product> products = productRepository.findByModelContainingWithIgnoreCase(keyword);
 ////                productRepository.findByModelStartingWithIgnoreCase(keyword);
 //        products.addAll(productRepository.findByModelStartingWithIgnoreCase(keyword));
@@ -119,7 +119,7 @@ public class ProductService {
 
         //return products;
 
-        return productRepository.findByKeyWord(keyword);
+        return productRepository.findByNameContainingIgnoreCase(keyword, pageRequest);
 
     }
 

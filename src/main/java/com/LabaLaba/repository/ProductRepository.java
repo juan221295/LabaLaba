@@ -31,6 +31,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p where LOWER(p.name) like LOWER(CONCAT('%',:keyword,'%'))")
     public Collection<Product> findByKeyWord(@Param("keyword") String keyword);
 
+    Collection<Product> findByNameContainingIgnoreCase(String name);
+    Page<Product> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
 //    @Query("SELECT p FROM Product p where LOWER(p.name) like LOWER(CONCAT('%',:keyword,'%'))")
 //    Page<Product> findByKeyWord(@Param("keyword") String keyword, Pageable pageable);
 
