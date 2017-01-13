@@ -3,9 +3,7 @@ package com.LabaLaba.controller;
 import com.LabaLaba.entity.Customer;
 import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
-import com.LabaLaba.service.CustomerService;
-import com.LabaLaba.service.ProductService;
-import com.LabaLaba.service.SupplierService;
+import com.LabaLaba.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Juan on 1/9/17.
@@ -29,6 +29,12 @@ public class AdminController {
 
     @Autowired
     private SupplierService supplierService;
+
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private CommentService commentService;
 
 
     @Autowired
@@ -49,6 +55,14 @@ public class AdminController {
 
     @GetMapping("/supplier/delete")
     public String supplierDelete(Model model, @RequestParam Long id){
+        Collection<Product> products = productService.getBySupplier(supplierService.getSupplierById(id));
+        for (Product product:
+             products) {
+            commentService.deleteCommentByProduct(product);
+            cartService.deleteCartByProduct(product);
+            productService.deleteProduct(product.getId());
+        }
+//        productService.deleteProductBySupplier(supplierService.getSupplierById(id));
         supplierService.deleteSupplier(id);
         return "redirect:/admin/dashboard";
 
