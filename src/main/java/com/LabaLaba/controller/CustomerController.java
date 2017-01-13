@@ -48,7 +48,15 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String handleRegister(@Valid @ModelAttribute(name = "form") CustomerRegistrationForm registrationForm, BindingResult bindingResult) {
+    public String handleRegister(@Valid @ModelAttribute(name = "form") CustomerRegistrationForm registrationForm, BindingResult bindingResult, Model model) {
+        if(customerService.getUserByEmail(registrationForm.getEmail()) != null) {
+            model.addAttribute("error", "Email sudah dipakai oleh salah satu customer");
+            return VIEW_PREFIX + "login";
+        }
+        if(supplierService.getUserByEmail(registrationForm.getEmail()) != null){
+            model.addAttribute("error", "Email sudah dipakai oleh salah satu supplier");
+            return VIEW_PREFIX + "login";
+        }
         if(bindingResult.hasErrors()) {
             return VIEW_PREFIX + "login";
         }

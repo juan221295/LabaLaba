@@ -30,8 +30,18 @@
         <div class="col-sm-8 col-md-4">
             <div class="caption">
                 <h2 th:text="${product.getName()}" class="product-detail-title">Buku</h2>
-                <h4>Harga: Rp. <span th:text="${product.getPrice()}"></span></h4>
-                <h4>Minimal Quantity: <span th:text="${product.getMinimalQuantity()}"></span></h4>
+                <h4>Minimal Quantity : <span th:text="${product.getMinimalQuantity()}">100</span></h4>
+                <h4>Starting Price: Rp. <span th:text="${product.getPrice()}"></span></h4>
+                <!--<p>Starting price : <span>Rp. 5000</span></p>-->
+                <div th:each="treshold : ${product.tresholds}">
+                    <div th:unless="${treshold.key} == 0">
+                        <div th:unless="${treshold.key} == ${product.getMinimalQuantity()}">
+                            <h4>@<span th:text="${treshold.key}"></span> : Rp. <span th:text="${treshold.value}"></span></h4>
+                        </div>
+                    </div>
+                </div>
+                <!--<h4>Harga: Rp. <span th:text="${product.getPrice()}"></span></h4>-->
+                <!--<h4>Minimal Quantity: <span th:text="${product.getMinimalQuantity()}"></span></h4>-->
                 <h4>By: <span th:text="${product.getSupplier().getName()}"></span></h4>
                 <p th:text="${product.getDescription()}">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <!-- <p><a href="#">Details...</a></p> -->
@@ -105,9 +115,13 @@
                         </p>
                     </div>
                 </div>
-                <div th:if="${session.user.getId() == comment.getCommentator().getId()}">
-                    <a th:href="@{/products/deleteComment(id=${comment.getId()})}">Delete</a>
+
+                <div th:if="${session.loggedIn}">
+                    <div th:if="${session.user.getId()} == ${comment.getCommentator().getId()}">
+                        <a th:href="@{/products/deleteComment(id=${comment.getId()})}">Delete</a>
+                    </div>
                 </div>
+
                 <hr />
             </div>
             <!--<div class="row">-->
@@ -156,9 +170,19 @@
                         <img th:src="@{'/images/' + ${prod.imagePath}}" alt="" />
                         <div class="caption">
                             <h3 th:text="${prod.getName()}">Feature Label</h3>
-                            <p>Price: <span th:text="${prod.getPrice()}"></span></p>
-                            <!--<p>Starting price : <span>Rp. 5000</span></p>-->
+                            <!--<p>Price: <span th:text="${prod.getPrice()}"></span></p>-->
+                            <!--&lt;!&ndash;<p>Starting price : <span>Rp. 5000</span></p>&ndash;&gt;-->
+                            <!--<p>Minimal Quantity : <span th:text="${prod.getMinimalQuantity()}">100</span></p>-->
                             <p>Minimal Quantity : <span th:text="${prod.getMinimalQuantity()}">100</span></p>
+                            <p>Starting Price: Rp. <span th:text="${prod.getPrice()}"></span></p>
+                            <!--<p>Starting price : <span>Rp. 5000</span></p>-->
+                            <div th:each="treshold : ${prod.tresholds}">
+                                <div th:unless="${treshold.key} == 0">
+                                    <div th:unless="${treshold.key} == ${prod.getMinimalQuantity()}">
+                                        <p>@<span th:text="${treshold.key}"></span> : Rp. <span th:text="${treshold.value}"></span></p>
+                                    </div>
+                                </div>
+                            </div>
                             <p>By: <span th:text="${prod.getSupplier().getName()}"></span></p>
                             <p>
                                 <!--<a href="#" class="btn btn-primary">add to Cart</a> -->

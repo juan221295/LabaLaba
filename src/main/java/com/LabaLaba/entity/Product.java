@@ -29,10 +29,8 @@ public class Product {
     private DateTime uploadDate;
     @ManyToOne(cascade = CascadeType.MERGE)
     private Supplier supplier;
-    /**Edit Treshold**/
     @ElementCollection
     private Map<Long, Long> tresholds;
-    /**EoEdit Treshold**/
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "product")
     private Collection<Comment> comments;
 
@@ -43,21 +41,17 @@ public class Product {
     }
 
     public Product(ProductForm form) {
-        /**Edit Treshold**/
         if(form.getId() != null) {
             this.id = form.getId();
         }
-        /**EoEdit Treshold**/
 
         this.setName(form.getName());
-//        this.setPrice(form.getPrice());
-//        this.setMinimalQuantity(form.getMinimalQuantity());
         this.setSupplier(form.getSupplier());
         this.setUploadDate(new DateTime());
         this.setCategory(form.getCategory());
         this.setDescription(form.getDescription());
 
-        /**Edit Treshold**/
+
         Map<Long, Long> treshold = new TreeMap<>();
         if(form.getTreshold1() <= 0 && form.getPrice1() <=0 &&
             form.getTreshold2() <= 0 && form.getPrice2() <= 0 &&
@@ -80,7 +74,6 @@ public class Product {
 
         this.setMinimalQuantity(Collections.min(treshold.keySet()));
         this.setPrice(treshold.get(this.getMinimalQuantity()));
-        /**EoEdit Treshold**/
     }
 
     public Long getId() {

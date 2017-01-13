@@ -25,7 +25,7 @@
             <div class="col-md-8" style="text-align: center; padding:10px;">
                 <label>Name : </label><input type="text"  id="name" th:field="*{name}" />
                 <br />
-                <label>Email : </label> <input type="text" id="email" th:field="*{email}" />
+                <label>Email : </label><input type="text" id="email" th:field="*{email}" readonly="readonly"/>
                 <br />
                 <label>Password : </label> <span th:text="${customer.password}"></span>
                 <br />

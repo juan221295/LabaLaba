@@ -116,10 +116,14 @@
                         </div>
                     </div>
                 </div>
+                <div th:if="${error}">
+                    <p th:text="${error}" style="color: red;"></p>
+                </div>
             </div>
 
         </div>
     </div>
+
 
 
     <div th:replace="footer :: footer"></div>
