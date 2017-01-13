@@ -33,7 +33,7 @@
                             <tbody th:each="detail : ${payment.getDetails()}">
                             <tr>
                                 <!--<td><img th:src="'/images/' + ${cartItem.product.getImagePath()}"  src="http://lorempixel.com/50/50/" alt="" style="width: auto; height: auto; max-width: 50px; max-height: 50px;"/></td>-->
-                                <td th:text="${detail.product.getName()}">Item Name</td>
+                                <td th:text="${detail.getProductName()}">Item Name</td>
                                 <td th:text="${detail.getQuantity()}">Q</td>
                                 <td th:text="${detail.getPrice()}">Price</td>
                             </tr>
@@ -62,7 +62,7 @@
                             <tbody th:each="detail : ${payment.getDetails()}">
                             <tr>
                                 <!--<td><img th:src="'/images/' + ${cartItem.product.getImagePath()}"  src="http://lorempixel.com/50/50/" alt="" style="width: auto; height: auto; max-width: 50px; max-height: 50px;"/></td>-->
-                                <td th:text="${detail.product.getName()}">Item Name</td>
+                                <td th:text="${detail.getProductName()}">Item Name</td>
                                 <td th:text="${detail.getQuantity()}">Q</td>
                                 <td th:text="${detail.getPrice()}">Price</td>
                             </tr>
