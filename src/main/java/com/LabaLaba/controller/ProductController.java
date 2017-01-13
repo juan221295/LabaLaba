@@ -112,8 +112,8 @@ public class ProductController {
     public String deleteProduct(@RequestParam Long id){
         commentService.deleteCommentByProduct(productService.getProductById(id));
         cartService.deleteCartByProduct(productService.getProductById(id));
-        productService.deleteProduct(id);
 
+        productService.deleteProduct(id);
         return "redirect:/supplier/profile";
     }
 
