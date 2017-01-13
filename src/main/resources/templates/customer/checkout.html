@@ -23,7 +23,6 @@
             <th>Price</th>
             <th>Minimal Quantity</th>
             <th>Your Order Quantity</th>
-            <th>Date</th>
             <th>Supplier</th>
             <th>Total Price</th>
             <th>Delete</th>
@@ -37,7 +36,6 @@
             <td th:text="${cartItem.product.getPrice()}">Price</td>
             <td th:text="${cartItem.product.getMinimalQuantity()}">Minimal</td>
             <td th:text="${cartItem.quantity}">Order Quantity</td>
-            <td>Date</td>
             <td th:text="${cartItem.product.getSupplier().getName()}">Supp</td>
             <td th:text="${cartItem.getPrice()}">Total Price</td>
             <!--<td><a href="#" class="btn btn-xs btn-danger">x</a></td>-->

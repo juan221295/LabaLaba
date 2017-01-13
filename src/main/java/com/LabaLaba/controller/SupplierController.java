@@ -2,6 +2,7 @@ package com.LabaLaba.controller;
 
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.SupplierRegistrationForm;
+import com.LabaLaba.service.CustomerService;
 import com.LabaLaba.service.ProductService;
 import com.LabaLaba.service.SupplierService;
 import com.LabaLaba.session.SessionInfo;
@@ -29,6 +30,9 @@ public class SupplierController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CustomerService customerService;
     @Autowired
     private SupplierRegistrationFormValidator validator;
 
@@ -44,7 +48,15 @@ public class SupplierController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-      public String handleRegister(@Valid @ModelAttribute(name = "form") SupplierRegistrationForm registrationForm, BindingResult bindingResult) {
+      public String handleRegister(@Valid @ModelAttribute(name = "form") SupplierRegistrationForm registrationForm, BindingResult bindingResult, Model model) {
+        if(customerService.getUserByEmail(registrationForm.getEmail()) != null) {
+            model.addAttribute("error", "Email sudah dipakai oleh salah satu customer");
+            return VIEW_PREFIX + "register";
+        }
+        if(supplierService.getUserByEmail(registrationForm.getEmail()) != null){
+            model.addAttribute("error", "Email sudah dipakai oleh salah satu supplier");
+            return VIEW_PREFIX + "register";
+        }
         if(bindingResult.hasErrors()) {
             return VIEW_PREFIX + "register";
         }

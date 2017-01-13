@@ -237,7 +237,7 @@ public class ProductController {
         if(page <= 0) {
             page = 1;
         }
-        Page<Product> searchResult = productService.searchProduct(keyword, new PageRequest(page - 1, 10, Sort.Direction.ASC, "uploadDate"));
+        Page<Product> searchResult = productService.searchProduct(keyword, new PageRequest(page - 1, 10, Sort.Direction.DESC, "uploadDate"));
 
         if(session.getAttribute("user") != null) {
             SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");

@@ -79,7 +79,7 @@ public class CustomerService {
     }
 
     public String uploadImage(MultipartFile uploadingFile, Customer customer){
-        String namaFile = customer.getId().toString()+ "-" + customer.getName();
+        String namaFile = customer.getId().toString()+ "-" + customer.getName() + "-" +uploadingFile.getOriginalFilename();
 
         System.out.println(IMAGE_DIR);
         try {

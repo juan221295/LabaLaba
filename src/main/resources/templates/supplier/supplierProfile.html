@@ -53,17 +53,26 @@
                 <!--</div>-->
             <!--</div>-->
             <div class="col-md-3 col-sm-6 hero-feature" th:each="prod : ${products}">
-                <div class="thumbnail">
-                    <img th:src="'/images/' + ${prod.getImagePath()}" />
+                <div class="thumbnail" style="height: 500px;">
+                    <img th:src="'/images/' + ${prod.getImagePath()}" style="width: 150px; height: 150px;"/>
                     <div class="caption">
                         <h3 th:text="${prod.name}">Feature Label</h3>
                         <!--<label th:text="${prod.id}"></label>-->
-                        <p>Price : <span th:text="${prod.price}"></span></p>
+                        <!--<p>Price : <span th:text="${prod.price}"></span></p>-->
                         <p>Category : <span th:text="${prod.category}"></span></p>
-
+                        <!--<div th:each="treshold : ${prod.tresholds}">-->
+                            <!--<div th:unless="${treshold.key} == 0">-->
+                                <!--<p>@<span th:text="${treshold.key}"></span> : Rp. <span th:text="${treshold.value}"></span></p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <p>Minimal Quantity : <span th:text="${prod.getMinimalQuantity()}">100</span></p>
+                        <p>Starting Price: Rp. <span th:text="${prod.getPrice()}"></span></p>
+                        <!--<p>Starting price : <span>Rp. 5000</span></p>-->
                         <div th:each="treshold : ${prod.tresholds}">
                             <div th:unless="${treshold.key} == 0">
-                                <p>@<span th:text="${treshold.key}"></span> : Rp. <span th:text="${treshold.value}"></span></p>
+                                <div th:unless="${treshold.key} == ${prod.getMinimalQuantity()}">
+                                    <p>@<span th:text="${treshold.key}"></span> : Rp. <span th:text="${treshold.value}"></span></p>
+                                </div>
                             </div>
                         </div>
                         <p>
