@@ -51,6 +51,10 @@ public class PaymentService {
         }
         Customer owner = customerRepository.findOne(ownerId);
 
+        if(owner == null) {
+            return null;
+        }
+
         List<CartItem> cart = new ArrayList<>(cartService.getCartByCustomer(ownerId));
         Map<Long, List<CartItem>> separatedItem = separateItemBySupplier(cart);
         List<Payment> payments = generatePaymentsFromSeparatedItem(separatedItem, owner);
@@ -78,7 +82,7 @@ public class PaymentService {
             return null;
         }
 
-        return paymentRepository.findByCustomerOrderByCreationDateDesc(customer);
+        return paymentRepository.findByCustomerIdOrderByCreationDateDesc(customer.getId());
     }
 
     public Collection<Payment> getPaymentBySupplier(Long supplierId) {
@@ -91,7 +95,7 @@ public class PaymentService {
             return null;
         }
 
-        return paymentRepository.findBySupplierOrderByCreationDateDesc(supplier);
+        return paymentRepository.findBySupplierIdOrderByCreationDateDesc(supplier.getId());
     }
 
 
@@ -132,7 +136,12 @@ public class PaymentService {
 
             detail.setQuantity(itemInCart.getQuantity());
             detail.setHeader(result);
-            detail.setProduct(itemInCart.getProduct());
+
+            Product productInCart = itemInCart.getProduct();
+            detail.setProductId(productInCart.getId());
+            detail.setProductName(productInCart.getName());
+            detail.setProductImagePath(productInCart.getImagePath());
+
 
             detail.setPrice(itemInCart.getPrice() * itemInCart.getQuantity());
             totalPriceBuffer = itemInCart.getPrice() * itemInCart.getQuantity();
@@ -140,9 +149,11 @@ public class PaymentService {
         }
 
         result.setCreationDate(new DateTime());
-        result.setCustomer(owner);
+        result.setCustomerId(owner.getId());
+        result.setCustomerName(owner.getName());
+        result.setSupplierId(supplier.getId());
+        result.setSupplierName(supplier.getName());
         result.setDetails(resultDetail);
-        result.setSupplier(supplier);
         result.setPaid(false);
         result.setTotalPrice(totalPriceBuffer);
 

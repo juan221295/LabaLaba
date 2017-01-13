@@ -15,18 +15,16 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @ManyToOne
-    private Customer customer;
-    @ManyToOne
-    private Supplier supplier;
+    private Long customerId;
+    private Long supplierId;
+    private String customerName;
+    private String SupplierName;
     @OneToMany(mappedBy = "header")
     private Collection<PaymentDetail> details;
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime creationDate;
     private Boolean isPaid;
-    /**Edit Treshold**/
     private Long totalPrice;
-    /**EoEdit Treshold**/
 
     public Long getId() {
         return id;
@@ -36,20 +34,36 @@ public class Payment {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public Long getSupplierId() {
+        return supplierId;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getSupplierName() {
+        return SupplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        SupplierName = supplierName;
     }
 
     public Collection<PaymentDetail> getDetails() {

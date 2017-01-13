@@ -42,9 +42,9 @@ public class AdminController {
 
     @RequestMapping("/dashboard")
     public String adminDashboard(Model model){
-        ArrayList<Product> products = (ArrayList)productService.getAll();
-        ArrayList<Customer> customers = (ArrayList)customerService.getAllUser();
-        ArrayList<Supplier> suppliers = (ArrayList)supplierService.getAllUser();
+        List<Product> products = new ArrayList<>(productService.getAll());
+        List<Customer> customers = new ArrayList<>(customerService.getAllUser());
+        List<Supplier> suppliers = new ArrayList<>(supplierService.getAllUser());
         Collections.sort(products, (product1, product2) -> product2.getId().compareTo(product1.getId()));
         model.addAttribute("products", products);
         model.addAttribute("customers", customers);
