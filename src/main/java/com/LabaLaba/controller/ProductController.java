@@ -15,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rien on 12/6/16.
@@ -93,7 +96,7 @@ public class ProductController {
         Collection<Product> products =
                 productService.getProductByCategoryWithPageRequest(
                         productService.getProductById(id).getCategory(),
-                        new PageRequest(0, 3, Sort.Direction.ASC, "uploadDate")).getContent();
+                        new PageRequest(0, 3, Sort.Direction.DESC, "uploadDate")).getContent();
         model.addAttribute("relatedProducts", products);
 
         if(session.getAttribute("user") != null) {
@@ -107,6 +110,7 @@ public class ProductController {
     @GetMapping(value = "/delete")
     public String deleteProduct(@RequestParam Long id){
         commentService.deleteCommentByProduct(productService.getProductById(id));
+        cartService.deleteCartByProduct(productService.getProductById(id));
         productService.deleteProduct(id);
 
         return "redirect:/supplier/profile";
@@ -116,24 +120,27 @@ public class ProductController {
     public String editProduct(@RequestParam Long id, Model model){
         Product product = productService.getProductById(id);
 
-        ProductForm productForm = new ProductForm(product);
+        //ProductForm productForm = new ProductForm(product);
         /**Edit Treshold**/
-//        ProductForm productForm = new ProductForm();
-//        productForm.setId(product.getId());
-//        productForm.setDescription(product.getDescription());
-//        productForm.setName(product.getName());
-//        productForm.setCategory(product.getCategory());
-//        productForm.setSupplier(product.getSupplier());
-//
-//        Map<Long, Long> tresholds = product.getTresholds();
-//        List<Long> tresholdQuantity = new ArrayList(tresholds.keySet());
-//
-//        productForm.setTreshold1(tresholdQuantity.get(0));
-//        productForm.setTreshold2(tresholdQuantity.get(1));
-//        productForm.setTreshold3(tresholdQuantity.get(2));
-//        productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
-//        productForm.setPrice2(tresholds.get(tresholdQuantity.get(1)));
-//        productForm.setPrice3(tresholds.get(tresholdQuantity.get(2)));
+        ProductForm productForm = new ProductForm(product);
+        ///productForm.setId(product.getId());
+        productForm.setDescription(product.getDescription());
+        productForm.setName(product.getName());
+        productForm.setCategory(product.getCategory());
+        productForm.setSupplier(product.getSupplier());
+
+        Map<Long, Long> tresholds = product.getTresholds();
+//        List<Long> tresholdPrice = new ArrayList<>();
+        List<Long> tresholdQuantity = new ArrayList<>();
+        tresholdQuantity.addAll(tresholds.keySet());
+//        tresholdPrice.addAll(tresholds.values());
+
+        productForm.setTreshold1(tresholdQuantity.get(0));
+        productForm.setTreshold2(tresholdQuantity.get(1));
+        productForm.setTreshold3(tresholdQuantity.get(2));
+        productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+        productForm.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+        productForm.setPrice3(tresholds.get(tresholdQuantity.get(2)));
         /**EoEdit Treshold**/
 
         model.addAttribute("form", productForm);
@@ -160,7 +167,7 @@ public class ProductController {
         Page<Product> productPage =
                 productService.getProductByCategoryWithPageRequest(
                         Category.valueOf(nama),
-                        new PageRequest(page - 1, 10, Sort.Direction.ASC, "uploadDate")
+                        new PageRequest(page - 1, 10, Sort.Direction.DESC, "uploadDate")
                 );
 
         if(session.getAttribute("user") != null) {

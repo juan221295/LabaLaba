@@ -87,7 +87,9 @@
             <div class="row text-center">
                 <div class="col-md-3 col-sm-6 hero-feature" th:each="prod : ${displayItem.value}">
                     <div class="thumbnail">
-                        <img th:src="@{'/images/' + ${prod.imagePath}}" alt="" />
+                        <div style="height: 150; width:150;">
+                            <img th:src="@{'/images/' + ${prod.imagePath}}" alt="" width="150" height="150"/>
+                        </div>
                         <div class="caption">
                             <h3 th:text="${prod.getName()}">Feature Label</h3>
                             <p>Price: <span th:text="${prod.getPrice()}"></span></p>

@@ -102,7 +102,7 @@ public class ProductService {
         Map<String, List<Product>> result = new HashMap<>();
         for(Category category : Category.values()) {
             List<Product> products =
-                    productRepository.findByCategory(category, new PageRequest(0, 5, Sort.Direction.ASC, "uploadDate")).getContent();
+                    productRepository.findByCategory(category, new PageRequest(0, 5, Sort.Direction.DESC, "uploadDate")).getContent();
 
             result.put(category.name(), products);
         }

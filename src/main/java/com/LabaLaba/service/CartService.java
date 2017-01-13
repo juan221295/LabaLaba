@@ -62,4 +62,8 @@ public class CartService {
         }
     }
 
+    public void deleteCartByProduct(Product product){
+        cartRepository.deleteByProduct(product);
+    }
+
 }

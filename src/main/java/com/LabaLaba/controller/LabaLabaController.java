@@ -37,7 +37,7 @@ public class LabaLabaController {
             List<Product> products =
                     productService.getProductByCategoryWithPageRequest(
                             category,
-                            new PageRequest(FIRST_PAGE, INDEX_ITEM_PAGE_SIZE, Sort.Direction.ASC, "uploadDate")).getContent();
+                            new PageRequest(FIRST_PAGE, INDEX_ITEM_PAGE_SIZE, Sort.Direction.DESC, "uploadDate")).getContent();
 
             displayItem.put(category.name(), products);
         }
