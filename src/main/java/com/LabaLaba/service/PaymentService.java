@@ -54,6 +54,9 @@ public class PaymentService {
         if(owner == null) {
             return null;
         }
+        if(owner.getAddress() == null) {
+            return null;
+        }
 
         List<CartItem> cart = new ArrayList<>(cartService.getCartByCustomer(ownerId));
         Map<Long, List<CartItem>> separatedItem = separateItemBySupplier(cart);
@@ -152,6 +155,7 @@ public class PaymentService {
         result.setCustomerId(owner.getId());
         result.setCustomerName(owner.getName());
         result.setSupplierId(supplier.getId());
+        result.setPurchaseAddress(owner.getAddress());
         result.setSupplierName(supplier.getName());
         result.setDetails(resultDetail);
         result.setPaid(false);

@@ -51,7 +51,7 @@ public class CustomerService {
     }
 
     public Collection<Customer> getAllUser() {
-        return (Collection<Customer>) repository.findAll();
+        return  repository.findAll();
     }
     public void clearUser(){
         repository.deleteAll();
@@ -65,6 +65,7 @@ public class CustomerService {
         oldCustomer.setName(form.getName());
         oldCustomer.setEmail(form.getEmail());
         oldCustomer.setPassword(form.getPassword());
+        oldCustomer.setAddress(form.getAddress());
         if(!form.getPhotoProfile().isEmpty()){
             oldCustomer.setImagePath(this.uploadImage(form.getPhotoProfile(), oldCustomer));
         }

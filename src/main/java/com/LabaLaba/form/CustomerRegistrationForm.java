@@ -21,8 +21,10 @@ public class CustomerRegistrationForm {
     @NotEmpty
     private String repeatPassword;
 
-
     private MultipartFile photoProfile;
+
+    @NotEmpty
+    private String address;
 
     public String getName() {
         return name;
@@ -62,5 +64,13 @@ public class CustomerRegistrationForm {
 
     public void setPhotoProfile(MultipartFile photoProfile) {
         this.photoProfile = photoProfile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

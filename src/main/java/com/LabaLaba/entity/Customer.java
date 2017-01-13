@@ -18,7 +18,7 @@ public class Customer {
     private String email;
     private String password;
     private String imagePath;
-
+    private String address;
 
     public Customer() {}
 
@@ -26,6 +26,7 @@ public class Customer {
         this.name = form.getName();
         this.email = form.getEmail();
         this.password = form.getPassword();
+        this.address = form.getAddress();
     }
 
     public Long getId() {
@@ -66,5 +67,13 @@ public class Customer {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

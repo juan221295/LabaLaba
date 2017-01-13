@@ -1,5 +1,6 @@
 package com.LabaLaba.controller;
 
+import com.LabaLaba.entity.Customer;
 import com.LabaLaba.form.CustomerRegistrationForm;
 import com.LabaLaba.service.CartService;
 import com.LabaLaba.service.CustomerService;
@@ -152,9 +153,11 @@ public class CustomerController {
                 SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
                 if(customerService.getUserById(sessionInfo.getId()).equals(customerService.getUserById(id))){
                     CustomerRegistrationForm form = new CustomerRegistrationForm();
-                    form.setName(customerService.getUserById(sessionInfo.getId()).getName());
-                    form.setEmail(customerService.getUserById(sessionInfo.getId()).getEmail());
-                    form.setPassword(customerService.getUserById(sessionInfo.getId()).getPassword());
+                    Customer customerToBeEdited = customerService.getUserById(sessionInfo.getId());
+                    form.setName(customerToBeEdited.getName());
+                    form.setEmail(customerToBeEdited.getEmail());
+                    form.setPassword(customerToBeEdited.getPassword());
+                    form.setAddress(customerToBeEdited.getAddress());
                     model.addAttribute("form", form);
                     model.addAttribute("customer" , customerService.getUserById(id));
                     return VIEW_PREFIX + "editProfile";

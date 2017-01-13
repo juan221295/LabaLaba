@@ -12,12 +12,16 @@
 <body>
     <div th:replace="header :: header"></div>
     <div class="container">
-        <div class="panel-group" th:each="payment : ${payments} ">
+        <div th:unless="${payments}">
+            Tidak ada payment yang tercatat
+        </div>
+        <div class="panel-group" th:if="${payments}" th:each="payment : ${payments} ">
             <div th:if="${payment.getPaid()}">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <p>Payment Id: # <span th:text="${payment.getId()}"></span></p>
                         <p>Payment Date:<span th:text="${payment.getCreationDate()}"></span></p>
+                        <p>Address: <span th:text="${payment.getPurchaseAddress()}"></span></p>
                         <p>Confirmed: Yes</p>
                     </div>
                     <div class="panel-body">
@@ -47,6 +51,7 @@
                     <div class="panel-heading">
                         <p>Payment Id: # <span th:text="${payment.getId()}"></span></p>
                         <p>Payment Date:<span th:text="${payment.getCreationDate()}"></span></p>
+                        <p>Address: <span th:text="${payment.getPurchaseAddress()}"></span></p>
                         <p>Confirmed: No</p>
                     </div>
                     <div class="panel-body">

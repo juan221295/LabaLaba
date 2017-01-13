@@ -19,6 +19,7 @@ public class Payment {
     private Long supplierId;
     private String customerName;
     private String SupplierName;
+    private String purchaseAddress;
     @OneToMany(mappedBy = "header")
     private Collection<PaymentDetail> details;
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -64,6 +65,14 @@ public class Payment {
 
     public void setSupplierName(String supplierName) {
         SupplierName = supplierName;
+    }
+
+    public String getPurchaseAddress() {
+        return purchaseAddress;
+    }
+
+    public void setPurchaseAddress(String purchaseAddress) {
+        this.purchaseAddress = purchaseAddress;
     }
 
     public Collection<PaymentDetail> getDetails() {
