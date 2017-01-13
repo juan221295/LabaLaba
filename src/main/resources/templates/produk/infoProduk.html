@@ -105,6 +105,9 @@
                         </p>
                     </div>
                 </div>
+                <div th:if="${session.user.getId() == comment.getCommentator().getId()}">
+                    <a th:href="@{/products/deleteComment(id=${comment.getId()})}">Delete</a>
+                </div>
                 <hr />
             </div>
             <!--<div class="row">-->
