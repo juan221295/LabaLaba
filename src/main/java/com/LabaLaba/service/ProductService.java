@@ -5,6 +5,8 @@ import com.LabaLaba.entity.Product;
 import com.LabaLaba.entity.Supplier;
 import com.LabaLaba.form.ProductForm;
 import com.LabaLaba.repository.ProductRepository;
+import com.LabaLaba.repository.SupplierRepository;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,10 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by rien on 12/6/16.
@@ -30,6 +29,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private SupplierRepository supplierRepository;
 
     public Product addProduct(ProductForm form) {
         Product product = new Product(form);
@@ -87,15 +89,48 @@ public class ProductService {
         productRepository.delete(id);
     }
 
-    public void editProduct(ProductForm form){
-        Product newProduct = new Product(form);
+    public void editProduct(ProductForm form, Long id){
+        Product oldProduct = productRepository.findById(form.getId());
+
+        //Product newProduct = new Product(form);
+        oldProduct.setName(form.getName());
+//        this.setPrice(form.getPrice());
+//        this.setMinimalQuantity(form.getMinimalQuantity());
+        oldProduct.setSupplier(supplierRepository.findById(id));
+        oldProduct.setUploadDate(new DateTime());
+        oldProduct.setCategory(form.getCategory());
+        oldProduct.setDescription(form.getDescription());
+
+        /**Edit Treshold**/
+        Map<Long, Long> treshold = new TreeMap<>();
+        if(form.getTreshold1() <= 0 && form.getPrice1() <=0 &&
+                form.getTreshold2() <= 0 && form.getPrice2() <= 0 &&
+                form.getTreshold3() <= 0 && form.getPrice3() <= 0)
+        {
+            treshold.put(new Long(0), new Long(0));
+        }
+        else{
+            if(form.getTreshold1() > 0 || form.getPrice1() >0){
+                treshold.put(form.getTreshold1(), form.getPrice1());
+            }
+            if(form.getTreshold2() > 0 || form.getPrice2() > 0){
+                treshold.put(form.getTreshold2(), form.getPrice2());
+            }
+            if(form.getTreshold3() > 0 || form.getPrice3() > 0){
+                treshold.put(form.getTreshold3(), form.getPrice3());
+            }
+        }
+        oldProduct.setTresholds(treshold);
+
+        oldProduct.setMinimalQuantity(Collections.min(treshold.keySet()));
+        oldProduct.setPrice(treshold.get(oldProduct.getMinimalQuantity()));
 
 
 //        Product oldProduct = getProductById(form.getId());
 //        oldProduct.setDescription(form.getDescription());
 //        oldProduct.setMinimalQuantity(form.getMinimalQuantity());
 //        oldProduct.setPrice(form.getPrice());
-        productRepository.save(newProduct);
+        productRepository.save(oldProduct);
     }
 
     public Map<String, List<Product>> getProductOnIndexPage() {

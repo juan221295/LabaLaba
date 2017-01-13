@@ -20,6 +20,7 @@ public class ProductForm {
     private Category category;
     private MultipartFile file;
     private Supplier supplier;
+    private Long idSupplier;
     private String description;
 
 
@@ -192,5 +193,13 @@ public class ProductForm {
 
     public void setPrice3(long price3) {
         this.price3 = price3;
+    }
+
+    public Long getIdSupplier() {
+        return idSupplier;
+    }
+
+    public void setIdSupplier(Long idSupplier) {
+        this.idSupplier = idSupplier;
     }
 }

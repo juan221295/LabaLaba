@@ -128,7 +128,8 @@ public class ProductController {
         productForm.setDescription(product.getDescription());
         productForm.setName(product.getName());
         productForm.setCategory(product.getCategory());
-        productForm.setSupplier(product.getSupplier());
+        productForm.setSupplier(supplierService.getSupplierById(product.getSupplier().getId()));
+        productForm.setIdSupplier(product.getSupplier().getId());
 
         Map<Long, Long> tresholds = product.getTresholds();
 //        List<Long> tresholdPrice = new ArrayList<>();
@@ -179,8 +180,7 @@ public class ProductController {
 
     @RequestMapping(value="/edit", method = RequestMethod.POST)
     public String editProcess(@ModelAttribute("form") ProductForm form){
-
-        productService.editProduct(form);
+        productService.editProduct(form, form.getIdSupplier());
         return "redirect:/supplier/profile";
     }
 

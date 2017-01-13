@@ -34,8 +34,6 @@ public class CartItem {
         for(Map.Entry<Long, Long> treshold : productTreshold.entrySet()) {
             if(this.quantity >= treshold.getKey()) {
                 this.price = treshold.getValue();
-            } else {
-                break;
             }
         }
         /**EoEdit Treshold**/
