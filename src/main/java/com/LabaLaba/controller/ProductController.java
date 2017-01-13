@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -246,5 +247,24 @@ public class ProductController {
 
         model.addAttribute("keyword", keyword);
         return VIEW_PREFIX + "searchResult";
+    }
+
+    @GetMapping(value = "/deleteComment")
+    public String deleteComment(@RequestParam Long id, HttpSession session, HttpServletRequest request){
+        try{
+            SessionInfo sessionInfo = (SessionInfo) session.getAttribute("user");
+            if(sessionInfo.getId().equals(commentService.getCommentById(id).getCommentator().getId())) {
+                commentService.deleteComment(id);
+                return "redirect:" + getRefererUrl(request);
+            }
+            return "redirect:" + getRefererUrl(request);
+
+        }catch (NullPointerException e){
+            return "redirect:" + getRefererUrl(request);
+        }
+    }
+
+    private String getRefererUrl(HttpServletRequest request) {
+        return request.getHeader("Referer");
     }
 }
