@@ -134,13 +134,41 @@ public class ProductController {
         List<Long> tresholdQuantity = new ArrayList<>();
         tresholdQuantity.addAll(tresholds.keySet());
 //        tresholdPrice.addAll(tresholds.values());
+//        for (Long t:
+//             tresholdQuantity) {
+//            productForm.setTreshold1(t);
+//            productForm.setPrice1(tresholds.get(t));
+//        }
+        System.out.println(tresholdQuantity.size());
+        if(tresholdQuantity.size() < 2){
+            productForm.setTreshold1(tresholdQuantity.get(0));
+            productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+        }
+        else if(tresholdQuantity.size() == 2){
+            productForm.setTreshold1(tresholdQuantity.get(0));
+            productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+            productForm.setTreshold2(tresholdQuantity.get(1));
+            productForm.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+        }
+        else if(tresholdQuantity.size() > 2){
+            productForm.setTreshold1(tresholdQuantity.get(0));
+            productForm.setTreshold2(tresholdQuantity.get(1));
+            productForm.setTreshold3(tresholdQuantity.get(2));
+            productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+            productForm.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+            productForm.setPrice3(tresholds.get(tresholdQuantity.get(2)));
+        }
 
-        productForm.setTreshold1(tresholdQuantity.get(0));
-        productForm.setTreshold2(tresholdQuantity.get(1));
-        productForm.setTreshold3(tresholdQuantity.get(2));
-        productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
-        productForm.setPrice2(tresholds.get(tresholdQuantity.get(1)));
-        productForm.setPrice3(tresholds.get(tresholdQuantity.get(2)));
+//        for(int i=tresholdQuantity.size();i<3;i++){
+//            productForm.
+//        }
+
+//        productForm.setTreshold1(tresholdQuantity.get(0));
+//        productForm.setTreshold2(tresholdQuantity.get(1));
+//        productForm.setTreshold3(tresholdQuantity.get(2));
+//        productForm.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+//        productForm.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+//        productForm.setPrice3(tresholds.get(tresholdQuantity.get(2)));
         /**EoEdit Treshold**/
 
         model.addAttribute("form", productForm);

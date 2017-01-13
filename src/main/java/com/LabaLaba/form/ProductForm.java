@@ -40,15 +40,44 @@ public class ProductForm {
         this.setSupplier(product.getSupplier());
 
         /**Edit Treshold**/
+//        Map<Long, Long> tresholds = product.getTresholds();
+//        List<Long> tresholdQuantity = new ArrayList(tresholds.keySet());
+//
+//        this.setTreshold1(tresholdQuantity.get(0));
+//        this.setTreshold2(tresholdQuantity.get(1));
+//        this.setTreshold3(tresholdQuantity.get(2));
+//        this.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+//        this.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+//        this.setPrice3(tresholds.get(tresholdQuantity.get(2)));
         Map<Long, Long> tresholds = product.getTresholds();
-        List<Long> tresholdQuantity = new ArrayList(tresholds.keySet());
-
-        this.setTreshold1(tresholdQuantity.get(0));
-        this.setTreshold2(tresholdQuantity.get(1));
-        this.setTreshold3(tresholdQuantity.get(2));
-        this.setPrice1(tresholds.get(tresholdQuantity.get(0)));
-        this.setPrice2(tresholds.get(tresholdQuantity.get(1)));
-        this.setPrice3(tresholds.get(tresholdQuantity.get(2)));
+//        List<Long> tresholdPrice = new ArrayList<>();
+        List<Long> tresholdQuantity = new ArrayList<>();
+        tresholdQuantity.addAll(tresholds.keySet());
+//        tresholdPrice.addAll(tresholds.values());
+//        for (Long t:
+//             tresholdQuantity) {
+//            productForm.setTreshold1(t);
+//            productForm.setPrice1(tresholds.get(t));
+//        }
+        System.out.println(tresholdQuantity.size());
+        if(tresholdQuantity.size() < 2){
+            this.setTreshold1(tresholdQuantity.get(0));
+            this.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+        }
+        else if(tresholdQuantity.size() == 2){
+            this.setTreshold1(tresholdQuantity.get(0));
+            this.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+            this.setTreshold2(tresholdQuantity.get(1));
+            this.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+        }
+        else if(tresholdQuantity.size() > 2){
+            this.setTreshold1(tresholdQuantity.get(0));
+            this.setTreshold2(tresholdQuantity.get(1));
+            this.setTreshold3(tresholdQuantity.get(2));
+            this.setPrice1(tresholds.get(tresholdQuantity.get(0)));
+            this.setPrice2(tresholds.get(tresholdQuantity.get(1)));
+            this.setPrice3(tresholds.get(tresholdQuantity.get(2)));
+        }
         /**EoEdit Treshold**/
     }
 

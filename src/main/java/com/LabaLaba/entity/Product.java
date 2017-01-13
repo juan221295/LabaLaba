@@ -59,9 +59,23 @@ public class Product {
 
         /**Edit Treshold**/
         Map<Long, Long> treshold = new TreeMap<>();
-        treshold.put(form.getTreshold1(), form.getPrice1());
-        treshold.put(form.getTreshold2(), form.getPrice2());
-        treshold.put(form.getTreshold3(), form.getPrice3());
+        if(form.getTreshold1() <= 0 && form.getPrice1() <=0 &&
+            form.getTreshold2() <= 0 && form.getPrice2() <= 0 &&
+            form.getTreshold3() <= 0 && form.getPrice3() <= 0)
+        {
+            treshold.put(new Long(0), new Long(0));
+        }
+        else{
+            if(form.getTreshold1() > 0 || form.getPrice1() >0){
+                treshold.put(form.getTreshold1(), form.getPrice1());
+            }
+            if(form.getTreshold2() > 0 || form.getPrice2() > 0){
+                treshold.put(form.getTreshold2(), form.getPrice2());
+            }
+            if(form.getTreshold3() > 0 || form.getPrice3() > 0){
+                treshold.put(form.getTreshold3(), form.getPrice3());
+            }
+        }
         this.setTresholds(treshold);
 
         this.setMinimalQuantity(Collections.min(treshold.keySet()));
